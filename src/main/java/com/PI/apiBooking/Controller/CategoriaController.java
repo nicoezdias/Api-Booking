@@ -1,8 +1,8 @@
-package com.PI.ProyectoIntegrador.Controller;
+package com.PI.apiBooking.Controller;
 
-import com.PI.ProyectoIntegrador.Exceptions.ResourceNotFoundException;
-import com.PI.ProyectoIntegrador.Model.DTO.CategoriaDto;
-import com.PI.ProyectoIntegrador.Services.Impl.CategoriaServices;
+import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.CategoriaDto;
+import com.PI.apiBooking.Services.Impl.CategoriaServices;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

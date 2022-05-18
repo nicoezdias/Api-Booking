@@ -1,6 +1,6 @@
-package com.PI.ProyectoIntegrador.Repository;
+package com.PI.apiBooking.Repository;
 
-import com.PI.ProyectoIntegrador.Model.Categoria;
+import com.PI.apiBooking.Model.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

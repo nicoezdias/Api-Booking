@@ -1,4 +1,4 @@
-package com.PI.ProyectoIntegrador.Model.DTO;
+package com.PI.apiBooking.Model.DTO;
 
 import lombok.Getter;
 import lombok.Setter;

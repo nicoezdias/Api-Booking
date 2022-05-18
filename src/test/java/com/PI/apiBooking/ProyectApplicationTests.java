@@ -1,10 +1,10 @@
-package com.PI.ProyectoIntegrador;
+package com.PI.apiBooking;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProyectoIntegradorApplicationTests {
+class ProyectApplicationTests {
 
 	@Test
 	void contextLoads() {

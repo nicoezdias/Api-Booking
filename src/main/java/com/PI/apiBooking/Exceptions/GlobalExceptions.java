@@ -1,4 +1,4 @@
-package com.PI.ProyectoIntegrador.Exceptions;
+package com.PI.apiBooking.Exceptions;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;

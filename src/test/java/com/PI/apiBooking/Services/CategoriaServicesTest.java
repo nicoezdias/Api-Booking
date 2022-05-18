@@ -1,8 +1,8 @@
-package com.PI.ProyectoIntegrador.Services;
+package com.PI.apiBooking.Services;
 
-import com.PI.ProyectoIntegrador.Exceptions.ResourceNotFoundException;
-import com.PI.ProyectoIntegrador.Model.DTO.CategoriaDto;
-import com.PI.ProyectoIntegrador.Services.Impl.CategoriaServices;
+import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.CategoriaDto;
+import com.PI.apiBooking.Services.Impl.CategoriaServices;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

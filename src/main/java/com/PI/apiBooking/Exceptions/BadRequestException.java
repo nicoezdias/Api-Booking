@@ -1,4 +1,4 @@
-package com.PI.ProyectoIntegrador.Exceptions;
+package com.PI.apiBooking.Exceptions;
 
 public class BadRequestException extends Exception{
 

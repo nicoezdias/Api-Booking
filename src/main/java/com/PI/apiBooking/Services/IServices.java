@@ -1,7 +1,6 @@
-package com.PI.ProyectoIntegrador.Services;
+package com.PI.apiBooking.Services;
 
-import com.PI.ProyectoIntegrador.Exceptions.ResourceNotFoundException;
-import com.PI.ProyectoIntegrador.Model.DTO.CategoriaDto;
+import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 
 import java.util.Set;
 
