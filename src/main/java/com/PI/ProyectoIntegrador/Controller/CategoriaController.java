@@ -18,19 +18,19 @@ public class CategoriaController {
     @Autowired
     CategoriaServices categoriaServices;
 
-    @Operation(summary = "Registramos una nueva Categoria")
+    @Operation(summary = "Guardar Categoria")
     @PostMapping
     public ResponseEntity<CategoriaDto> guardar(@RequestBody CategoriaDto categoria) {
         return ResponseEntity.ok(categoriaServices.guardar(categoria));
     }
 
-    @Operation(summary = "Traemos todas las Categorias")
+    @Operation(summary = "Traer todas las Categorias")
     @GetMapping
-    public ResponseEntity<Set<CategoriaDto>> buscarTodas(){
+    public ResponseEntity<Set<CategoriaDto>> buscarTodas() {
         return ResponseEntity.ok(categoriaServices.buscarTodas());
     }
 
-    @Operation(summary = "Traemos la Categoria por Id")
+    @Operation(summary = "Traer la Categoria por Id")
     @GetMapping("/{id}")
     public ResponseEntity<CategoriaDto> buscar(@PathVariable Long id) throws ResourceNotFoundException {
         CategoriaDto categoria = categoriaServices.buscar(id);
@@ -38,23 +38,11 @@ public class CategoriaController {
         return ResponseEntity.ok(categoria);
     }
 
-    @Operation(summary = "Eliminamos la Categoria por Id")
+    @Operation(summary = "Eliminar la Categoria por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws ResourceNotFoundException {
         categoriaServices.eliminar(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminada");
     }
 
-    @Operation(summary = "Actualizamos la Categoria")
-    @PutMapping()
-    public ResponseEntity<CategoriaDto> actualizar(@RequestBody CategoriaDto categoria) throws ResourceNotFoundException {
-        ResponseEntity<CategoriaDto> response = null;
-
-        if (categoria.getId() != null && categoriaServices.buscar(categoria.getId()) != null)
-            response = ResponseEntity.ok(categoriaServices.actualizar(categoria));
-        else
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-        return response;
-    }
 }

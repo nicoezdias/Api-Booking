@@ -28,8 +28,12 @@ public class ProductoServices implements IProductoServices {
     public ProductoDto guardar(ProductoDto productoDto) {
         Producto producto = mapper.convertValue(productoDto,Producto.class);
         productoRepository.save(producto);
-        productoDto.setId(producto.getId());
-        logger.info("Producto registrado correctamente: "+ productoDto);
+        if (productoDto.getId() == null){
+            productoDto.setId(producto.getId());
+            logger.info("Producto registrado correctamente: "+ productoDto);
+        }else{
+            logger.info("Producto actualizado correctamente: "+ productoDto);
+        }
         return productoDto;
     }
 
@@ -61,13 +65,5 @@ public class ProductoServices implements IProductoServices {
         buscar(id);
         productoRepository.deleteById(id);
         logger.info("Se elimino el producto correctamente: id("+id+")");
-    }
-
-    @Override
-    public ProductoDto actualizar(ProductoDto productoDto) {
-        Producto producto = mapper.convertValue(productoDto,Producto.class);
-        productoRepository.save(producto);
-        logger.info("Producto actualizado correctamente: "+ productoDto.toString());
-        return productoDto;
     }
 }

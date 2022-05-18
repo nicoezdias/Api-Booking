@@ -27,8 +27,13 @@ public class CategoriaServices implements ICategoriaServices {
     public CategoriaDto guardar(CategoriaDto categoriaDto) {
         Categoria categoria = mapper.convertValue(categoriaDto,Categoria.class);
         categoriaRepository.save(categoria);
-        categoriaDto.setId(categoria.getId());
-        logger.info("Categoria registrada correctamente: "+ categoriaDto);
+        if (categoriaDto.getId() == null){
+            categoriaDto.setId(categoria.getId());
+            logger.info("Categoria registrada correctamente: "+ categoriaDto);
+        }else{
+            logger.info("Categoria actualizada correctamente: "+ categoriaDto);
+        }
+
         return categoriaDto;
     }
 
@@ -62,11 +67,4 @@ public class CategoriaServices implements ICategoriaServices {
         logger.info("Se elimino la categoria correctamente: id("+id+")");
     }
 
-    @Override
-    public CategoriaDto actualizar(CategoriaDto categoriaDto) {
-        Categoria categoria = mapper.convertValue(categoriaDto,Categoria.class);
-        categoriaRepository.save(categoria);
-        logger.info("Categoria actualizada correctamente: "+ categoriaDto.toString());
-        return categoriaDto;
-    }
 }

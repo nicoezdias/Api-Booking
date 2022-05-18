@@ -66,7 +66,7 @@ class CategoriaServicesTest {
         CategoriaDto c6 = new CategoriaDto("Hotel4","Descripcion4","UrlCambiada");
         c6.setId(c5.getId());
 
-        categoriaServices.actualizar(c6);
+        categoriaServices.guardar(c6);
         assertEquals(c6.toString(), categoriaServices.buscar(c6.getId()).toString());
     }
 }
