@@ -11,5 +11,5 @@ public interface IServices<T>{
     T buscar(Long id) throws ResourceNotFoundException;
     T guardar(T t);
     void eliminar(Long id) throws ResourceNotFoundException;;
-    T actualizar(CategoriaDto categoriaDto);
+    T actualizar(T t);
 }

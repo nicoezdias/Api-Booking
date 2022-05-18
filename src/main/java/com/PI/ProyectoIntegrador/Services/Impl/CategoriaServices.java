@@ -34,11 +34,11 @@ public class CategoriaServices implements ICategoriaServices {
 
     @Override
     public CategoriaDto buscar(Long id) throws ResourceNotFoundException {
-        Optional<Categoria> o = categoriaRepository.findById(id);
-        if (o.isEmpty()) {
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        if (categoria.isEmpty()) {
             throw new ResourceNotFoundException("No existe categoria con id: " + id);
         }
-        CategoriaDto categoriaDto = mapper.convertValue(o,CategoriaDto.class);
+        CategoriaDto categoriaDto = mapper.convertValue(categoria,CategoriaDto.class);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return categoriaDto;
     }
@@ -64,8 +64,8 @@ public class CategoriaServices implements ICategoriaServices {
 
     @Override
     public CategoriaDto actualizar(CategoriaDto categoriaDto) {
-        Categoria odontologo = mapper.convertValue(categoriaDto,Categoria.class);
-        categoriaRepository.save(odontologo);
+        Categoria categoria = mapper.convertValue(categoriaDto,Categoria.class);
+        categoriaRepository.save(categoria);
         logger.info("Categoria actualizada correctamente: "+ categoriaDto.toString());
         return categoriaDto;
     }

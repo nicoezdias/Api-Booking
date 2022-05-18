@@ -7,21 +7,18 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class CategoriaDto {
+public class ProductoDto {
     private Long id;
-    private String title;
+    private String name;
     private String description;
-    private String urlImage;
 
     //Constructor para los test
-    public CategoriaDto(String title, String description, String urlImage) {
-        this.title = title;
+    public ProductoDto(String name, String description) {
+        this.name = name;
         this.description = description;
-        this.urlImage = urlImage;
     }
 
     //Constructor default
-    public CategoriaDto() {
+    public ProductoDto() {
     }
-
 }

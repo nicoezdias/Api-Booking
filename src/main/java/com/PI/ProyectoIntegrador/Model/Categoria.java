@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "categorias")
 public class Categoria {
     @Id
     @SequenceGenerator(name = "categoriaSequence",sequenceName = "categoriaSequence", allocationSize = 1)
@@ -18,6 +18,6 @@ public class Categoria {
     private String description;
     private String urlImage;
 
-    //Constructor de Categoria default
+    //Constructor default
     public Categoria() {}
 }

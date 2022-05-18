@@ -30,7 +30,7 @@ class CategoriaServicesTest {
     }
 
     @Test
-    public void registrarOdontologoYTraerOdontologo() throws ResourceNotFoundException {
+    public void registrarYTraerCategoria() throws ResourceNotFoundException {
         CategoriaDto c1 = categoriaServices.guardar(new CategoriaDto("Hotel1","Descripcion1","Url1"));
         CategoriaDto c2 = categoriaServices.guardar(new CategoriaDto("Hotel2","Descripcion2","Url2"));
         CategoriaDto c3 = categoriaServices.guardar(new CategoriaDto("Hotel3","Descripcion3","Url3"));
@@ -40,7 +40,7 @@ class CategoriaServicesTest {
     }
 
     @Test
-    public void traerTodos() {
+    public void traerTodasCategorias() {
         cargarInfo();
         Set<CategoriaDto> categorias = categoriaServices.buscarTodas();
         assertFalse(categorias.isEmpty());
@@ -48,7 +48,7 @@ class CategoriaServicesTest {
     }
 
     @Test
-    public void eliminarOdontologo() throws ResourceNotFoundException {
+    public void eliminarCategoria() throws ResourceNotFoundException {
         boolean ex = false;
         CategoriaDto c4 = categoriaServices.guardar(new CategoriaDto("Hotel4","Descripcion4","Url4"));
         categoriaServices.eliminar(c4.getId());
@@ -61,7 +61,7 @@ class CategoriaServicesTest {
     }
 
     @Test
-    public void actualizarOdontologo() throws ResourceNotFoundException {
+    public void actualizarCategoria() throws ResourceNotFoundException {
         CategoriaDto c5 = categoriaServices.guardar(new CategoriaDto("Hotel5","Descripcion5","Url5"));
         CategoriaDto c6 = new CategoriaDto("Hotel4","Descripcion4","UrlCambiada");
         c6.setId(c5.getId());
