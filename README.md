@@ -3,7 +3,7 @@
 ## Gestionar los productos para utilizarlos en el sitio
 ### Como administrador quiero poder gestionar los productos para utilizarlos en el sitio.
 
-Tareas (2)
+
 	1	Crear tabla “productos” en la BD. Los atributos son:
 	
 		◦	id
@@ -11,16 +11,18 @@ Tareas (2)
 		◦	descripción
 		
 	2	El controller de productos tiene que permitirnos
+	
 		◦	Crear productos
 		◦	Buscar y retornar productos por ID
 
 ## Agregar categoría a un producto
 ### Como administrador quiero poder agregar una categoría a un producto para organizar los productos similares.
 
-Tareas (1)
+
 	1	Agregar relación ManyToOne entre la clase categoría y producto.
-	◦	Utilizar hibernate o realizarlo desde la base de datos y luego mapearlo en la clase producto.
-	◦	La clase producto deberá tener un atributo que indique la categoría a la que pertenece, para implementarlo vamos a usar una relación muchos (producto) a uno (categoría).
+	
+		◦	Utilizar hibernate o realizarlo desde la base de datos y luego mapearlo en la clase producto.
+		◦	La clase producto deberá tener un atributo que indique la categoría a la que pertenece, para implementarlo vamos a usar una relación muchos (producto) a uno (categoría).
 	
 ## Características para productos
 ### Como administrador quiero poder gestionar las características para describir productos
