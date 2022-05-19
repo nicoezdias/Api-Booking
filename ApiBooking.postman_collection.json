@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n    \"title\": \"Hotel\",\n    \"description\": \"descripcion\",\n    \"urlImage\": \"url\"\n}",
+							"raw": "{\n    \"title\": \"Hotel\",\n    \"description\": \"descripcion\",\n    \"urlImage\": \"url\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -31,6 +31,26 @@
 							"port": "8084",
 							"path": [
 								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "traerPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/categorias/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"categorias",
+								"1"
 							]
 						}
 					},
@@ -65,26 +85,6 @@
 							"port": "8084",
 							"path": [
 								"categorias"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "traerUna",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8084/categorias/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"categorias",
-								"1"
 							]
 						}
 					},
@@ -141,6 +141,126 @@
 			]
 		},
 		{
+			"name": "Caracteristica",
+			"item": [
+				{
+					"name": "crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Gym\",\n    \"icon\": \"url\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "traerPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/caracteristicas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"caracteristicas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "traerTodas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Wifi\",\n    \"icon\": \"urlCambiada\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/caracteristicas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"caracteristicas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Poductos",
 			"item": [
 				{
@@ -151,40 +271,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"name\": \"Producto3\",\n    \"description\": \"descripcion\",\n    \"category\": {\n        \"id\": 1\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8084/productos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"productos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "traerTodos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -226,9 +312,43 @@
 					"response": []
 				},
 				{
+					"name": "traerTodos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "actualizar",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -289,6 +409,27 @@
 								"productos",
 								"categoria",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "traerPorCaracteristica",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/productos/caracteristica/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"productos",
+								"caracteristica",
+								"1"
 							]
 						}
 					},

@@ -18,30 +18,33 @@ public class CategoriaController {
     @Autowired
     CategoriaServices categoriaServices;
 
+    //* ///////// POST ///////// *//
     @Operation(summary = "Guardar Categoria")
     @PostMapping
     public ResponseEntity<CategoriaDto> guardar(@RequestBody CategoriaDto categoria) {
-        return ResponseEntity.ok(categoriaServices.guardar(categoria));
+        return ResponseEntity.ok(categoriaServices.save(categoria));
     }
 
+    //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Categorias")
     @GetMapping
     public ResponseEntity<Set<CategoriaDto>> buscarTodas() {
-        return ResponseEntity.ok(categoriaServices.buscarTodas());
+        return ResponseEntity.ok(categoriaServices.findAll());
     }
 
     @Operation(summary = "Traer la Categoria por Id")
     @GetMapping("/{id}")
     public ResponseEntity<CategoriaDto> buscarPorId(@PathVariable Long id) throws ResourceNotFoundException {
-        CategoriaDto categoria = categoriaServices.buscarPorId(id);
+        CategoriaDto categoria = categoriaServices.findById(id);
 
         return ResponseEntity.ok(categoria);
     }
 
+    //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Categoria por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws ResourceNotFoundException {
-        categoriaServices.eliminar(id);
+        categoriaServices.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminada");
     }
 

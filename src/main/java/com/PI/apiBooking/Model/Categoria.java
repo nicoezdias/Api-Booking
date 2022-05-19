@@ -22,7 +22,7 @@ public class Categoria {
     private String urlImage;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Producto> products = new HashSet<>();
+    private Set<Producto> products;
 
     //Constructor default
     public Categoria() {}

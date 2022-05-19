@@ -24,7 +24,7 @@ public class CategoriaServices implements ICategoriaServices {
     ObjectMapper mapper;
 
     @Override
-    public CategoriaDto guardar(CategoriaDto categoriaDto) {
+    public CategoriaDto save(CategoriaDto categoriaDto) {
         Categoria categoria = mapper.convertValue(categoriaDto,Categoria.class);
         categoriaRepository.save(categoria);
         if (categoriaDto.getId() == null){
@@ -38,15 +38,15 @@ public class CategoriaServices implements ICategoriaServices {
     }
 
     @Override
-    public CategoriaDto buscarPorId(Long id) throws ResourceNotFoundException {
-        Categoria categoria = idCorrecto(id);
+    public CategoriaDto findById(Long id) throws ResourceNotFoundException {
+        Categoria categoria = checkId(id);
         CategoriaDto categoriaDto = mapper.convertValue(categoria,CategoriaDto.class);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return categoriaDto;
     }
 
     @Override
-    public Set<CategoriaDto> buscarTodas() {
+    public Set<CategoriaDto> findAll() {
         Set<CategoriaDto> categoriasDtos = new HashSet<>();
         List<Categoria> categorias = categoriaRepository.findAll();
         for (Categoria categoria:categorias
@@ -58,16 +58,16 @@ public class CategoriaServices implements ICategoriaServices {
     }
 
     @Override
-    public void eliminar(Long id) throws ResourceNotFoundException {
-        idCorrecto(id);
+    public void delete(Long id) throws ResourceNotFoundException {
+        checkId(id);
         categoriaRepository.deleteById(id);
-        logger.info("Se elimino la categoria correctamente: id("+id+")");
+        logger.info("Se elimino la Categoria correctamente: id("+id+")");
     }
 
-    public Categoria idCorrecto(Long id) throws ResourceNotFoundException{
+    public Categoria checkId(Long id) throws ResourceNotFoundException{
         Optional<Categoria> categoria = categoriaRepository.findById(id);
         if (categoria.isEmpty()) {
-            throw new ResourceNotFoundException("No existe categoria con id: " + id);
+            throw new ResourceNotFoundException("No existe Categoria con id: " + id);
         }
         return categoria.get();
     }

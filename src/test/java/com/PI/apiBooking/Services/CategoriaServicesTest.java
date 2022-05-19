@@ -24,25 +24,25 @@ class CategoriaServicesTest {
     private CategoriaServices categoriaServices;
 
     public void cargarInfo(){
-        categoriaServices.guardar(new CategoriaDto("Hotel1","Descripcion1","Url1"));
-        categoriaServices.guardar(new CategoriaDto("Hotel2","Descripcion2","Url2"));
-        categoriaServices.guardar(new CategoriaDto("Hotel3","Descripcion3","Url3"));
+        categoriaServices.save(new CategoriaDto("Hotel1","Descripcion1","Url1"));
+        categoriaServices.save(new CategoriaDto("Hotel2","Descripcion2","Url2"));
+        categoriaServices.save(new CategoriaDto("Hotel3","Descripcion3","Url3"));
     }
 
     @Test
     public void registrarYTraerCategoria() throws ResourceNotFoundException {
-        CategoriaDto c1 = categoriaServices.guardar(new CategoriaDto("Hotel1","Descripcion1","Url1"));
-        CategoriaDto c2 = categoriaServices.guardar(new CategoriaDto("Hotel2","Descripcion2","Url2"));
-        CategoriaDto c3 = categoriaServices.guardar(new CategoriaDto("Hotel3","Descripcion3","Url3"));
-        assertNotNull(categoriaServices.buscarPorId(c1.getId()));
-        assertNotNull(categoriaServices.buscarPorId(c2.getId()));
-        assertNotNull(categoriaServices.buscarPorId(c3.getId()));
+        CategoriaDto c1 = categoriaServices.save(new CategoriaDto("Hotel1","Descripcion1","Url1"));
+        CategoriaDto c2 = categoriaServices.save(new CategoriaDto("Hotel2","Descripcion2","Url2"));
+        CategoriaDto c3 = categoriaServices.save(new CategoriaDto("Hotel3","Descripcion3","Url3"));
+        assertNotNull(categoriaServices.findById(c1.getId()));
+        assertNotNull(categoriaServices.findById(c2.getId()));
+        assertNotNull(categoriaServices.findById(c3.getId()));
     }
 
     @Test
     public void traerTodasCategorias() {
         cargarInfo();
-        Set<CategoriaDto> categorias = categoriaServices.buscarTodas();
+        Set<CategoriaDto> categorias = categoriaServices.findAll();
         assertFalse(categorias.isEmpty());
         System.out.println(categorias);
     }
@@ -50,10 +50,10 @@ class CategoriaServicesTest {
     @Test
     public void eliminarCategoria() throws ResourceNotFoundException {
         boolean ex = false;
-        CategoriaDto c4 = categoriaServices.guardar(new CategoriaDto("Hotel4","Descripcion4","Url4"));
-        categoriaServices.eliminar(c4.getId());
+        CategoriaDto c4 = categoriaServices.save(new CategoriaDto("Hotel4","Descripcion4","Url4"));
+        categoriaServices.delete(c4.getId());
         try{
-            categoriaServices.buscarPorId(c4.getId());
+            categoriaServices.findById(c4.getId());
         }catch (ResourceNotFoundException e){
             ex = true;
         }
@@ -62,11 +62,11 @@ class CategoriaServicesTest {
 
     @Test
     public void actualizarCategoria() throws ResourceNotFoundException {
-        CategoriaDto c5 = categoriaServices.guardar(new CategoriaDto("Hotel5","Descripcion5","Url5"));
+        CategoriaDto c5 = categoriaServices.save(new CategoriaDto("Hotel5","Descripcion5","Url5"));
         CategoriaDto c6 = new CategoriaDto("Hotel4","Descripcion4","UrlCambiada");
         c6.setId(c5.getId());
 
-        categoriaServices.guardar(c6);
-        assertEquals(c6.toString(), categoriaServices.buscarPorId(c6.getId()).toString());
+        categoriaServices.save(c6);
+        assertEquals(c6.toString(), categoriaServices.findById(c6.getId()).toString());
     }
 }
