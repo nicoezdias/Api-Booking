@@ -1,6 +1,6 @@
 # Api-Booking
 
-## Gestionar los productos para utilizarlos en el sitio
+## 1) Gestionar los productos para utilizarlos en el sitio
 ### Como administrador quiero poder gestionar los productos para utilizarlos en el sitio.
 
 
@@ -15,7 +15,7 @@
 		◦	Crear productos
 		◦	Buscar y retornar productos por ID
 
-## Agregar categoría a un producto
+## 2) Agregar categoría a un producto
 ### Como administrador quiero poder agregar una categoría a un producto para organizar los productos similares.
 
 
@@ -24,7 +24,7 @@
 		◦	Utilizar hibernate o realizarlo desde la base de datos y luego mapearlo en la clase producto.
 		◦	La clase producto deberá tener un atributo que indique la categoría a la que pertenece, para implementarlo vamos a usar una relación muchos (producto) a uno (categoría).
 	
-## Características para productos
+## 3) Características para productos
 ### Como administrador quiero poder gestionar las características para describir productos
 
 
@@ -34,7 +34,7 @@
 		◦	nombre
 		◦	ícono
 	
-## Gestión de ciudades
+## 4) Gestión de ciudades
 ### Como administrador quiero poder gestionar las ciudades para poder relacionarlas a productos.
 
 
@@ -48,7 +48,7 @@
 	
 	3	Agregar ciudades en la BD (opcional)
 	
-## Indicar la ciudad de un producto
+## 5) Indicar la ciudad de un producto
 ## Como administrador quiero poder indicar la ciudad de un producto para que los usuarios puedan conocer su ubicación y buscar por este dato.
 
 
@@ -57,7 +57,7 @@
 		◦	Utilizar hibernate o realizarlo desde la base de datos y luego mapearlo en la clase producto.
 		◦	La clase producto deberá tener un atributo que indique la ciudad a la que pertenece, para implementarlo vamos a usar una relación muchos (producto) a uno (ciudad).
 
-## Gestionar las imágenes del producto
+## 6) Gestionar las imágenes del producto
 ### Como administrador quiero poder gestionar las imágenes del producto para ilustrarlo.
 
 
