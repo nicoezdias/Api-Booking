@@ -5,12 +5,14 @@
 
 Tareas (2)
 	1	Crear tabla “productos” en la BD. Los atributos son:
-	◦	id
-	◦	nombre
-	◦	descripción
+	
+		◦	id
+		◦	nombre
+		◦	descripción
+		
 	2	El controller de productos tiene que permitirnos
-	◦	Crear productos
-	◦	Buscar y retornar productos por ID
+		◦	Crear productos
+		◦	Buscar y retornar productos por ID
 
 ## Agregar categoría a un producto
 ### Como administrador quiero poder agregar una categoría a un producto para organizar los productos similares.
