@@ -1,6 +1,4 @@
 # Api-Booking
-<<<<<<< HEAD
-=======
 
 ## 1) Gestionar los productos para utilizarlos en el sitio
 ### Como administrador quiero poder gestionar los productos para utilizarlos en el sitio.
@@ -71,4 +69,7 @@
 	2	Mapear las tablas “ciudades”, “productos” e “imagenes” con clases del modelo
 	
 		◦	Crear las clases necesarias dentro de nuestro paquete ”Model” para mapear con las tablas de la base de datos.
+<<<<<<< HEAD
 >>>>>>> develop-back-nico
+=======
+>>>>>>> 8b15fde045abb7ab80dda697a41ce9e81e662085
