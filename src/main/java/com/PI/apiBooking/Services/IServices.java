@@ -6,8 +6,8 @@ import java.util.Set;
 
 public interface IServices<T>{
 
-    Set<T> buscarTodas();
-    T buscarPorId(Long id) throws ResourceNotFoundException;
-    T guardar(T t);
-    void eliminar(Long id) throws ResourceNotFoundException;
+    Set<T> findAll();
+    T findById(Long id) throws ResourceNotFoundException;
+    T save(T t);
+    void delete(Long id) throws ResourceNotFoundException;
 }

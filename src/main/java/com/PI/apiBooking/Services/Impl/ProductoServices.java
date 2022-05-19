@@ -1,10 +1,10 @@
 package com.PI.apiBooking.Services.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.Caracteristica;
 import com.PI.apiBooking.Model.Categoria;
 import com.PI.apiBooking.Model.DTO.ProductoDto;
 import com.PI.apiBooking.Model.Producto;
-import com.PI.apiBooking.Repository.ICategoriaRepository;
 import com.PI.apiBooking.Repository.IProductoRepository;
 import com.PI.apiBooking.Services.Interfaces.IProductoServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,10 +26,12 @@ public class ProductoServices implements IProductoServices {
     @Autowired
     CategoriaServices categoriaServices;
     @Autowired
+    CaracteristicaServices caracteristicaServices;
+    @Autowired
     ObjectMapper mapper;
 
     @Override
-    public ProductoDto guardar(ProductoDto productoDto) {
+    public ProductoDto save(ProductoDto productoDto) {
         Producto producto = mapper.convertValue(productoDto,Producto.class);
         productoRepository.save(producto);
         if (productoDto.getId() == null){
@@ -42,15 +44,15 @@ public class ProductoServices implements IProductoServices {
     }
 
     @Override
-    public ProductoDto buscarPorId(Long id) throws ResourceNotFoundException {
-        Producto producto = idCorrecto(id);
+    public ProductoDto findById(Long id) throws ResourceNotFoundException {
+        Producto producto = checkId(id);
         ProductoDto productoDto = mapper.convertValue(producto,ProductoDto.class);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return productoDto;
     }
 
     @Override
-    public Set<ProductoDto> buscarTodas() {
+    public Set<ProductoDto> findAll() {
         Set<ProductoDto> productosDto = new HashSet<>();
         List<Producto> productos = productoRepository.findAll();
         for (Producto producto:productos
@@ -62,14 +64,14 @@ public class ProductoServices implements IProductoServices {
     }
 
     @Override
-    public void eliminar(Long id) throws ResourceNotFoundException {
-        idCorrecto(id);
+    public void delete(Long id) throws ResourceNotFoundException {
+        checkId(id);
         productoRepository.deleteById(id);
         logger.info("Se elimino el producto correctamente: id("+id+")");
     }
 
-    public Set<ProductoDto> buscarPorcategoria(long categoriaid) throws ResourceNotFoundException {
-        Categoria categoria = categoriaServices.idCorrecto(categoriaid);
+    public Set<ProductoDto> findByCategory(long categoriaId) throws ResourceNotFoundException {
+        Categoria categoria = categoriaServices.checkId(categoriaId);
         Set<ProductoDto> productosDto = new HashSet<>();
         Set<Producto> productos = categoria.getProducts();
         for (Producto producto:productos
@@ -80,7 +82,19 @@ public class ProductoServices implements IProductoServices {
         return productosDto;
     }
 
-    public Producto idCorrecto(Long id) throws ResourceNotFoundException{
+    public Set<ProductoDto> findByFeature(long caracteristicaId) throws ResourceNotFoundException {
+        Caracteristica caracteristica = caracteristicaServices.checkId(caracteristicaId);
+        Set<ProductoDto> productosDto = new HashSet<>();
+        Set<Producto> productos = caracteristica.getProducts();
+        for (Producto producto:productos
+        ) {
+            productosDto.add(mapper.convertValue(producto,ProductoDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productosDto);
+        return productosDto;
+    }
+
+    public Producto checkId(Long id) throws ResourceNotFoundException{
         Optional<Producto> producto = productoRepository.findById(id);
         if (producto.isEmpty()) {
             throw new ResourceNotFoundException("No existe Producto con id: " + id);
