@@ -39,10 +39,7 @@ public class CategoriaServices implements ICategoriaServices {
 
     @Override
     public CategoriaDto buscar(Long id) throws ResourceNotFoundException {
-        Optional<Categoria> categoria = categoriaRepository.findById(id);
-        if (categoria.isEmpty()) {
-            throw new ResourceNotFoundException("No existe categoria con id: " + id);
-        }
+        Categoria categoria = idCorrecto(id);
         CategoriaDto categoriaDto = mapper.convertValue(categoria,CategoriaDto.class);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return categoriaDto;
@@ -62,9 +59,16 @@ public class CategoriaServices implements ICategoriaServices {
 
     @Override
     public void eliminar(Long id) throws ResourceNotFoundException {
-        buscar(id);
+        idCorrecto(id);
         categoriaRepository.deleteById(id);
         logger.info("Se elimino la categoria correctamente: id("+id+")");
     }
 
+    public Categoria idCorrecto(Long id) throws ResourceNotFoundException{
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        if (categoria.isEmpty()) {
+            throw new ResourceNotFoundException("No existe categoria con id: " + id);
+        }
+        return categoria.get();
+    }
 }
