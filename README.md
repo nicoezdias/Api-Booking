@@ -1,7 +1,7 @@
 # Api-Booking
 
-##Gestionar los productos para utilizarlos en el sitio
-###Como administrador quiero poder gestionar los productos para utilizarlos en el sitio.
+## Gestionar los productos para utilizarlos en el sitio
+### Como administrador quiero poder gestionar los productos para utilizarlos en el sitio.
 
 Tareas (2)
 	1	Crear tabla “productos” en la BD. Los atributos son:
