@@ -32,8 +32,8 @@ public class CategoriaController {
 
     @Operation(summary = "Traer la Categoria por Id")
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaDto> buscar(@PathVariable Long id) throws ResourceNotFoundException {
-        CategoriaDto categoria = categoriaServices.buscar(id);
+    public ResponseEntity<CategoriaDto> buscarPorId(@PathVariable Long id) throws ResourceNotFoundException {
+        CategoriaDto categoria = categoriaServices.buscarPorId(id);
 
         return ResponseEntity.ok(categoria);
     }

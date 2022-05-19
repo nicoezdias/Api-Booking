@@ -1,8 +1,10 @@
 package com.PI.apiBooking.Services.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.Categoria;
 import com.PI.apiBooking.Model.DTO.ProductoDto;
 import com.PI.apiBooking.Model.Producto;
+import com.PI.apiBooking.Repository.ICategoriaRepository;
 import com.PI.apiBooking.Repository.IProductoRepository;
 import com.PI.apiBooking.Services.Interfaces.IProductoServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +24,8 @@ public class ProductoServices implements IProductoServices {
     @Autowired
     IProductoRepository productoRepository;
     @Autowired
+    CategoriaServices categoriaServices;
+    @Autowired
     ObjectMapper mapper;
 
     @Override
@@ -38,11 +42,8 @@ public class ProductoServices implements IProductoServices {
     }
 
     @Override
-    public ProductoDto buscar(Long id) throws ResourceNotFoundException {
-        Optional<Producto> producto = productoRepository.findById(id);
-        if (producto.isEmpty()) {
-            throw new ResourceNotFoundException("No existe producto con id: " + id);
-        }
+    public ProductoDto buscarPorId(Long id) throws ResourceNotFoundException {
+        Producto producto = idCorrecto(id);
         ProductoDto productoDto = mapper.convertValue(producto,ProductoDto.class);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return productoDto;
@@ -62,8 +63,28 @@ public class ProductoServices implements IProductoServices {
 
     @Override
     public void eliminar(Long id) throws ResourceNotFoundException {
-        buscar(id);
+        idCorrecto(id);
         productoRepository.deleteById(id);
         logger.info("Se elimino el producto correctamente: id("+id+")");
+    }
+
+    public Set<ProductoDto> buscarPorcategoria(long categoriaid) throws ResourceNotFoundException {
+        Categoria categoria = categoriaServices.idCorrecto(categoriaid);
+        Set<ProductoDto> productosDto = new HashSet<>();
+        Set<Producto> productos = categoria.getProducts();
+        for (Producto producto:productos
+        ) {
+            productosDto.add(mapper.convertValue(producto,ProductoDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productosDto);
+        return productosDto;
+    }
+
+    public Producto idCorrecto(Long id) throws ResourceNotFoundException{
+        Optional<Producto> producto = productoRepository.findById(id);
+        if (producto.isEmpty()) {
+            throw new ResourceNotFoundException("No existe Producto con id: " + id);
+        }
+        return producto.get();
     }
 }

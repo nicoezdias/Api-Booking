@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ICategoriaRepository extends JpaRepository<Categoria, Long> {
+
+    //    @Query("SELECT c FROM Categoria c WHERE c.title = ?1")
+    //    Optional<Categoria> findByTitle(String title);
 }

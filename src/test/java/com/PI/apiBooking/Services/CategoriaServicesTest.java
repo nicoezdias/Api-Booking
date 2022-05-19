@@ -34,9 +34,9 @@ class CategoriaServicesTest {
         CategoriaDto c1 = categoriaServices.guardar(new CategoriaDto("Hotel1","Descripcion1","Url1"));
         CategoriaDto c2 = categoriaServices.guardar(new CategoriaDto("Hotel2","Descripcion2","Url2"));
         CategoriaDto c3 = categoriaServices.guardar(new CategoriaDto("Hotel3","Descripcion3","Url3"));
-        assertNotNull(categoriaServices.buscar(c1.getId()));
-        assertNotNull(categoriaServices.buscar(c2.getId()));
-        assertNotNull(categoriaServices.buscar(c3.getId()));
+        assertNotNull(categoriaServices.buscarPorId(c1.getId()));
+        assertNotNull(categoriaServices.buscarPorId(c2.getId()));
+        assertNotNull(categoriaServices.buscarPorId(c3.getId()));
     }
 
     @Test
@@ -53,7 +53,7 @@ class CategoriaServicesTest {
         CategoriaDto c4 = categoriaServices.guardar(new CategoriaDto("Hotel4","Descripcion4","Url4"));
         categoriaServices.eliminar(c4.getId());
         try{
-            categoriaServices.buscar(c4.getId());
+            categoriaServices.buscarPorId(c4.getId());
         }catch (ResourceNotFoundException e){
             ex = true;
         }
@@ -67,6 +67,6 @@ class CategoriaServicesTest {
         c6.setId(c5.getId());
 
         categoriaServices.guardar(c6);
-        assertEquals(c6.toString(), categoriaServices.buscar(c6.getId()).toString());
+        assertEquals(c6.toString(), categoriaServices.buscarPorId(c6.getId()).toString());
     }
 }

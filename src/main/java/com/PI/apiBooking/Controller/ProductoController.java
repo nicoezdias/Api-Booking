@@ -32,9 +32,16 @@ public class ProductoController {
 
     @Operation(summary = "Traer el Productos por Id")
     @GetMapping("/{id}")
-    public ResponseEntity<ProductoDto> buscar(@PathVariable Long id) throws ResourceNotFoundException {
-        ProductoDto producto = productoServices.buscar(id);
+    public ResponseEntity<ProductoDto> buscarPorId(@PathVariable Long id) throws ResourceNotFoundException {
+        ProductoDto producto = productoServices.buscarPorId(id);
 
+        return ResponseEntity.ok(producto);
+    }
+
+    @Operation(summary = "Traer el Productos por Categoria")
+    @GetMapping("categoria/{id}")
+    public ResponseEntity<Set<ProductoDto>> buscarPorCategoria(@PathVariable Long id) throws ResourceNotFoundException {
+        Set<ProductoDto> producto = productoServices.buscarPorcategoria(id);
         return ResponseEntity.ok(producto);
     }
 

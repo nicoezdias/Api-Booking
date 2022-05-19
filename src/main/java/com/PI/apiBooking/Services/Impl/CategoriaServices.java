@@ -38,7 +38,7 @@ public class CategoriaServices implements ICategoriaServices {
     }
 
     @Override
-    public CategoriaDto buscar(Long id) throws ResourceNotFoundException {
+    public CategoriaDto buscarPorId(Long id) throws ResourceNotFoundException {
         Categoria categoria = idCorrecto(id);
         CategoriaDto categoriaDto = mapper.convertValue(categoria,CategoriaDto.class);
         logger.info("La busqueda fue exitosa: id("+id+")");
