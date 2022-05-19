@@ -62,8 +62,10 @@
 
 
 	1	Crear tabla “imagenes” en la base de datos, que deberá tener como atributos:
+	
 		◦	id
 		◦	título
 		◦	url
 	2	Mapear las tablas “ciudades”, “productos” e “imagenes” con clases del modelo
+	
 		◦	Crear las clases necesarias dentro de nuestro paquete ”Model” para mapear con las tablas de la base de datos.
