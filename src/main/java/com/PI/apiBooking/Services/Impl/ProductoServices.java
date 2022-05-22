@@ -94,6 +94,22 @@ public class ProductoServices implements IProductoServices {
         return productosDto;
     }
 
+    @Override
+    public Long countByCategory(String c) {
+        return productoRepository.countByCategory(c);
+    }
+
+    @Override
+    public Set<ProductoDto> buscarPorCategoria(String c) {
+        Set<ProductoDto> productosDto = new HashSet<>();
+        Set<Producto> productos = productoRepository.buscarPorCategoria(c);
+        for (Producto producto:productos) {
+            productosDto.add(mapper.convertValue(producto,ProductoDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productosDto);
+        return productosDto;
+    }
+
     public Producto checkId(Long id) throws ResourceNotFoundException{
         Optional<Producto> producto = productoRepository.findById(id);
         if (producto.isEmpty()) {
