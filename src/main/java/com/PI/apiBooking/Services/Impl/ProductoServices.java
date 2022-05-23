@@ -3,6 +3,7 @@ package com.PI.apiBooking.Services.Impl;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.Caracteristica;
 import com.PI.apiBooking.Model.Categoria;
+import com.PI.apiBooking.Model.DTO.CaracteristicaDto;
 import com.PI.apiBooking.Model.DTO.ProductoDto;
 import com.PI.apiBooking.Model.Producto;
 import com.PI.apiBooking.Repository.IProductoRepository;

@@ -1,6 +1,9 @@
 package com.PI.apiBooking.Services.Interfaces;
 
+import com.PI.apiBooking.Model.Caracteristica;
+import com.PI.apiBooking.Model.DTO.CaracteristicaDto;
 import com.PI.apiBooking.Model.DTO.ProductoDto;
+import com.PI.apiBooking.Model.Producto;
 import com.PI.apiBooking.Services.IServices;
 
 import java.util.Set;
