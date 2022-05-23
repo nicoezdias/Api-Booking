@@ -3,6 +3,8 @@ package com.PI.apiBooking.Services.Impl;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.Caracteristica;
 import com.PI.apiBooking.Model.DTO.CaracteristicaDto;
+import com.PI.apiBooking.Model.DTO.ProductoDto;
+import com.PI.apiBooking.Model.Producto;
 import com.PI.apiBooking.Repository.ICaractericaRepository;
 import com.PI.apiBooking.Services.Interfaces.ICaracteristicaServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -64,6 +66,17 @@ public class CaracteristicaServices implements ICaracteristicaServices {
         logger.info("Se elimino la Caracteristica correctamente: id("+id+")");
     }
 
+    @Override
+    public Set<ProductoDto> buscarPorCaracteristica(String c) {
+        Set<ProductoDto> productosDto = new HashSet<>();
+        Set<Producto> productos = caractericaRepository.buscarPorCaracteristica(c);
+        for (Producto producto:productos) {
+            productosDto.add(mapper.convertValue(producto,ProductoDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productosDto);
+        return productosDto;
+    }
+
     public Caracteristica checkId(Long id) throws ResourceNotFoundException{
         Optional<Caracteristica> caracteristica = caractericaRepository.findById(id);
         if (caracteristica.isEmpty()) {
@@ -71,5 +84,6 @@ public class CaracteristicaServices implements ICaracteristicaServices {
         }
         return caracteristica.get();
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.CaracteristicaDto;
 import com.PI.apiBooking.Model.DTO.ProductoDto;
 import com.PI.apiBooking.Services.Impl.ProductoServices;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,11 +48,23 @@ public class ProductoController {
         return ResponseEntity.ok(producto);
     }
 
-    @Operation(summary = "Traer el Productos por Caracteriastica")
+    @Operation(summary = "Traer el Productos por Característica")
     @GetMapping("caracteristica/{id}")
     public ResponseEntity<Set<ProductoDto>> buscarPorCaracteristica(@PathVariable Long id) throws ResourceNotFoundException {
         Set<ProductoDto> producto = productoServices.findByFeature(id);
         return ResponseEntity.ok(producto);
+    }
+
+    @Operation(summary = "Contar la cantidad de Productos por Categoría")
+    @GetMapping("/contar/{c}")
+    public Long contarPorCategorias(@PathVariable String c) {
+        return productoServices.countByCategory(c);
+    }
+
+    @Operation(summary = "Traer Productos por Categoria")
+    @GetMapping("/c/{c}")
+    public Set<ProductoDto> buscarPorC(@PathVariable String c) {
+        return productoServices.buscarPorCategoria(c);
     }
 
     //* ///////// DELETE ///////// *//
