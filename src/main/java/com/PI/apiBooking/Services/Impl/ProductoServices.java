@@ -3,6 +3,7 @@ package com.PI.apiBooking.Services.Impl;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.Caracteristica;
 import com.PI.apiBooking.Model.Categoria;
+import com.PI.apiBooking.Model.DTO.CaracteristicaDto;
 import com.PI.apiBooking.Model.DTO.ProductoDto;
 import com.PI.apiBooking.Model.Producto;
 import com.PI.apiBooking.Repository.IProductoRepository;
@@ -88,6 +89,22 @@ public class ProductoServices implements IProductoServices {
         Set<Producto> productos = caracteristica.getProducts();
         for (Producto producto:productos
         ) {
+            productosDto.add(mapper.convertValue(producto,ProductoDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productosDto);
+        return productosDto;
+    }
+
+    @Override
+    public Long countByCategory(String c) {
+        return productoRepository.countByCategory(c);
+    }
+
+    @Override
+    public Set<ProductoDto> buscarPorCategoria(String c) {
+        Set<ProductoDto> productosDto = new HashSet<>();
+        Set<Producto> productos = productoRepository.buscarPorCategoria(c);
+        for (Producto producto:productos) {
             productosDto.add(mapper.convertValue(producto,ProductoDto.class));
         }
         logger.info("La busqueda fue exitosa: "+ productosDto);
