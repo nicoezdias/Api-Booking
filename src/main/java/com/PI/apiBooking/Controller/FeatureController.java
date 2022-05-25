@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.FeatureDto;
-import com.PI.apiBooking.Services.Impl.FeatureServices;
+import com.PI.apiBooking.Services.Interfaces.IFeatureServices;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.Set;
 public class FeatureController {
 
     @Autowired
-    FeatureServices featureServices;
+    IFeatureServices featureServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar Caracteristica")
@@ -40,8 +40,8 @@ public class FeatureController {
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Caracteristica por Id")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<?> delete(@PathVariable Long id) throws ResourceNotFoundException {
         featureServices.delete(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminada");
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

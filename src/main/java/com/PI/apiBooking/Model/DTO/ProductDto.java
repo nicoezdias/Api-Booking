@@ -17,9 +17,9 @@ public class ProductDto {
     private String name;
     private String description;
     private Category category;
-    private Set<Feature> features;
+    //private Set<Feature> features;
     private City city;
-    private Set<Image> images;
+    //private Set<Image> images;
 
     //Constructor for test
     public ProductDto(String name, String description, Category category, City city) {

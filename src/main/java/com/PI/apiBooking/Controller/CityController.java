@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.CityDto;
-import com.PI.apiBooking.Services.Impl.CityServices;
+import com.PI.apiBooking.Services.Interfaces.ICityServices;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.Set;
 public class CityController {
 
     @Autowired
-    CityServices cityServices;
+    ICityServices cityServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar Ciudad")
@@ -40,8 +40,8 @@ public class CityController {
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Ciudad por Id")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<?> delete(@PathVariable Long id) throws ResourceNotFoundException {
         cityServices.delete(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminada");
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

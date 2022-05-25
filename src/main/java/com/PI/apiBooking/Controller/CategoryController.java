@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.CategoryDto;
-import com.PI.apiBooking.Services.Impl.CategoryServices;
+import com.PI.apiBooking.Services.Interfaces.ICategoryServices;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.Set;
 public class CategoryController {
 
     @Autowired
-    CategoryServices categoryServices;
+    ICategoryServices categoryServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar Categoria")
@@ -40,9 +40,9 @@ public class CategoryController {
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Categoria por Id")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<?> delete(@PathVariable Long id) throws ResourceNotFoundException {
         categoryServices.delete(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminada");
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
