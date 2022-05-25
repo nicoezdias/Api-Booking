@@ -13,8 +13,8 @@ import java.util.Set;
 @Table
 public class Product {
     @Id
-    @SequenceGenerator(name = "productoSequence",sequenceName = "productoSequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productoSequence")
+    @SequenceGenerator(name = "productSequence",sequenceName = "productSequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSequence")
     private Long id;
     private String name;
     private String description;
@@ -24,7 +24,7 @@ public class Product {
     private Category category;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "productos_caracteristicas",
+            name = "product_features",
             joinColumns = @JoinColumn(name = "product_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name="feature_id", nullable = false)
     )

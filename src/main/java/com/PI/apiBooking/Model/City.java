@@ -12,8 +12,8 @@ import java.util.Set;
 @Table
 public class City {
     @Id
-    @SequenceGenerator(name = "ciudadSequence",sequenceName = "ciudadSequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ciudadSequence")
+    @SequenceGenerator(name = "citySequence",sequenceName = "citySequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "citySequence")
     private Long id;
     private String name;
     private String name_country;

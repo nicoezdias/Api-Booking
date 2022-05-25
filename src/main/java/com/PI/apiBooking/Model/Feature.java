@@ -12,8 +12,8 @@ import java.util.Set;
 @Table
 public class Feature {
     @Id
-    @SequenceGenerator(name = "caracteristicaSequence",sequenceName = "caracteristicaSequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "caracteristicaSequence")
+    @SequenceGenerator(name = "featureSequence",sequenceName = "featureSequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "featureSequence")
     private Long id;
     private String name;
     private String icon;

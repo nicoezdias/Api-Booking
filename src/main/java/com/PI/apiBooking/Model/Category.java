@@ -12,8 +12,8 @@ import java.util.Set;
 @Table
 public class Category {
     @Id
-    @SequenceGenerator(name = "categoriaSequence",sequenceName = "categoriaSequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoriaSequence")
+    @SequenceGenerator(name = "categorySequence",sequenceName = "categorySequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
     private Long id;
     private String title;
     private String description;

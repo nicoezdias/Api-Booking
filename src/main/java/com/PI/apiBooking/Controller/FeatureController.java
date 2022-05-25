@@ -2,7 +2,6 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.FeatureDto;
-import com.PI.apiBooking.Model.DTO.ProductDto;
 import com.PI.apiBooking.Services.Impl.FeatureServices;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/caracteristicas")
+@RequestMapping("/features")
 public class FeatureController {
 
     @Autowired
