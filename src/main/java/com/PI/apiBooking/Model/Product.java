@@ -40,6 +40,10 @@ public class Product {
     @JsonIgnore
     private Set<Image> images;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Rating> ratings;
+
     //Default
     public Product() {
     }

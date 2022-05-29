@@ -1,10 +1,10 @@
-package com.PI.apiBooking.Services.Impl;
+package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.Category;
 import com.PI.apiBooking.Model.DTO.CategoryDto;
 import com.PI.apiBooking.Repository.ICategoryRepository;
-import com.PI.apiBooking.Services.Interfaces.ICategoryServices;
+import com.PI.apiBooking.Service.Interfaces.ICategoryServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

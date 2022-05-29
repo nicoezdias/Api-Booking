@@ -15,6 +15,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imageSequence")
     private Long id;
     private String title;
+    @Lob
     private String url;
     private String text_alt;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

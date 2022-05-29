@@ -17,7 +17,7 @@ public class ProductDto {
     private String name;
     private String description;
     private Category category;
-    //private Set<Feature> features;
+    private Set<Feature> features;
     private City city;
     //private Set<Image> images;
 
