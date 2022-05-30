@@ -18,6 +18,8 @@ public class Product {
     private Long id;
     private String name;
     private String description;
+    private Boolean availability;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -39,6 +41,10 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Image> images;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_policy" , referencedColumnName= "id")
+    private Policy policy;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnore
