@@ -4,7 +4,7 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.ImageDto;
 import com.PI.apiBooking.Model.Image;
 import com.PI.apiBooking.Repository.IImageRepository;
-import com.PI.apiBooking.Service.Interfaces.IImagenServices;
+import com.PI.apiBooking.Service.Interfaces.IImagenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class ImageServices implements IImagenServices {
-    protected final static Logger logger = Logger.getLogger(CityServices.class);
+public class ImageService implements IImagenService {
+    protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
     IImageRepository imageRepository;

@@ -1,11 +1,10 @@
 package com.PI.apiBooking.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.PI.apiBooking.Model.User.Rule;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Getter

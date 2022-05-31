@@ -4,7 +4,7 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.RatingDto;
 import com.PI.apiBooking.Model.Rating;
 import com.PI.apiBooking.Repository.IRespositoryRating;
-import com.PI.apiBooking.Service.Interfaces.IRatingServices;
+import com.PI.apiBooking.Service.Interfaces.IRatingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class RatingServices implements IRatingServices{
+public class RatingService implements IRatingService {
 
-    protected final static Logger logger = Logger.getLogger(CityServices.class);
+    protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
     IRespositoryRating ratingRepository;

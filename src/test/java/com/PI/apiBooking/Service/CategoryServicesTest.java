@@ -2,7 +2,7 @@ package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.CategoryDto;
-import com.PI.apiBooking.Service.Impl.CategoryServices;
+import com.PI.apiBooking.Service.Impl.CategoryService;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CategoryServicesTest {
 
     @Autowired
-    private CategoryServices categoryServices;
+    private CategoryService categoryServices;
 
     public void logInfo(){
         categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1"));

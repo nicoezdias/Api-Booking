@@ -4,7 +4,7 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.Category;
 import com.PI.apiBooking.Model.DTO.CategoryDto;
 import com.PI.apiBooking.Repository.ICategoryRepository;
-import com.PI.apiBooking.Service.Interfaces.ICategoryServices;
+import com.PI.apiBooking.Service.Interfaces.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class CategoryServices implements ICategoryServices {
-    protected final static Logger logger = Logger.getLogger(CategoryServices.class);
+public class CategoryService implements ICategoryService {
+    protected final static Logger logger = Logger.getLogger(CategoryService.class);
 
     @Autowired
     ICategoryRepository categoryRepository;

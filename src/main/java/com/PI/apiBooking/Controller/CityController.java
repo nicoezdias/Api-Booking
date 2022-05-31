@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.CityDto;
-import com.PI.apiBooking.Service.Interfaces.ICityServices;
+import com.PI.apiBooking.Service.Interfaces.ICityService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.Set;
 public class CityController {
 
     @Autowired
-    ICityServices cityServices;
+    ICityService cityServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar Ciudad")
