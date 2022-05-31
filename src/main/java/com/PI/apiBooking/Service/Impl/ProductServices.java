@@ -1,10 +1,10 @@
-package com.PI.apiBooking.Services.Impl;
+package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.ProductDto;
 import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
-import com.PI.apiBooking.Services.Interfaces.IProductServices;
+import com.PI.apiBooking.Service.Interfaces.IProductServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,7 @@ public class ProductServices implements IProductServices {
 
     @Autowired
     IProductRepository productRepository;
-//    @Autowired
-//    CaracteristicaServices caracteristicaServices;
+
     @Autowired
     ObjectMapper mapper;
 
@@ -29,8 +28,7 @@ public class ProductServices implements IProductServices {
     public Set<ProductDto> findAll() {
         Set<ProductDto> productsDto = new HashSet<>();
         List<Product> products = productRepository.findAll();
-        for (Product product : products
-        ) {
+        for (Product product : products) {
             productsDto.add(mapper.convertValue(product, ProductDto.class));
         }
         logger.info("La busqueda fue exitosa: "+ productsDto);
@@ -71,9 +69,42 @@ public class ProductServices implements IProductServices {
     }
 
     @Override
-    public Set<ProductDto> findByCategory(Long categoryId){
+    public Set<ProductDto> findByCategoryId(Long categoryId){
         Set<ProductDto> productsDto = new HashSet<>();
-        Set<Product> products = productRepository.buscarPorCategoria(categoryId);
+        Set<Product> products = productRepository.findByCategoryId(categoryId);
+        for (Product product : products) {
+            productsDto.add(mapper.convertValue(product, ProductDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productsDto);
+        return productsDto;
+    }
+
+    @Override
+    public Set<ProductDto> findByCategoryTitle(String categoryTitle){
+        Set<ProductDto> productsDto = new HashSet<>();
+        Set<Product> products = productRepository.findByCategoryTitle(categoryTitle);
+        for (Product product : products) {
+            productsDto.add(mapper.convertValue(product, ProductDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productsDto);
+        return productsDto;
+    }
+
+    @Override
+    public Set<ProductDto> findByCityId(Long cityId){
+        Set<ProductDto> productsDto = new HashSet<>();
+        Set<Product> products = productRepository.findByCityId(cityId);
+        for (Product product : products) {
+            productsDto.add(mapper.convertValue(product, ProductDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productsDto);
+        return productsDto;
+    }
+
+    @Override
+    public Set<ProductDto> findByCityName(String cityTitle){
+        Set<ProductDto> productsDto = new HashSet<>();
+        Set<Product> products = productRepository.findByCityName(cityTitle);
         for (Product product : products) {
             productsDto.add(mapper.convertValue(product, ProductDto.class));
         }

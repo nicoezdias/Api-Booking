@@ -12,6 +12,7 @@ public class CategoryDto {
     private String title;
     private String description;
     private String urlImage;
+    private String text_alt;
 
     //Constructor for test
     public CategoryDto(String title, String description, String urlImage) {

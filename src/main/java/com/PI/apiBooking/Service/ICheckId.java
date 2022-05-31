@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Services;
+package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 

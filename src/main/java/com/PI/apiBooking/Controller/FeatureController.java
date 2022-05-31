@@ -2,7 +2,8 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.FeatureDto;
-import com.PI.apiBooking.Services.Interfaces.IFeatureServices;
+import com.PI.apiBooking.Model.DTO.ProductDto;
+import com.PI.apiBooking.Service.Interfaces.IFeatureServices;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +19,14 @@ public class FeatureController {
     IFeatureServices featureServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar Caracteristica")
+    @Operation(summary = "Guardar o actualizar Caracteristica")
     @PostMapping
-    public ResponseEntity<FeatureDto> save(@RequestBody FeatureDto feature) {
-        return ResponseEntity.ok(featureServices.save(feature));
+    public ResponseEntity<FeatureDto> save(@RequestBody FeatureDto featureDto) {
+        if(featureDto.getId() == null)
+            return ResponseEntity.status(HttpStatus.CREATED).body(featureServices.save(featureDto));
+        else
+            return ResponseEntity.ok(featureServices.save(featureDto));
     }
-
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Caracteristica")
     @GetMapping
@@ -37,11 +40,18 @@ public class FeatureController {
         return ResponseEntity.ok(featureServices.findById(id));
     }
 
+    @Operation(summary = "Traer todos Productos por Nombre de Característica")
+    @GetMapping("products/name/{featureName}")
+    public ResponseEntity<Set<ProductDto>> findProductsByFeature(@PathVariable String featureName){
+        Set<ProductDto> product = featureServices.findProductsByFeature(featureName);
+        return ResponseEntity.ok(product);
+    }
+
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Caracteristica por Id")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         featureServices.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

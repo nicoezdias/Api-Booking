@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.CityDto;
-import com.PI.apiBooking.Services.Interfaces.ICityServices;
+import com.PI.apiBooking.Service.Interfaces.ICityServices;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +18,13 @@ public class CityController {
     ICityServices cityServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar Ciudad")
+    @Operation(summary = "Guardar o actualizar Ciudad")
     @PostMapping
     public ResponseEntity<CityDto> save(@RequestBody CityDto cityDto) {
-        return ResponseEntity.ok(cityServices.save(cityDto));
+        if(cityDto.getId() == null)
+            return ResponseEntity.status(HttpStatus.CREATED).body(cityServices.save(cityDto));
+        else
+            return ResponseEntity.ok(cityServices.save(cityDto));
     }
 
     //* ///////// GET ///////// *//
@@ -40,8 +43,8 @@ public class CityController {
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Ciudad por Id")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         cityServices.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

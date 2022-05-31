@@ -1,10 +1,12 @@
-package com.PI.apiBooking.Services.Impl;
+package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.ProductDto;
 import com.PI.apiBooking.Model.Feature;
 import com.PI.apiBooking.Model.DTO.FeatureDto;
+import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IFeatureRepository;
-import com.PI.apiBooking.Services.Interfaces.IFeatureServices;
+import com.PI.apiBooking.Service.Interfaces.IFeatureServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,17 @@ public class FeatureServices implements IFeatureServices {
         }
 
         return featureDto;
+    }
+
+    @Override
+    public Set<ProductDto> findProductsByFeature(String featureName){
+        Set<ProductDto> productsDto = new HashSet<>();
+        Set<Product> products = featureRepository.findProductsByFeature(featureName);
+        for (Product product : products) {
+            productsDto.add(mapper.convertValue(product, ProductDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ productsDto);
+        return productsDto;
     }
 
     @Override

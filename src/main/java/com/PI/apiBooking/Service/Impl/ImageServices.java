@@ -1,11 +1,10 @@
-package com.PI.apiBooking.Services.Impl;
+package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Services.ICheckId;
 import com.PI.apiBooking.Model.DTO.ImageDto;
 import com.PI.apiBooking.Model.Image;
 import com.PI.apiBooking.Repository.IImageRepository;
-import com.PI.apiBooking.Services.Interfaces.IImagenServices;
+import com.PI.apiBooking.Service.Interfaces.IImagenServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class ImageServices implements IImagenServices, ICheckId<Image> {
+public class ImageServices implements IImagenServices {
     protected final static Logger logger = Logger.getLogger(CityServices.class);
 
     @Autowired
