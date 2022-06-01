@@ -1,11 +1,13 @@
 package com.PI.apiBooking.Model.DTO;
 
-import com.PI.apiBooking.Model.*;
+import com.PI.apiBooking.Model.Category;
+import com.PI.apiBooking.Model.City;
+import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Model.Policy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Lob;
 import java.util.Set;
 
 @ToString

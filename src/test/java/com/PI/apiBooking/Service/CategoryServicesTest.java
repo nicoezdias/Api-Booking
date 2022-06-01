@@ -1,6 +1,5 @@
 package com.PI.apiBooking.Service;
 
-import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.CategoryDto;
 import com.PI.apiBooking.Service.Impl.CategoryServices;
 import org.junit.FixMethodOrder;

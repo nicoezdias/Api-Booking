@@ -4,19 +4,20 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.City;
 import com.PI.apiBooking.Model.DTO.CityDto;
 import com.PI.apiBooking.Repository.ICityRepository;
-import com.PI.apiBooking.Service.Interfaces.ICityServices;
+import com.PI.apiBooking.Service.Interfaces.ICityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class CityServices implements ICityServices{
-    protected final static Logger logger = Logger.getLogger(CityServices.class);
+public class CityService implements ICityService {
+    protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
     ICityRepository cityRepository;

@@ -1,13 +1,13 @@
 package com.PI.apiBooking.Controller;
 
-import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.ProductDto;
-import com.PI.apiBooking.Service.Interfaces.IProductServices;
+import com.PI.apiBooking.Service.Interfaces.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Set;
 
 @RestController
@@ -15,7 +15,7 @@ import java.util.Set;
 public class ProductController {
 
     @Autowired
-    IProductServices productServices;
+    IProductService productServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar Producto")
@@ -67,7 +67,7 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @Operation(summary = "Traer todos Productos por Nombre de Ciudad")
+    @Operation(summary = "Traer todos Productos por Título de Ciudad")
     @GetMapping("city/name/{cityName}")
     public ResponseEntity<Set<ProductDto>> findByCityName(@PathVariable String cityName){
         Set<ProductDto> product = productServices.findByCityName(cityName);

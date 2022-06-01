@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.RatingDto;
-import com.PI.apiBooking.Service.Interfaces.IRatingServices;
+import com.PI.apiBooking.Service.Interfaces.IRatingService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class RatingController {
 
     @Autowired
-    IRatingServices ratingServices;
+    IRatingService ratingServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar Puntuación")

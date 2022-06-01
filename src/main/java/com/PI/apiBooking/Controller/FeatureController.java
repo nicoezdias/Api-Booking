@@ -1,14 +1,14 @@
 package com.PI.apiBooking.Controller;
 
-import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.FeatureDto;
 import com.PI.apiBooking.Model.DTO.ProductDto;
-import com.PI.apiBooking.Service.Interfaces.IFeatureServices;
+import com.PI.apiBooking.Service.Interfaces.IFeatureService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Set;
 
 @RestController
@@ -16,7 +16,7 @@ import java.util.Set;
 public class FeatureController {
 
     @Autowired
-    IFeatureServices featureServices;
+    IFeatureService featureServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar Caracteristica")

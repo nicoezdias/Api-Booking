@@ -4,7 +4,7 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 
 import java.util.Set;
 
-public interface IServices<T>{
+public interface IService<T>{
 
     Set<T> findAll();
     T findById(Long id) throws ResourceNotFoundException;

@@ -4,19 +4,20 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.ProductDto;
 import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
-import com.PI.apiBooking.Service.Interfaces.IProductServices;
+import com.PI.apiBooking.Service.Interfaces.IProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class ProductServices implements IProductServices {
-    protected final static Logger logger = Logger.getLogger(ProductServices.class);
+public class ProductService implements IProductService {
+    protected final static Logger logger = Logger.getLogger(ProductService.class);
 
     @Autowired
     IProductRepository productRepository;
