@@ -67,7 +67,7 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @Operation(summary = "Traer todos Productos por Título de Ciudad")
+    @Operation(summary = "Traer todos Productos por Nombre de Ciudad")
     @GetMapping("city/name/{cityName}")
     public ResponseEntity<Set<ProductDto>> findByCityName(@PathVariable String cityName){
         Set<ProductDto> product = productServices.findByCityName(cityName);
