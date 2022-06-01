@@ -1,5 +1,6 @@
 package com.PI.apiBooking.Controller;
 
+import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.ImageDto;
 import com.PI.apiBooking.Service.Interfaces.IImagenService;
 import io.swagger.v3.oas.annotations.Operation;

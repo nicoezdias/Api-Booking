@@ -1,5 +1,6 @@
 package com.PI.apiBooking.Controller;
 
+import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.CityDto;
 import com.PI.apiBooking.Service.Interfaces.ICityService;
 import io.swagger.v3.oas.annotations.Operation;

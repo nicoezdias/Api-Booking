@@ -1,7 +1,8 @@
 package com.PI.apiBooking.Service;
 
+import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.FeatureDto;
-import com.PI.apiBooking.Service.Impl.FeatureServices;
+import com.PI.apiBooking.Service.Impl.FeatureService;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,28 +22,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FeatureServicesTest {
 
     @Autowired
-    private FeatureServices featureServices;
+    private FeatureService featureService;
 
     public void logInfo(){
-        featureServices.save(new FeatureDto("Gym","Url1"));
-        featureServices.save(new FeatureDto("Wifi","Url2"));
-        featureServices.save(new FeatureDto("Mercado","Url3"));
+        featureService.save(new FeatureDto("Gym","Url1"));
+        featureService.save(new FeatureDto("Wifi","Url2"));
+        featureService.save(new FeatureDto("Mercado","Url3"));
     }
 
     @Test
     public void saveAndFindFeatures() throws ResourceNotFoundException {
-        FeatureDto c1 = featureServices.save(new FeatureDto("Gym","Url1"));
-        FeatureDto c2 = featureServices.save(new FeatureDto("Wifi","Url2"));
-        FeatureDto c3 = featureServices.save(new FeatureDto("Mercado","Url3"));
-        assertNotNull(featureServices.findById(c1.getId()));
-        assertNotNull(featureServices.findById(c2.getId()));
-        assertNotNull(featureServices.findById(c3.getId()));
+        FeatureDto c1 = featureService.save(new FeatureDto("Gym","Url1"));
+        FeatureDto c2 = featureService.save(new FeatureDto("Wifi","Url2"));
+        FeatureDto c3 = featureService.save(new FeatureDto("Mercado","Url3"));
+        assertNotNull(featureService.findById(c1.getId()));
+        assertNotNull(featureService.findById(c2.getId()));
+        assertNotNull(featureService.findById(c3.getId()));
     }
 
     @Test
     public void findAllFeatures() {
         logInfo();
-        Set<FeatureDto> caracteristicas = featureServices.findAll();
+        Set<FeatureDto> caracteristicas = featureService.findAll();
         assertFalse(caracteristicas.isEmpty());
         System.out.println(caracteristicas);
     }
@@ -50,10 +51,10 @@ class FeatureServicesTest {
     @Test
     public void deleteFeature() throws ResourceNotFoundException {
         boolean ex = false;
-        FeatureDto c4 = featureServices.save(new FeatureDto("CoWorking","Url4"));
-        featureServices.delete(c4.getId());
+        FeatureDto c4 = featureService.save(new FeatureDto("CoWorking","Url4"));
+        featureService.delete(c4.getId());
         try{
-            featureServices.findById(c4.getId());
+            featureService.findById(c4.getId());
         }catch (ResourceNotFoundException e){
             ex = true;
         }
@@ -62,11 +63,11 @@ class FeatureServicesTest {
 
     @Test
     public void updateFeature() throws ResourceNotFoundException {
-        FeatureDto c5 = featureServices.save(new FeatureDto("Servicio de limpieza","Url5"));
+        FeatureDto c5 = featureService.save(new FeatureDto("Servicio de limpieza","Url5"));
         FeatureDto c6 = new FeatureDto("Servicio de limpieza","UrlCambiada");
         c6.setId(c5.getId());
 
-        featureServices.save(c6);
-        assertEquals(c6.toString(), featureServices.findById(c6.getId()).toString());
+        featureService.save(c6);
+        assertEquals(c6.toString(), featureService.findById(c6.getId()).toString());
     }
 }
