@@ -1,11 +1,13 @@
 package com.PI.apiBooking.Model.DTO;
 
-import com.PI.apiBooking.Model.*;
+import com.PI.apiBooking.Model.Category;
+import com.PI.apiBooking.Model.City;
+import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Model.Policy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Lob;
 import java.util.Set;
 
 @ToString
@@ -18,9 +20,9 @@ public class ProductDto {
     private Boolean availability;
     private Policy policy;
     private Category category;
+    //private Set<Image> images;
     private Set<Feature> features;
     private City city;
-    //private Set<Image> images;
 
     //Constructor for test
     public ProductDto(String name, String description, Category category, City city) {

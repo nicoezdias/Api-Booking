@@ -44,8 +44,8 @@ public class RatingController {
 
     @Operation(summary = "Traer el promedio de Puntuaciones por Producto")
     @GetMapping("product/{id}")
-    public ResponseEntity<Optional<Double>> findByCategory(@PathVariable Long id){
-        Optional<Double> ratings = ratingServices.findByProduct(id);
+    public ResponseEntity<Optional<Integer>> findByCategory(@PathVariable Long id){
+        Optional<Integer> ratings = ratingServices.findByProduct(id);
         return ResponseEntity.ok(ratings);
     }
 

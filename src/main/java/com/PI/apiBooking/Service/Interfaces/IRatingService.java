@@ -11,5 +11,5 @@ import java.util.Optional;
 
 public interface IRatingService extends IService<RatingDto>, ICheckId<Rating> {
 
-    Optional<Double> findByProduct(Long ratingId);
+    Optional<Integer> findByProduct(Long ratingId);
 }
