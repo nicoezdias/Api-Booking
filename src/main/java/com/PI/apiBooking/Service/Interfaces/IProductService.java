@@ -10,10 +10,12 @@ import java.util.Set;
 
 public interface IProductService extends IService<ProductDto>, ICheckId<Product> {
 
-    Long countByCategory(String c);
+
     Set<ProductDto> findByCategoryId(Long categoryId);
-    Set<ProductDto> findByCategoryTitle(String categoryTitle);
+
     Set<ProductDto> findByCityId(Long cityId);
+
     Set<ProductDto> findByCityName(String cityTitle);
+
     Set<FeatureDto> findFeaturesByProductId(Long id);
 }

@@ -42,28 +42,15 @@ public class ProductController {
         return ResponseEntity.ok(productServices.findById(id));
     }
 
-    @Operation(summary = "Traer la cantidad de Productos por Id de Categoría")
-    @GetMapping("/categories/count/{category}")
-    public ResponseEntity<Long> countByCategory(@PathVariable String category) {
-        return ResponseEntity.ok(productServices.countByCategory(category));
-    }
-
     @Operation(summary = "Traer todos Productos por Id de Categoria")
-    @GetMapping("categories/id/{id}")
+    @GetMapping("categories/{id}")
     public ResponseEntity<Set<ProductDto>> findByCategoryId(@PathVariable Long id){
         Set<ProductDto> product = productServices.findByCategoryId(id);
         return ResponseEntity.ok(product);
     }
 
-    @Operation(summary = "Traer todos Productos por Título de Categoria")
-    @GetMapping("categories/title/{categoryTitle}")
-    public ResponseEntity<Set<ProductDto>> findByCategoryTitle(@PathVariable String categoryTitle){
-        Set<ProductDto> product = productServices.findByCategoryTitle(categoryTitle);
-        return ResponseEntity.ok(product);
-    }
-
     @Operation(summary = "Traer todos Productos por Id de Ciudad")
-    @GetMapping("city/id/{id}")
+    @GetMapping("city/{id}")
     public ResponseEntity<Set<ProductDto>> findByCityId(@PathVariable Long id){
         Set<ProductDto> product = productServices.findByCityId(id);
         return ResponseEntity.ok(product);

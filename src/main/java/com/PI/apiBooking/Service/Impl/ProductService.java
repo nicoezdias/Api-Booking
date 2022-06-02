@@ -67,25 +67,9 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Long countByCategory(String c) {
-        return productRepository.countByCategory(c);
-    }
-
-    @Override
     public Set<ProductDto> findByCategoryId(Long categoryId){
         Set<ProductDto> productsDto = new HashSet<>();
         Set<Product> products = productRepository.findByCategoryId(categoryId);
-        for (Product product : products) {
-            productsDto.add(mapper.convertValue(product, ProductDto.class));
-        }
-        logger.info("La busqueda fue exitosa: "+ productsDto);
-        return productsDto;
-    }
-
-    @Override
-    public Set<ProductDto> findByCategoryTitle(String categoryTitle){
-        Set<ProductDto> productsDto = new HashSet<>();
-        Set<Product> products = productRepository.findByCategoryTitle(categoryTitle);
         for (Product product : products) {
             productsDto.add(mapper.convertValue(product, ProductDto.class));
         }

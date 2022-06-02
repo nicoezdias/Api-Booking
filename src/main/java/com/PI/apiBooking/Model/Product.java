@@ -40,12 +40,11 @@ public class Product {
     private City city;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnore
     private Set<Image> images;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_policy" , referencedColumnName= "id")
-    private Policy policy;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_policy" , referencedColumnName= "id")
+//    private Policy policy;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnore

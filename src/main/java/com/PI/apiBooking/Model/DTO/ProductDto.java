@@ -2,8 +2,9 @@ package com.PI.apiBooking.Model.DTO;
 
 import com.PI.apiBooking.Model.Category;
 import com.PI.apiBooking.Model.City;
+//import com.PI.apiBooking.Model.Policy;
 import com.PI.apiBooking.Model.Feature;
-import com.PI.apiBooking.Model.Policy;
+import com.PI.apiBooking.Model.Image;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +19,7 @@ public class ProductDto {
     private String name;
     private String description;
     private Boolean availability;
-    private Policy policy;
+//    private Policy policy;
     private Category category;
     //private Set<Image> images;
     private Set<Feature> features;

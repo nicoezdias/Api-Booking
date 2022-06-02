@@ -1,6 +1,5 @@
 package com.PI.apiBooking.Model.User;
 
-import com.PI.apiBooking.Model.Rol;
 import lombok.Getter;
 import lombok.Setter;
 
