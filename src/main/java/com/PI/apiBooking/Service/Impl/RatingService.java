@@ -3,7 +3,7 @@ package com.PI.apiBooking.Service.Impl;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.RatingDto;
 import com.PI.apiBooking.Model.Rating;
-import com.PI.apiBooking.Repository.IRespositoryRating;
+import com.PI.apiBooking.Repository.IRatingRepository;
 import com.PI.apiBooking.Service.Interfaces.IRatingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
@@ -21,7 +21,7 @@ public class RatingService implements IRatingService {
     protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
-    IRespositoryRating ratingRepository;
+    IRatingRepository ratingRepository;
     @Autowired
     ObjectMapper mapper;
 
@@ -65,8 +65,8 @@ public class RatingService implements IRatingService {
     }
 
     @Override
-    public Optional<Double> findByProduct(Long productId){
-        Optional<Double> prom = ratingRepository.buscarPorProducto(productId);
+    public Optional<Integer> findByProduct(Long productId){
+        Optional<Integer> prom = ratingRepository.buscarPorProducto(productId);
 
         if (prom == null){
             return null;

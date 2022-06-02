@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface IRespositoryRating extends JpaRepository<Rating, Long> {
+public interface IRatingRepository extends JpaRepository<Rating, Long> {
 
     @Query("SELECT AVG(r.score) FROM Rating r WHERE product.id = ?1")
-    Optional<Double> buscarPorProducto(Long productId);
+    Optional<Integer> buscarPorProducto(Long productId);
 }

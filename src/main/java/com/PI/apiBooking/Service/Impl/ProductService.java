@@ -1,7 +1,9 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.FeatureDto;
 import com.PI.apiBooking.Model.DTO.ProductDto;
+import com.PI.apiBooking.Model.Feature;
 import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
@@ -9,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -110,6 +113,17 @@ public class ProductService implements IProductService {
         }
         logger.info("La busqueda fue exitosa: "+ productsDto);
         return productsDto;
+    }
+
+    @Override
+    public Set<FeatureDto> findFeaturesByProductId(Long id) {
+        Set<FeatureDto> featuresDto = new HashSet<>();
+        Set<Feature> features = productRepository.findFeaturesByProductId(id);
+        for (Feature feature : features) {
+            featuresDto.add(mapper.convertValue(feature, FeatureDto.class));
+        }
+        logger.info("La busqueda fue exitosa: "+ featuresDto);
+        return featuresDto;
     }
 
 //    public Set<ProductDto> findByFeature(long caracteristicaId) throws ResourceNotFoundException {

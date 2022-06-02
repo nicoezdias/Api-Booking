@@ -1,19 +1,14 @@
-package com.PI.apiBooking.Model;
+package com.PI.apiBooking.Model.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
-
+@ToString
 @Getter
 @Setter
-@Entity
-@Table
-public class Policy {
+public class PolicyDto {
 
-    @Id
-    @SequenceGenerator(name = "policySequence",sequenceName = "policySequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "policySequence")
     private Long id;
     private Integer checkOut;
     private Boolean parties;
