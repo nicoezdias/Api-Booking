@@ -2,7 +2,8 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.ImageDto;
-import com.PI.apiBooking.Service.Interfaces.IImagenService;
+import com.PI.apiBooking.Model.DTO.ImageProductDto;
+import com.PI.apiBooking.Service.Interfaces.IImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class ImageController {
 
     @Autowired
-    IImagenService imageServices;
+    IImageService imageServices;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar Imagen")
@@ -26,7 +27,6 @@ public class ImageController {
             return ResponseEntity.status(HttpStatus.CREATED).body(imageServices.save(imageDto));
         else
             return ResponseEntity.ok(imageServices.save(imageDto));
-
     }
 
     //* ///////// GET ///////// *//
@@ -40,6 +40,11 @@ public class ImageController {
     @GetMapping("/{id}")
     public ResponseEntity<ImageDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(imageServices.findById(id));
+    }
+
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<Set<ImageProductDto>> getImagesByProduct(@PathVariable Long productId){
+        return ResponseEntity.ok(imageServices.getImagesByProduct(productId));
     }
 
     //* ///////// DELETE ///////// *//

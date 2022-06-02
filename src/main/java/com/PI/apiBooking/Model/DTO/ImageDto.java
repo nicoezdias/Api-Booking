@@ -1,6 +1,7 @@
 package com.PI.apiBooking.Model.DTO;
 
 import com.PI.apiBooking.Model.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,6 +16,7 @@ public class ImageDto {
     private String url;
     private String text_alt;
     private Product product;
+
 
     //Constructor for test
     public ImageDto(String title, String url, String text_alt, Product product) {

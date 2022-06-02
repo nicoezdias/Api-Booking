@@ -1,7 +1,9 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.FeatureDto;
 import com.PI.apiBooking.Model.DTO.ProductDto;
+import com.PI.apiBooking.Model.Feature;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,12 +77,12 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-//    @Operation(summary = "Traer el Productos por Característica")
-//    @GetMapping("caracteristica/{id}")
-//    public ResponseEntity<Set<ProductDto>> buscarPorCaracteristica(@PathVariable Long id) throws ResourceNotFoundException {
-//        Set<ProductDto> producto = productServices.findByFeature(id);
-//        return ResponseEntity.ok(producto);
-//    }
+    @Operation(summary = "Traer todas las Características por Id de Producto")
+    @GetMapping("features/{productId}")
+    public ResponseEntity<Set<FeatureDto>> findFeaturesByProductId(@PathVariable Long productId){
+        Set<FeatureDto> product = productServices.findFeaturesByProductId(productId);
+        return ResponseEntity.ok(product);
+    }
 
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar el Producto por Id")
