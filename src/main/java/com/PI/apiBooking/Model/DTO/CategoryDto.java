@@ -13,13 +13,13 @@ public class CategoryDto {
     private String description;
     private String urlImage;
     private String text_alt;
-    private int productQuantity = 0;
 
     //Constructor for test
-    public CategoryDto(String title, String description, String urlImage) {
+    public CategoryDto(String title, String description, String urlImage, String text_alt) {
         this.title = title;
         this.description = description;
         this.urlImage = urlImage;
+        this.text_alt = text_alt;
     }
 
     //Default

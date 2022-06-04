@@ -1,5 +1,6 @@
 package com.PI.apiBooking.Model.DTO;
 
+import com.PI.apiBooking.Model.Feature;
 import com.PI.apiBooking.Model.Product;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,18 +9,18 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class RatingDto {
+public class Product_FeatureDto {
 
     private Long id;
-    private Integer score;
     private Product product;
+    private Feature feature;
 
     //Constructor for test
-    public RatingDto(Integer score, Product product) {
-        this.score = score;
+    public Product_FeatureDto(Product product, Feature feature) {
         this.product = product;
+        this.feature = feature;
     }
 
     //Default
-    public RatingDto() {}
+    public Product_FeatureDto() {}
 }

@@ -65,16 +65,8 @@ public class RatingService implements IRatingService {
     }
 
     @Override
-    public Optional<Integer> findByProduct(Long productId){
-        Optional<Integer> prom = ratingRepository.buscarPorProducto(productId);
-
-        if (prom == null){
-            return null;
-
-        }else{
-
-        }
-        return prom;
+    public Optional<Integer> averageScoreByProduct(Long productId){
+        return ratingRepository.averageScoreByProduct(productId);
     }
 
     @Override

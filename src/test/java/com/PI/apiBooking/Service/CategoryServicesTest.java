@@ -24,16 +24,16 @@ class CategoryServicesTest {
     private CategoryService categoryServices;
 
     public void logInfo(){
-        categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1"));
-        categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2"));
-        categoryServices.save(new CategoryDto("Dpto","Descripcion3","Url3"));
+        categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1"));
+        categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2", "txt2"));
+        categoryServices.save(new CategoryDto("Dpto","Descripcion3", "url3","txt3"));
     }
 
     @Test
     public void saveAndFindCategories() throws ResourceNotFoundException {
-        CategoryDto c1 = categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1"));
-        CategoryDto c2 = categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2"));
-        CategoryDto c3 = categoryServices.save(new CategoryDto("Dpto","Descripcion3","Url3"));
+        CategoryDto c1 = categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1"));
+        CategoryDto c2 = categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2", "txt2"));
+        CategoryDto c3 = categoryServices.save(new CategoryDto("Dpto","Descripcion3","Url3", "txt3"));
         assertNotNull(categoryServices.findById(c1.getId()));
         assertNotNull(categoryServices.findById(c2.getId()));
         assertNotNull(categoryServices.findById(c3.getId()));
@@ -50,7 +50,7 @@ class CategoryServicesTest {
     @Test
     public void deleteCategory() throws ResourceNotFoundException {
         boolean ex = false;
-        CategoryDto c4 = categoryServices.save(new CategoryDto("Hostel","Descripcion4","Url4"));
+        CategoryDto c4 = categoryServices.save(new CategoryDto("Hostel","Descripcion4","Url4", "txt4"));
         categoryServices.delete(c4.getId());
         try{
             categoryServices.findById(c4.getId());
@@ -62,8 +62,8 @@ class CategoryServicesTest {
 
     @Test
     public void updateCategory() throws ResourceNotFoundException {
-        CategoryDto c5 = categoryServices.save(new CategoryDto("Residencia","Descripcion5","Url5"));
-        CategoryDto c6 = new CategoryDto("Residencia","DescripcionCambiada","UrlCambiada");
+        CategoryDto c5 = categoryServices.save(new CategoryDto("Residencia","Descripcion5","Url5", "txt5"));
+        CategoryDto c6 = new CategoryDto("Residencia","DescripcionCambiada","UrlCambiada", "txt5");
         c6.setId(c5.getId());
 
         categoryServices.save(c6);

@@ -42,31 +42,23 @@ public class ProductController {
         return ResponseEntity.ok(productServices.findById(id));
     }
 
+    @Operation(summary = "Traer la cantidad de Productos por Id de Categoría")
+    @GetMapping("/categories/count/{categoryId}")
+    public ResponseEntity<Integer> countByCategory(@PathVariable Long categoryId) {
+        return ResponseEntity.ok(productServices.countByCategory(categoryId));
+    }
+
     @Operation(summary = "Traer todos Productos por Id de Categoria")
-    @GetMapping("categories/{id}")
-    public ResponseEntity<Set<ProductDto>> findByCategoryId(@PathVariable Long id){
-        Set<ProductDto> product = productServices.findByCategoryId(id);
+    @GetMapping("categories/{categoryId}")
+    public ResponseEntity<Set<ProductDto>> findByCategoryId(@PathVariable Long categoryId){
+        Set<ProductDto> product = productServices.findByCategoryId(categoryId);
         return ResponseEntity.ok(product);
     }
 
     @Operation(summary = "Traer todos Productos por Id de Ciudad")
-    @GetMapping("city/{id}")
-    public ResponseEntity<Set<ProductDto>> findByCityId(@PathVariable Long id){
-        Set<ProductDto> product = productServices.findByCityId(id);
-        return ResponseEntity.ok(product);
-    }
-
-    @Operation(summary = "Traer todos Productos por Título de Ciudad")
-    @GetMapping("city/name/{cityName}")
-    public ResponseEntity<Set<ProductDto>> findByCityName(@PathVariable String cityName){
-        Set<ProductDto> product = productServices.findByCityName(cityName);
-        return ResponseEntity.ok(product);
-    }
-
-    @Operation(summary = "Traer todas las Características por Id de Producto")
-    @GetMapping("features/{productId}")
-    public ResponseEntity<Set<FeatureDto>> findFeaturesByProductId(@PathVariable Long productId){
-        Set<FeatureDto> product = productServices.findFeaturesByProductId(productId);
+    @GetMapping("city/{cityId}")
+    public ResponseEntity<Set<ProductDto>> findByCityId(@PathVariable Long cityId){
+        Set<ProductDto> product = productServices.findByCityId(cityId);
         return ResponseEntity.ok(product);
     }
 

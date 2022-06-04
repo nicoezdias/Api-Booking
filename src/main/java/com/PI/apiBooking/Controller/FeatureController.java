@@ -41,13 +41,6 @@ public class FeatureController {
         return ResponseEntity.ok(featureServices.findById(id));
     }
 
-    @Operation(summary = "Traer todos Productos por Nombre de Característica")
-    @GetMapping("products/name/{featureName}")
-    public ResponseEntity<Set<ProductDto>> findProductsByFeature(@PathVariable String featureName){
-        Set<ProductDto> product = featureServices.findProductsByFeature(featureName);
-        return ResponseEntity.ok(product);
-    }
-
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Caracteristica por Id")
     @DeleteMapping("/{id}")

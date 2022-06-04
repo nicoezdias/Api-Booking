@@ -1,6 +1,6 @@
 package com.PI.apiBooking.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
+@JsonIgnoreProperties({"products"})
 public class Category {
     @Id
     @SequenceGenerator(name = "categorySequence",sequenceName = "categorySequence", allocationSize = 1)
@@ -22,8 +23,8 @@ public class Category {
     @Lob
     private String urlImage;
     private String text_alt;
+
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    @JsonIgnore
     private Set<Product> products;
 
     //Default

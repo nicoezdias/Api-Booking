@@ -60,6 +60,7 @@ public class FeatureService implements IFeatureService {
         return featureDto;
     }
 
+    /*
     @Override
     public Set<ProductDto> findProductsByFeature(String featureName){
         Set<ProductDto> productsDto = new HashSet<>();
@@ -69,7 +70,7 @@ public class FeatureService implements IFeatureService {
         }
         logger.info("La busqueda fue exitosa: "+ productsDto);
         return productsDto;
-    }
+    } */
 
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
@@ -86,4 +87,5 @@ public class FeatureService implements IFeatureService {
         }
         return feature.get();
     }
+
 }

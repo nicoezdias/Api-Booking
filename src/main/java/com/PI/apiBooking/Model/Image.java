@@ -19,6 +19,8 @@ public class Image {
     @Lob
     private String url;
     private String text_alt;
+    private Boolean profile;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

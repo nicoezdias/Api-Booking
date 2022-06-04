@@ -14,15 +14,16 @@ public class ImageDto {
     private String title;
     private String url;
     private String text_alt;
+    private Boolean profile;
     private Product product;
 
-
     //Constructor for test
-    public ImageDto(String title, String url, String text_alt, Product product) {
+    public ImageDto(String title, String url, String text_alt, Boolean profile) {
         this.title = title;
         this.url = url;
         this.text_alt = text_alt;
-        this.product = product;
+        this.profile = profile;
+
     }
 
     //Default

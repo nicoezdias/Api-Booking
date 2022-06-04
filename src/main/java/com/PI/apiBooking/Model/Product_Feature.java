@@ -10,27 +10,24 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table
-public class Rating {
+public class Product_Feature {
 
     @Id
-    @SequenceGenerator(name = "ratingSequence",sequenceName = "ratingSequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ratingSequence")
+    @SequenceGenerator(name = "categorySequence",sequenceName = "categorySequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
     private Long id;
-    private Integer score;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "product_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Product product;
 
-    /*
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "feature_id",  nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private User user;
-    */
+    private Feature feature;
 
     //Default
-    public Rating() {
+    public Product_Feature() {
     }
 }
