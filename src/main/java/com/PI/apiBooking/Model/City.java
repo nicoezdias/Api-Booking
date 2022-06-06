@@ -17,10 +17,12 @@ public class City {
     @SequenceGenerator(name = "citySequence",sequenceName = "citySequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "citySequence")
     private Long id;
+    @Column(length = 50)
     private String name;
+    @Column(length = 50)
     private String name_country;
 
-    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city")
     private Set<Product> products;
 
     //Default

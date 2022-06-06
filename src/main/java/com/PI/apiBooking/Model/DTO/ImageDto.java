@@ -23,7 +23,6 @@ public class ImageDto {
         this.url = url;
         this.text_alt = text_alt;
         this.profile = profile;
-
     }
 
     //Default

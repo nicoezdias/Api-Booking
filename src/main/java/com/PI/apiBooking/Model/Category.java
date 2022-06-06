@@ -24,7 +24,7 @@ public class Category {
     private String urlImage;
     private String text_alt;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category")
     private Set<Product> products;
 
     //Default

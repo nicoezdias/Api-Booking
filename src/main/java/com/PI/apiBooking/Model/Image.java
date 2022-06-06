@@ -15,13 +15,14 @@ public class Image {
     @SequenceGenerator(name = "imageSequence",sequenceName = "imageSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imageSequence")
     private Long id;
+    @Column(length = 50)
     private String title;
     @Lob
     private String url;
     private String text_alt;
     private Boolean profile;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Product product;

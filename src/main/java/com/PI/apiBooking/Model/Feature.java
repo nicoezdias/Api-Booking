@@ -17,11 +17,11 @@ public class Feature {
     @SequenceGenerator(name = "featureSequence",sequenceName = "featureSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "featureSequence")
     private Long id;
-    @Column(unique = true)
+    @Column(unique = true, length = 50)
     private String name;
     private String icon;
 
-    @OneToMany(mappedBy = "feature", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "feature", cascade = CascadeType.REMOVE)
     private Set<Product_Feature> products_features;
 
     //Default

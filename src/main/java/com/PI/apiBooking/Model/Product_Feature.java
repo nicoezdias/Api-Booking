@@ -17,12 +17,12 @@ public class Product_Feature {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Product product;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "feature_id",  nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Feature feature;

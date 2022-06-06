@@ -1,9 +1,6 @@
 package com.PI.apiBooking.Model.DTO;
 
 import com.PI.apiBooking.Model.*;
-//import com.PI.apiBooking.Model.Policy;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

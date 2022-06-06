@@ -18,7 +18,7 @@ public class Rating {
     private Long id;
     private Integer score;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Product product;
