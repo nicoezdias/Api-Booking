@@ -45,6 +45,23 @@ public class ImageService implements IImageService {
     }
 
     @Override
+    public Set<ImageProductDto> findImagesByProductId(Long productId) {
+        Set<Image> images = imageRepository.findImagesByProductId(productId);
+        Set<ImageProductDto> imageProductsDto = new HashSet<>();
+        for (Image image : images) {
+            imageProductsDto.add(mapper.convertValue(image, ImageProductDto.class));
+        }
+        logger.info("Búsqueda exitosa: " + imageProductsDto);
+        return imageProductsDto;
+    }
+
+    @Override
+    public ImageProductDto findProfileImageByProductId(Long productId) {
+        ImageProductDto imageProductDto = mapper.convertValue(imageRepository.findProfileImageByProductId(productId), ImageProductDto.class);
+        return imageProductDto;
+    }
+
+    @Override
     public ImageDto save(ImageDto imageDto) {
         Image image = mapper.convertValue(imageDto, Image.class);
         imageRepository.save(image);
@@ -55,17 +72,6 @@ public class ImageService implements IImageService {
             logger.info("Imagen actualizada correctamente: "+ imageDto);
         }
         return imageDto;
-    }
-
-    @Override
-    public Set<ImageProductDto> getImagesByProduct(Long id) {
-        Set<Image> images = imageRepository.getImagesByProduct(id);
-        Set<ImageProductDto> imageProductsDto = new HashSet<>();
-        for (Image image : images) {
-            imageProductsDto.add(mapper.convertValue(image, ImageProductDto.class));
-        }
-        logger.info("Búsqueda exitosa: " + imageProductsDto);
-        return imageProductsDto;
     }
 
     @Override

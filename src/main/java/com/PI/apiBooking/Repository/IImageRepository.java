@@ -10,6 +10,10 @@ import java.util.Set;
 @Repository
 public interface IImageRepository extends JpaRepository<Image, Long> {
 
-    @Query("FROM Image i where i.product.id= ?1")
-    Set<Image> getImagesByProduct(Long id);
+    @Query("SELECT i FROM Image i where i.product.id= ?1")
+    Set<Image> findImagesByProductId(Long productId);
+
+    @Query("SELECT i FROM Image i where i.product.id= ?1 AND i.profile = true")
+    Image findProfileImageByProductId(Long productId);
+
 }

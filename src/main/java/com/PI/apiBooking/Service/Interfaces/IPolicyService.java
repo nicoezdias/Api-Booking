@@ -6,4 +6,5 @@ import com.PI.apiBooking.Service.ICheckId;
 import com.PI.apiBooking.Service.IService;
 
 public interface IPolicyService extends IService<PolicyDto>, ICheckId<Policy> {
+
 }

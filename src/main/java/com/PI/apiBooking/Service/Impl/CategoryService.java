@@ -30,7 +30,9 @@ public class CategoryService implements ICategoryService {
         List<Category> categories = categoryRepository.findAll();
         for (Category category : categories
         ) {
-            categoriesDto.add(categoryToCategoryDto(category));
+            CategoryDto categoryDto = (mapper.convertValue(category, CategoryDto.class));
+            categoryDto.setProductQuantity(categoryRepository.countByCategory(category.getId()));
+            categoriesDto.add(categoryDto);
         }
         logger.info("La busqueda fue exitosa: "+ categoriesDto);
         return categoriesDto;
@@ -39,7 +41,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryDto findById(Long id) throws ResourceNotFoundException {
         Category category = checkId(id);
-        CategoryDto categoryDto = categoryToCategoryDto(category);
+        CategoryDto categoryDto = mapper.convertValue(category, CategoryDto.class);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return categoryDto;
     }
@@ -74,10 +76,4 @@ public class CategoryService implements ICategoryService {
         return category.get();
     }
 
-    public CategoryDto categoryToCategoryDto(Category category){
-        int productQuantity = category.getProducts().size();
-        CategoryDto categoryDto = mapper.convertValue(category, CategoryDto.class);
-        categoryDto.setProductQuantity(productQuantity);
-        return categoryDto;
-    }
 }

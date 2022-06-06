@@ -24,5 +24,10 @@ public class Policy {
     private Boolean smokeDetector;
     private Boolean safetyBox;
     private Boolean securityDeposit;
+    @Lob
     private String cancellationPolicy;
+
+    //Default
+    public Policy() {
+    }
 }

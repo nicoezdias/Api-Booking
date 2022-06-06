@@ -1,10 +1,6 @@
 package com.PI.apiBooking.Model.DTO;
 
-import com.PI.apiBooking.Model.Category;
-import com.PI.apiBooking.Model.City;
-//import com.PI.apiBooking.Model.Policy;
-import com.PI.apiBooking.Model.Feature;
-import com.PI.apiBooking.Model.Image;
+import com.PI.apiBooking.Model.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,21 +15,22 @@ public class ProductDto {
     private String name;
     private String description;
     private Boolean availability;
-//    private Policy policy;
+    private Integer stars;
     private Category category;
-    //private Set<Image> images;
-    private Set<Feature> features;
     private City city;
+    private Policy policy;
 
     //Constructor for test
-    public ProductDto(String name, String description, Category category, City city) {
+    public ProductDto(String name, String description, Boolean availability, Integer stars, Category category, City city, Policy policy) {
         this.name = name;
         this.description = description;
+        this.availability = availability;
+        this.stars = stars;
         this.category = category;
         this.city = city;
+        this.policy = policy;
     }
 
     //Default
-    public ProductDto() {
-    }
+    public ProductDto() {}
 }

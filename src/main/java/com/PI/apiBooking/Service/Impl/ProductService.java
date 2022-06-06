@@ -1,9 +1,9 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.FeatureDto;
 import com.PI.apiBooking.Model.DTO.ProductDto;
-import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Model.DTO.Product_CardDto;
+import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
 import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
@@ -25,6 +25,15 @@ public class ProductService implements IProductService {
     IProductRepository productRepository;
 
     @Autowired
+    ImageService imageService;
+
+    @Autowired
+    Product_FeatureService product_featureService;
+
+    @Autowired
+    Product_PolicyService product_policyService;
+
+    @Autowired
     ObjectMapper mapper;
 
     @Override
@@ -39,6 +48,21 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public Set<Product_CardDto> findAllCard() {
+        Set<Product_CardDto> products_cardDto = new HashSet<>();
+        List<Product> products = productRepository.findAll();
+        for (Product product : products) {
+            Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
+            product_cardDto.setCategoryName(product.getCategory().getTitle());
+            product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
+            product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
+            products_cardDto.add(product_cardDto);
+        }
+        logger.info("La busqueda fue exitosa: "+ products_cardDto);
+        return products_cardDto;
+    }
+
+    @Override
     public ProductDto findById(Long id) throws ResourceNotFoundException {
         Product product = checkId(id);
         ProductDto productDto = mapper.convertValue(product, ProductDto.class);
@@ -47,23 +71,15 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ProductDto save(ProductDto productDto) {
-        Product product = mapper.convertValue(productDto, Product.class);
-        productRepository.save(product);
-        if (productDto.getId() == null){
-            productDto.setId(product.getId());
-            logger.info("Producto registrado correctamente: "+ productDto);
-        }else{
-            logger.info("Producto actualizado correctamente: "+ productDto);
-        }
-        return productDto;
-    }
-
-    @Override
-    public void delete(Long id) throws ResourceNotFoundException {
-        checkId(id);
-        productRepository.deleteById(id);
-        logger.info("Se elimino el producto correctamente: id("+id+")");
+    public Product_CompleteDto findByIdComplete(Long id) throws ResourceNotFoundException {
+        Product product = checkId(id);
+        Product_CompleteDto product_completeDto = mapper.convertValue(product, Product_CompleteDto.class);
+        product_completeDto.setCategoryName(product.getCategory().getTitle());
+        product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()));
+        product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
+        product_completeDto.setFeaturesProduct(product_featureService.findFeaturesByProductId(product_completeDto.getId()));
+        product_completeDto.setPoliciesProduct(product_policyService.findPolicyByProductId(product_completeDto.getId()));
+        return product_completeDto;
     }
 
     @Override
@@ -89,38 +105,25 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Set<ProductDto> findByCityName(String cityTitle){
-        Set<ProductDto> productsDto = new HashSet<>();
-        Set<Product> products = productRepository.findByCityName(cityTitle);
-        for (Product product : products) {
-            productsDto.add(mapper.convertValue(product, ProductDto.class));
+    public ProductDto save(ProductDto productDto) {
+        Product product = mapper.convertValue(productDto, Product.class);
+        productRepository.save(product);
+
+        if (productDto.getId() == null){
+            productDto.setId(product.getId());
+            logger.info("Producto registrado correctamente: "+ productDto);
+        }else{
+            logger.info("Producto actualizado correctamente: "+ productDto);
         }
-        logger.info("La busqueda fue exitosa: "+ productsDto);
-        return productsDto;
+        return productDto;
     }
 
     @Override
-    public Set<FeatureDto> findFeaturesByProductId(Long id) {
-        Set<FeatureDto> featuresDto = new HashSet<>();
-        Set<Feature> features = productRepository.findFeaturesByProductId(id);
-        for (Feature feature : features) {
-            featuresDto.add(mapper.convertValue(feature, FeatureDto.class));
-        }
-        logger.info("La busqueda fue exitosa: "+ featuresDto);
-        return featuresDto;
+    public void delete(Long id) throws ResourceNotFoundException {
+        checkId(id);
+        productRepository.deleteById(id);
+        logger.info("Se elimino el producto correctamente: id("+id+")");
     }
-
-//    public Set<ProductDto> findByFeature(long caracteristicaId) throws ResourceNotFoundException {
-//        Caracteristica caracteristica = caracteristicaServices.checkId(caracteristicaId);
-//        Set<ProductDto> productosDto = new HashSet<>();
-//        Set<Product> products = caracteristica.getProducts();
-//        for (Product product : products
-//        ) {
-//            productosDto.add(mapper.convertValue(product, ProductDto.class));
-//        }
-//        logger.info("La busqueda fue exitosa: "+ productosDto);
-//        return productosDto;
-//    }
 
     @Override
     public Product checkId(Long id) throws ResourceNotFoundException{

@@ -8,8 +8,6 @@ import com.PI.apiBooking.Service.IService;
 
 import java.util.Optional;
 
-
 public interface IRatingService extends IService<RatingDto>, ICheckId<Rating> {
 
-    Optional<Integer> findByProduct(Long ratingId);
 }

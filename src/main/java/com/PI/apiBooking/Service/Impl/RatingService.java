@@ -65,19 +65,6 @@ public class RatingService implements IRatingService {
     }
 
     @Override
-    public Optional<Integer> findByProduct(Long productId){
-        Optional<Integer> prom = ratingRepository.buscarPorProducto(productId);
-
-        if (prom == null){
-            return null;
-
-        }else{
-
-        }
-        return prom;
-    }
-
-    @Override
     public Rating checkId(Long id) throws ResourceNotFoundException{
         Optional<Rating> rating = ratingRepository.findById(id);
         if (rating.isEmpty()) {

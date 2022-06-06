@@ -13,4 +13,15 @@ public class ImageProductDto {
     private String title;
     private String url;
     private String text_alt;
+
+    //Constructor for test
+    public ImageProductDto(String title, String url, String text_alt) {
+        this.title = title;
+        this.url = url;
+        this.text_alt = text_alt;
+    }
+
+    //Default
+    public ImageProductDto() {
+    }
 }

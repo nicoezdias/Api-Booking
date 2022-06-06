@@ -1,6 +1,5 @@
 package com.PI.apiBooking.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,43 +11,39 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
+@JsonIgnoreProperties({"images", "products_features", "ratings"})
 public class Product {
     @Id
     @SequenceGenerator(name = "productSequence",sequenceName = "productSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSequence")
     private Long id;
     private String name;
+    @Lob
     private String description;
     private Boolean availability;
+    private Integer stars;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "product_features",
-            joinColumns = @JoinColumn(name = "product_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name="feature_id", nullable = false)
-    )
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<Feature> features;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "city_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private City city;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinColumn(name = "policy_id" , referencedColumnName= "id")
+    private Policy policy;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Image> images;
 
-//    @OneToOne()
-//    @JoinColumn(name = "id_policy" , referencedColumnName= "id")
-//    private Policy policy;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private Set<Product_Feature> products_features;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Rating> ratings;
 
     //Default

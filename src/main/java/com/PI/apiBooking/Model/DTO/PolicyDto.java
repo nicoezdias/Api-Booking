@@ -10,14 +10,14 @@ import lombok.ToString;
 public class PolicyDto {
 
     private Long id;
-    private Integer checkOut;
-    private Boolean parties;
-    private Boolean smoke;
-    private Boolean pets;
-    private Boolean parking;
-    private Boolean coronaVirus;
-    private Boolean smokeDetector;
-    private Boolean safetyBox;
-    private Boolean securityDeposit;
-    private String cancellationPolicy;
+    private String policy;
+
+    //Constructor for test
+    public PolicyDto(String policy) {
+        this.policy = policy;
+    }
+
+    //Default
+    public PolicyDto() {
+    }
 }

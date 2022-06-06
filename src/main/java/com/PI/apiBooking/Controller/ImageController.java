@@ -42,9 +42,10 @@ public class ImageController {
         return ResponseEntity.ok(imageServices.findById(id));
     }
 
+    @Operation(summary = "Traer las Imágenes por Id de Producto")
     @GetMapping("/product/{productId}")
-    public ResponseEntity<Set<ImageProductDto>> getImagesByProduct(@PathVariable Long productId){
-        return ResponseEntity.ok(imageServices.getImagesByProduct(productId));
+    public ResponseEntity<Set<ImageProductDto>> findImagesByProductId(@PathVariable Long productId){
+        return ResponseEntity.ok(imageServices.findImagesByProductId(productId));
     }
 
     //* ///////// DELETE ///////// *//

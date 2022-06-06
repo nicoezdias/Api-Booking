@@ -42,14 +42,6 @@ public class RatingController {
         return ResponseEntity.ok(ratingServices.findById(id));
     }
 
-    @Operation(summary = "Traer el promedio de Puntuaciones por Producto")
-    @GetMapping("product/{id}")
-    public ResponseEntity<Optional<Integer>> findByCategory(@PathVariable Long id){
-        Optional<Integer> ratings = ratingServices.findByProduct(id);
-        return ResponseEntity.ok(ratings);
-    }
-
-
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Puntuación por Id")
     @DeleteMapping("/{id}")

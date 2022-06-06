@@ -10,5 +10,6 @@ import java.util.Set;
 
 public interface IImageService extends IService<ImageDto>, ICheckId<Image> {
 
-    Set<ImageProductDto> getImagesByProduct(Long id);
+    Set<ImageProductDto> findImagesByProductId(Long productId);
+    ImageProductDto findProfileImageByProductId(Long productId);
 }
