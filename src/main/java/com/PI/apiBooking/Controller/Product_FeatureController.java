@@ -42,12 +42,6 @@ public class Product_FeatureController {
         return ResponseEntity.ok(product_featureService.findById(id));
     }
 
-    @Operation(summary = "Traer las Características por Id de Producto")
-    @GetMapping("features/{productId}")
-    public ResponseEntity<Set<FeatureDto>> findFeaturesByProductId(@PathVariable Long productId){
-        return ResponseEntity.ok(product_featureService.findFeaturesByProductId(productId));
-    }
-
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar el Productos_Características por Id")
     @DeleteMapping("/{id}")

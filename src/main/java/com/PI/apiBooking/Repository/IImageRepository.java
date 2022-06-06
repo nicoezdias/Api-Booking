@@ -15,4 +15,5 @@ public interface IImageRepository extends JpaRepository<Image, Long> {
 
     @Query("SELECT i FROM Image i where i.product.id= ?1 AND i.profile = true")
     Image findProfileImageByProductId(Long productId);
+
 }

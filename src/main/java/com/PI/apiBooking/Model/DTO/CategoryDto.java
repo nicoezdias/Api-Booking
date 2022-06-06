@@ -13,6 +13,7 @@ public class CategoryDto {
     private String description;
     private String urlImage;
     private String text_alt;
+    private Integer productQuantity = 0;
 
     //Constructor for test
     public CategoryDto(String title, String description, String urlImage, String text_alt) {

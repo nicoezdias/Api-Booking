@@ -10,5 +10,4 @@ import java.util.Optional;
 
 public interface IRatingService extends IService<RatingDto>, ICheckId<Rating> {
 
-    Optional<Integer> averageScoreByProduct(Long ratingId);
 }

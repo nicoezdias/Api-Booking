@@ -48,12 +48,6 @@ public class ImageController {
         return ResponseEntity.ok(imageServices.findImagesByProductId(productId));
     }
 
-    @Operation(summary = "Traer la Imagen de Perfil por Id de Producto")
-    @GetMapping("/product/profile/{productId}")
-    public ResponseEntity<ImageProductDto> findProfileImageByProductId(@PathVariable Long productId){
-        return ResponseEntity.ok(imageServices.findProfileImageByProductId(productId));
-    }
-
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar la Imagen por Id")
     @DeleteMapping("/{id}")

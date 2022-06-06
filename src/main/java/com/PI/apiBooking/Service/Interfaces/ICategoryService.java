@@ -7,4 +7,5 @@ import com.PI.apiBooking.Service.IService;
 
 public interface ICategoryService extends IService<CategoryDto>, ICheckId<Category> {
 
+
 }

@@ -2,6 +2,8 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.ProductDto;
+import com.PI.apiBooking.Model.DTO.Product_CardDto;
+import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
 import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
@@ -23,6 +25,15 @@ public class ProductService implements IProductService {
     IProductRepository productRepository;
 
     @Autowired
+    ImageService imageService;
+
+    @Autowired
+    Product_FeatureService product_featureService;
+
+    @Autowired
+    Product_PolicyService product_policyService;
+
+    @Autowired
     ObjectMapper mapper;
 
     @Override
@@ -37,6 +48,21 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public Set<Product_CardDto> findAllCard() {
+        Set<Product_CardDto> products_cardDto = new HashSet<>();
+        List<Product> products = productRepository.findAll();
+        for (Product product : products) {
+            Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
+            product_cardDto.setCategoryName(product.getCategory().getTitle());
+            product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
+            product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
+            products_cardDto.add(product_cardDto);
+        }
+        logger.info("La busqueda fue exitosa: "+ products_cardDto);
+        return products_cardDto;
+    }
+
+    @Override
     public ProductDto findById(Long id) throws ResourceNotFoundException {
         Product product = checkId(id);
         ProductDto productDto = mapper.convertValue(product, ProductDto.class);
@@ -45,8 +71,15 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Integer countByCategory(Long categoryId) {
-        return productRepository.countByCategory(categoryId);
+    public Product_CompleteDto findByIdComplete(Long id) throws ResourceNotFoundException {
+        Product product = checkId(id);
+        Product_CompleteDto product_completeDto = mapper.convertValue(product, Product_CompleteDto.class);
+        product_completeDto.setCategoryName(product.getCategory().getTitle());
+        product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()));
+        product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
+        product_completeDto.setFeaturesProduct(product_featureService.findFeaturesByProductId(product_completeDto.getId()));
+        product_completeDto.setPoliciesProduct(product_policyService.findPolicyByProductId(product_completeDto.getId()));
+        return product_completeDto;
     }
 
     @Override

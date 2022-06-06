@@ -65,11 +65,6 @@ public class RatingService implements IRatingService {
     }
 
     @Override
-    public Optional<Integer> averageScoreByProduct(Long productId){
-        return ratingRepository.averageScoreByProduct(productId);
-    }
-
-    @Override
     public Rating checkId(Long id) throws ResourceNotFoundException{
         Optional<Rating> rating = ratingRepository.findById(id);
         if (rating.isEmpty()) {
