@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.CityDto;
+import com.PI.apiBooking.Model.DTO.Post.CityDto;
 import com.PI.apiBooking.Service.Impl.CityService;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;

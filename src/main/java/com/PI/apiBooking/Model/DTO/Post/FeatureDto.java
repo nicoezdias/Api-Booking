@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Model.DTO;
+package com.PI.apiBooking.Model.DTO.Post;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,19 +7,19 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class CityDto {
+public class FeatureDto {
 
     private Long id;
     private String name;
-    private String name_country;
+    private String icon;
 
     //Constructor for test
-    public CityDto(String name, String name_country) {
+    public FeatureDto(String name, String icon) {
         this.name = name;
-        this.name_country = name_country;
+        this.icon = icon;
     }
 
     //Default
-    public CityDto() {
+    public FeatureDto() {
     }
 }

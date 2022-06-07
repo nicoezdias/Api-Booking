@@ -7,14 +7,14 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class ImageProductDto {
-
+public class Category_CardDto {
     private Long id;
     private String title;
-    private String url;
+    private String urlImage;
     private String text_alt;
+    private Integer productQuantity = 0;
 
     //Default
-    public ImageProductDto() {
+    public Category_CardDto() {
     }
 }

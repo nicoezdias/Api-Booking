@@ -28,23 +28,34 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
 
+    @ManyToMany
+    @JoinTable(
+            name = "product_features",
+            joinColumns = @JoinColumn(name = "product_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name="feature_id", nullable = false)
+    )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Feature> features;
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_policies",
+            joinColumns = @JoinColumn(name = "product_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name="policy_id", nullable = false)
+    )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Policy> policies;
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private City city;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @JoinColumn(name = "policy_id" , referencedColumnName= "id")
-    private Policy policy;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Image> images;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private Set<Product_Feature> products_features;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private Set<Rating> ratings;
 
     //Default
     public Product() {

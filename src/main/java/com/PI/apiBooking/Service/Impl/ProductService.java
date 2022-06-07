@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.ProductDto;
+import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
 import com.PI.apiBooking.Model.Product;
@@ -28,80 +28,41 @@ public class ProductService implements IProductService {
     ImageService imageService;
 
     @Autowired
-    Product_FeatureService product_featureService;
-
-    @Autowired
-    Product_PolicyService product_policyService;
-
-    @Autowired
     ObjectMapper mapper;
 
-    @Override
-    public Set<ProductDto> findAll() {
-        Set<ProductDto> productsDto = new HashSet<>();
-        List<Product> products = productRepository.findAll();
-        for (Product product : products) {
-            productsDto.add(mapper.convertValue(product, ProductDto.class));
-        }
-        logger.info("La busqueda fue exitosa: "+ productsDto);
-        return productsDto;
-    }
 
     @Override
-    public Set<Product_CardDto> findAllCard() {
-        Set<Product_CardDto> products_cardDto = new HashSet<>();
+    public Set<Product_CardDto> findAll() {
         List<Product> products = productRepository.findAll();
-        for (Product product : products) {
-            Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
-            product_cardDto.setCategoryName(product.getCategory().getTitle());
-            product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
-            product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
-            products_cardDto.add(product_cardDto);
-        }
+        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
         logger.info("La busqueda fue exitosa: "+ products_cardDto);
         return products_cardDto;
     }
 
     @Override
-    public ProductDto findById(Long id) throws ResourceNotFoundException {
-        Product product = checkId(id);
-        ProductDto productDto = mapper.convertValue(product, ProductDto.class);
-        logger.info("La busqueda fue exitosa: id("+id+")");
-        return productDto;
-    }
-
-    @Override
-    public Product_CompleteDto findByIdComplete(Long id) throws ResourceNotFoundException {
+    public Product_CompleteDto findById(Long id) throws ResourceNotFoundException {
         Product product = checkId(id);
         Product_CompleteDto product_completeDto = mapper.convertValue(product, Product_CompleteDto.class);
         product_completeDto.setCategoryName(product.getCategory().getTitle());
-        product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()));
+        product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()).get());
         product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
-        product_completeDto.setFeaturesProduct(product_featureService.findFeaturesByProductId(product_completeDto.getId()));
-        product_completeDto.setPoliciesProduct(product_policyService.findPolicyByProductId(product_completeDto.getId()));
         return product_completeDto;
     }
 
     @Override
-    public Set<ProductDto> findByCategoryId(Long categoryId){
-        Set<ProductDto> productsDto = new HashSet<>();
-        Set<Product> products = productRepository.findByCategoryId(categoryId);
-        for (Product product : products) {
-            productsDto.add(mapper.convertValue(product, ProductDto.class));
-        }
-        logger.info("La busqueda fue exitosa: "+ productsDto);
-        return productsDto;
+    public Set<Product_CardDto> findByCategoryId(Long categoryId){
+        List<Product> products = productRepository.findByCategoryId(categoryId);
+        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
+        logger.info("La busqueda fue exitosa: "+ products_cardDto);
+        return products_cardDto;
     }
 
     @Override
-    public Set<ProductDto> findByCityId(Long cityId){
-        Set<ProductDto> productsDto = new HashSet<>();
-        Set<Product> products = productRepository.findByCityId(cityId);
-        for (Product product : products) {
-            productsDto.add(mapper.convertValue(product, ProductDto.class));
-        }
-        logger.info("La busqueda fue exitosa: "+ productsDto);
-        return productsDto;
+    public Set<Product_CardDto> findByCityId(Long cityId){
+        List<Product> products = productRepository.findByCityId(cityId);
+        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
+        logger.info("La busqueda fue exitosa: "+ products_cardDto);
+        return products_cardDto;
     }
 
     @Override
@@ -132,5 +93,17 @@ public class ProductService implements IProductService {
             throw new ResourceNotFoundException(msjError + id);
         }
         return product.get();
+    }
+
+    public Set<Product_CardDto> produtcToProduct_CardDto (List<Product> products){
+        Set<Product_CardDto> products_cardDto = new HashSet<>();
+        for (Product product : products) {
+            Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
+            product_cardDto.setCategoryName(product.getCategory().getTitle());
+            product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()).get());
+            product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
+            products_cardDto.add(product_cardDto);
+        }
+        return products_cardDto;
     }
 }

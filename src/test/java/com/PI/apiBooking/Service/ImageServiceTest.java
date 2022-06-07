@@ -1,7 +1,8 @@
 package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.ImageDto;
+import com.PI.apiBooking.Model.DTO.ImageProductDto;
+import com.PI.apiBooking.Model.DTO.Post.ImageDto;
 import com.PI.apiBooking.Service.Impl.ImageService;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class ImageServiceTest {
     @Test
     public void findAllImages() {
         logInfo();
-        Set<ImageDto> imagesDto = imageService.findAll();
+        Set<ImageProductDto> imagesDto = imageService.findAll();
         assertFalse(imagesDto.isEmpty());
         System.out.println(imagesDto);
     }

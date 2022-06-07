@@ -6,8 +6,6 @@ import java.util.Set;
 
 public interface IService<T>{
 
-    Set<T> findAll();
-    T findById(Long id) throws ResourceNotFoundException;
     T save(T t);
     void delete(Long id) throws ResourceNotFoundException;
 }

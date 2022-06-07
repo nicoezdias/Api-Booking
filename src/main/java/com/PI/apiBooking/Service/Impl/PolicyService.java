@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.PolicyDto;
+import com.PI.apiBooking.Model.DTO.Post.PolicyDto;
 import com.PI.apiBooking.Model.Policy;
 import com.PI.apiBooking.Repository.IPolicyRepository;
 import com.PI.apiBooking.Service.Interfaces.IPolicyService;

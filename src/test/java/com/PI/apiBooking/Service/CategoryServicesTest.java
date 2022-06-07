@@ -1,7 +1,8 @@
 package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.CategoryDto;
+import com.PI.apiBooking.Model.DTO.Category_CardDto;
+import com.PI.apiBooking.Model.DTO.Post.CategoryDto;
 import com.PI.apiBooking.Service.Impl.CategoryService;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ class CategoryServicesTest {
     @Test
     public void findAllCategories() {
         logInfo();
-        Set<CategoryDto> categories = categoryServices.findAll();
+        Set<Category_CardDto> categories = categoryServices.findAll();
         assertFalse(categories.isEmpty());
         System.out.println(categories);
     }
