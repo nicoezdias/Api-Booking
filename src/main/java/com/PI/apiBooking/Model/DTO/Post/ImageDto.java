@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Model.DTO;
+package com.PI.apiBooking.Model.DTO.Post;
 
 import com.PI.apiBooking.Model.Product;
 import lombok.Getter;

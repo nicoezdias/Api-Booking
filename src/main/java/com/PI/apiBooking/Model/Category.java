@@ -19,6 +19,7 @@ public class Category {
     private Long id;
     @Column(length = 20)
     private String title;
+    @Lob
     private String description;
     @Lob
     private String urlImage;

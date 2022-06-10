@@ -1,10 +1,8 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.FeatureDto;
-import com.PI.apiBooking.Model.DTO.ProductDto;
+import com.PI.apiBooking.Model.DTO.Post.FeatureDto;
 import com.PI.apiBooking.Model.Feature;
-import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IFeatureRepository;
 import com.PI.apiBooking.Service.Interfaces.IFeatureService;
 import com.fasterxml.jackson.databind.ObjectMapper;

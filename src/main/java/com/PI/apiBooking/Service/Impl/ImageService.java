@@ -1,8 +1,8 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.ImageDto;
 import com.PI.apiBooking.Model.DTO.ImageProductDto;
+import com.PI.apiBooking.Model.DTO.Post.ImageDto;
 import com.PI.apiBooking.Model.Image;
 import com.PI.apiBooking.Repository.IImageRepository;
 import com.PI.apiBooking.Service.Interfaces.IImageService;
@@ -26,20 +26,20 @@ public class ImageService implements IImageService {
     ObjectMapper mapper;
 
     @Override
-    public Set<ImageDto> findAll() {
-        Set<ImageDto> imagesDtos = new HashSet<>();
+    public Set<ImageProductDto> findAll() {
+        Set<ImageProductDto> imagesDtos = new HashSet<>();
         List<Image> images = imageRepository.findAll();
         for (Image image :images) {
-            imagesDtos.add(mapper.convertValue(image, ImageDto.class));
+            imagesDtos.add(mapper.convertValue(image, ImageProductDto.class));
         }
         logger.info("La búsqueda fue exitosa: "+ imagesDtos);
         return imagesDtos;
     }
 
     @Override
-    public ImageDto findById(Long id) throws ResourceNotFoundException {
+    public ImageProductDto findById(Long id) throws ResourceNotFoundException {
         Image image = checkId(id);
-        ImageDto imageDto = mapper.convertValue(image, ImageDto.class);
+        ImageProductDto imageDto = mapper.convertValue(image, ImageProductDto.class);
         logger.info("La búsqueda fue exitosa: id("+id+")");
         return imageDto;
     }

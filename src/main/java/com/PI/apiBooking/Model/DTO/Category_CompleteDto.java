@@ -7,7 +7,8 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class CategoryDto {
+public class Category_CompleteDto {
+
     private Long id;
     private String title;
     private String description;
@@ -15,16 +16,8 @@ public class CategoryDto {
     private String text_alt;
     private Integer productQuantity = 0;
 
-    //Constructor for test
-    public CategoryDto(String title, String description, String urlImage, String text_alt) {
-        this.title = title;
-        this.description = description;
-        this.urlImage = urlImage;
-        this.text_alt = text_alt;
-    }
-
     //Default
-    public CategoryDto() {
+    public Category_CompleteDto() {
     }
 
 }

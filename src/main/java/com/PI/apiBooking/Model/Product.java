@@ -11,40 +11,56 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
-@JsonIgnoreProperties({"images", "products_features", "ratings"})
+@JsonIgnoreProperties({"images", "products_features", "ratings", "bookings"})
 public class Product {
     @Id
     @SequenceGenerator(name = "productSequence",sequenceName = "productSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSequence")
     private Long id;
     private String name;
+    private String titleDescription;
     @Lob
     private String description;
-    private Boolean availability;
     private Integer stars;
+    private Double latitude;
+    private Double longitude;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
 
+    @ManyToMany
+    @JoinTable(
+            name = "product_features",
+            joinColumns = @JoinColumn(name = "product_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name="feature_id", nullable = false)
+    )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Feature> features;
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_policies",
+            joinColumns = @JoinColumn(name = "product_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name="policy_id", nullable = false)
+    )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Policy> policies;
+
     @ManyToOne
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "city_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private City city;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-    @JoinColumn(name = "policy_id" , referencedColumnName= "id")
-    private Policy policy;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Image> images;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private Set<Product_Feature> products_features;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private Set<Rating> ratings;
+    private Set<Booking> bookings;
 
     //Default
     public Product() {

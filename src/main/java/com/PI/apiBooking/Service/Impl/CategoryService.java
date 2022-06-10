@@ -2,7 +2,9 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.Category;
-import com.PI.apiBooking.Model.DTO.CategoryDto;
+import com.PI.apiBooking.Model.DTO.Category_CardDto;
+import com.PI.apiBooking.Model.DTO.Category_CompleteDto;
+import com.PI.apiBooking.Model.DTO.Post.CategoryDto;
 import com.PI.apiBooking.Repository.ICategoryRepository;
 import com.PI.apiBooking.Service.Interfaces.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,12 +27,12 @@ public class CategoryService implements ICategoryService {
     ObjectMapper mapper;
 
     @Override
-    public Set<CategoryDto> findAll() {
-        Set<CategoryDto> categoriesDto = new HashSet<>();
+    public Set<Category_CardDto> findAll() {
+        Set<Category_CardDto> categoriesDto = new HashSet<>();
         List<Category> categories = categoryRepository.findAll();
         for (Category category : categories
         ) {
-            CategoryDto categoryDto = (mapper.convertValue(category, CategoryDto.class));
+            Category_CardDto categoryDto = (mapper.convertValue(category, Category_CardDto.class));
             categoryDto.setProductQuantity(categoryRepository.countByCategory(category.getId()));
             categoriesDto.add(categoryDto);
         }
@@ -39,9 +41,10 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public CategoryDto findById(Long id) throws ResourceNotFoundException {
+    public Category_CompleteDto findById(Long id) throws ResourceNotFoundException {
         Category category = checkId(id);
-        CategoryDto categoryDto = mapper.convertValue(category, CategoryDto.class);
+        Category_CompleteDto categoryDto = mapper.convertValue(category, Category_CompleteDto.class);
+        categoryDto.setProductQuantity(categoryRepository.countByCategory(category.getId()));
         logger.info("La busqueda fue exitosa: id("+id+")");
         return categoryDto;
     }

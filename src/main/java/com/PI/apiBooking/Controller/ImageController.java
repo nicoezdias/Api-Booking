@@ -1,8 +1,8 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.ImageDto;
 import com.PI.apiBooking.Model.DTO.ImageProductDto;
+import com.PI.apiBooking.Model.DTO.Post.ImageDto;
 import com.PI.apiBooking.Service.Interfaces.IImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +32,13 @@ public class ImageController {
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Imágenes")
     @GetMapping
-    public ResponseEntity<Set<ImageDto>> findAll(){
+    public ResponseEntity<Set<ImageProductDto>> findAll(){
         return ResponseEntity.ok(imageServices.findAll());
     }
 
     @Operation(summary = "Traer la Imagen por Id")
     @GetMapping("/{id}")
-    public ResponseEntity<ImageDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<ImageProductDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(imageServices.findById(id));
     }
 

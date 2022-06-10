@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Model.DTO;
+package com.PI.apiBooking.Model.DTO.Post;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,11 +10,13 @@ import lombok.ToString;
 public class PolicyDto {
 
     private Long id;
-    private String policy;
+    private String type;
+    private String description;
 
     //Constructor for test
-    public PolicyDto(String policy) {
-        this.policy = policy;
+    public PolicyDto(String type, String description) {
+        this.type = type;
+        this.description = description;
     }
 
     //Default

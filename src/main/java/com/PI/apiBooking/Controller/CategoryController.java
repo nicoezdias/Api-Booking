@@ -1,7 +1,9 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.CategoryDto;
+import com.PI.apiBooking.Model.DTO.Category_CardDto;
+import com.PI.apiBooking.Model.DTO.Category_CompleteDto;
+import com.PI.apiBooking.Model.DTO.Post.CategoryDto;
 import com.PI.apiBooking.Service.Interfaces.ICategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Set;
 
 @RestController
@@ -32,13 +33,13 @@ public class CategoryController {
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Categorías")
     @GetMapping
-    public ResponseEntity<Set<CategoryDto>> findAll() {
+    public ResponseEntity<Set<Category_CardDto>> findAll() {
         return ResponseEntity.ok(categoryServices.findAll());
     }
 
     @Operation(summary = "Traer la Categoría por Id")
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Category_CompleteDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoryServices.findById(id));
     }
 
