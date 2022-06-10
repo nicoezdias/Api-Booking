@@ -19,7 +19,7 @@ public class CityController {
     ICityService cityServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar o actualizar Ciudad")
+    @Operation(summary = "Guardar o actualizar una Ciudad")
     @PostMapping
     public ResponseEntity<CityDto> save(@RequestBody CityDto cityDto) {
         if(cityDto.getId() == null)
@@ -35,14 +35,14 @@ public class CityController {
         return ResponseEntity.ok(cityServices.findAll());
     }
 
-    @Operation(summary = "Traer la Ciudad por Id")
+    @Operation(summary = "Traer una Ciudad por Id")
     @GetMapping("/{id}")
     public ResponseEntity<CityDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(cityServices.findById(id));
     }
 
     //* ///////// DELETE ///////// *//
-    @Operation(summary = "Eliminar la Ciudad por Id")
+    @Operation(summary = "Eliminar una Ciudad por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         cityServices.delete(id);

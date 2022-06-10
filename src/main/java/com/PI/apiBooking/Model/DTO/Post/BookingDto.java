@@ -6,22 +6,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @ToString
 @Getter
 @Setter
-public class RatingDto {
-
+public class BookingDto {
     private Long id;
-    private Integer score;
+    private String reservationTime;
+    private LocalDate arrival;
+    private LocalDate departure;
     private Product product;
-    private User user;
-
-    //Constructor for test
-    public RatingDto(Integer score, Product product) {
-        this.score = score;
-        this.product = product;
-    }
-
-    //Default
-    public RatingDto() {}
+    //private User usuario;
 }

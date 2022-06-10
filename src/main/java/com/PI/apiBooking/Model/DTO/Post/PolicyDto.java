@@ -1,13 +1,8 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
-import com.PI.apiBooking.Model.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.*;
-import java.util.Set;
 
 @ToString
 @Getter
@@ -19,8 +14,7 @@ public class PolicyDto {
     private String description;
 
     //Constructor for test
-    public PolicyDto(String type, String description) {
-        this.type = type;
+    public PolicyDto(String description) {
         this.description = description;
     }
 

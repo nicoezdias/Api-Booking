@@ -1,7 +1,14 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
+<<<<<<< HEAD:src/main/java/com/PI/apiBooking/Model/DTO/Post/ProductDto.java
 import com.PI.apiBooking.Model.*;
 import com.PI.apiBooking.Model.Feature;
+=======
+import com.PI.apiBooking.Model.Category;
+import com.PI.apiBooking.Model.City;
+import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Model.Policy;
+>>>>>>> back-dami:src/main/java/com/PI/apiBooking/Model/DTO/ProductDto.java
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +29,12 @@ public class ProductDto {
     private Set<Feature> features;
     private City city;
     private Set<Policy> policies;
+<<<<<<< HEAD:src/main/java/com/PI/apiBooking/Model/DTO/Post/ProductDto.java
+=======
+
+    private Double latitude;
+    private Double longitude;
+>>>>>>> back-dami:src/main/java/com/PI/apiBooking/Model/DTO/ProductDto.java
 
     //Constructor for test
     public ProductDto(String name, String description, Boolean availability, Integer stars, Category category, City city, Set<Policy> policies) {

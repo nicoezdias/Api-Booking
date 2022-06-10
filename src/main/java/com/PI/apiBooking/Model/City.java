@@ -20,7 +20,11 @@ public class City {
     @Column(length = 50)
     private String name;
     @Column(length = 50)
+    private String name_province;
+    @Column(length = 50)
     private String name_country;
+    private Double latitude;
+    private Double longitude;
 
     @OneToMany(mappedBy = "city")
     private Set<Product> products;

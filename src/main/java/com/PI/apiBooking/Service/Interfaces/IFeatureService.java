@@ -1,8 +1,13 @@
 package com.PI.apiBooking.Service.Interfaces;
 
+<<<<<<< HEAD
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.FeatureDto;
+=======
+>>>>>>> back-dami
 import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.Post.FeatureDto;
 import com.PI.apiBooking.Service.ICheckId;
 import com.PI.apiBooking.Service.IService;
 

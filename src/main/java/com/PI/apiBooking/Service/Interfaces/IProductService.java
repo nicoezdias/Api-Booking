@@ -1,6 +1,11 @@
 package com.PI.apiBooking.Service.Interfaces;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+<<<<<<< HEAD
+=======
+import com.PI.apiBooking.Model.Booking;
+import com.PI.apiBooking.Model.DTO.Post.BookingDto;
+>>>>>>> back-dami
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
@@ -16,5 +21,9 @@ public interface IProductService extends IService<ProductDto>, ICheckId<Product>
     Product_CompleteDto findById(Long id) throws ResourceNotFoundException;
     Set<Product_CardDto> findByCategoryId(Long categoryId);
     Set<Product_CardDto> findByCityId(Long cityId);
+<<<<<<< HEAD
 
+=======
+    Set<Product_CardDto> findByDateAndCityId(String arrival, String departure, int id);
+>>>>>>> back-dami
 }
