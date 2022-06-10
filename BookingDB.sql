@@ -308,9 +308,10 @@ DROP TABLE IF EXISTS `product_features`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product_features` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `product_id` bigint NOT NULL,
   `feature_id` bigint NOT NULL,
-  PRIMARY KEY (`product_id`,`feature_id`),
+  PRIMARY KEY (`id`),
   KEY `FKej5v6d4jh9c4y057og26vfadt` (`feature_id`),
   CONSTRAINT `FKej5v6d4jh9c4y057og26vfadt` FOREIGN KEY (`feature_id`) REFERENCES `feature` (`id`),
   CONSTRAINT `FKimprh85dmgtkfb97m9g45rmou` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
@@ -335,9 +336,10 @@ DROP TABLE IF EXISTS `product_policies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product_policies` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `product_id` bigint NOT NULL,
   `policy_id` bigint NOT NULL,
-  PRIMARY KEY (`product_id`,`policy_id`),
+  PRIMARY KEY (`id`),
   KEY `FKmcmmh0rig5hy5k2y9km0xtxf` (`policy_id`),
   CONSTRAINT `FKh8vdkj2k96xyo8lqdi2lmmonw` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `FKmcmmh0rig5hy5k2y9km0xtxf` FOREIGN KEY (`policy_id`) REFERENCES `policy` (`id`)
