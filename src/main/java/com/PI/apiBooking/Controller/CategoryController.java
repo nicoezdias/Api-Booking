@@ -21,7 +21,7 @@ public class CategoryController {
     ICategoryService categoryServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar o actualizar Categoría")
+    @Operation(summary = "Guardar o actualizar una Categoría")
     @PostMapping
     public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto categoryDto) {
         if(categoryDto.getId() == null)
@@ -37,14 +37,14 @@ public class CategoryController {
         return ResponseEntity.ok(categoryServices.findAll());
     }
 
-    @Operation(summary = "Traer la Categoría por Id")
+    @Operation(summary = "Traer una Categoría por Id")
     @GetMapping("/{id}")
     public ResponseEntity<Category_CompleteDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoryServices.findById(id));
     }
 
     //* ///////// DELETE ///////// *//
-    @Operation(summary = "Eliminar la Categoría por Id")
+    @Operation(summary = "Eliminar una Categoría por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         categoryServices.delete(id);

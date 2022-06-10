@@ -17,13 +17,20 @@ public class Product {
     @SequenceGenerator(name = "productSequence",sequenceName = "productSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSequence")
     private Long id;
+    @Column(nullable = false)
     private String name;
     private String titleDescription;
     @Lob
     private String description;
     private Integer stars;
+    @Column(nullable = false)
     private Double latitude;
+    @Column(nullable = false)
     private Double longitude;
+    @Column(nullable = false)
+    private String checkInMin;
+    @Column(nullable = false)
+    private String checkInMax;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

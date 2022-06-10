@@ -19,7 +19,7 @@ public class RatingController {
     IRatingService ratingServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar o actualizar Puntuación")
+    @Operation(summary = "Guardar o actualizar una Puntuación")
     @PostMapping
     public ResponseEntity<RatingDto> save(@RequestBody RatingDto ratingDto) {
         if(ratingDto.getId() == null)
@@ -35,14 +35,14 @@ public class RatingController {
         return ResponseEntity.ok(ratingServices.findAll());
     }
 
-    @Operation(summary = "Traer la Puntuación por Id")
+    @Operation(summary = "Traer una Puntuación por Id")
     @GetMapping("/{id}")
     public ResponseEntity<RatingDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(ratingServices.findById(id));
     }
 
     //* ///////// DELETE ///////// *//
-    @Operation(summary = "Eliminar la Puntuación por Id")
+    @Operation(summary = "Eliminar una Puntuación por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         ratingServices.delete(id);

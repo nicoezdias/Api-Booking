@@ -14,8 +14,7 @@ public class PolicyDto {
     private String description;
 
     //Constructor for test
-    public PolicyDto(String type, String description) {
-        this.type = type;
+    public PolicyDto(String description) {
         this.description = description;
     }
 

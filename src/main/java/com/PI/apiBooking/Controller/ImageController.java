@@ -20,7 +20,7 @@ public class ImageController {
     IImageService imageServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar o actualizar Imagen")
+    @Operation(summary = "Guardar o actualizar una Imagen")
     @PostMapping
     public ResponseEntity<ImageDto> save(@RequestBody ImageDto imageDto) {
         if(imageDto.getId() == null)
@@ -36,7 +36,7 @@ public class ImageController {
         return ResponseEntity.ok(imageServices.findAll());
     }
 
-    @Operation(summary = "Traer la Imagen por Id")
+    @Operation(summary = "Traer una Imagen por Id")
     @GetMapping("/{id}")
     public ResponseEntity<ImageProductDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(imageServices.findById(id));
@@ -49,7 +49,7 @@ public class ImageController {
     }
 
     //* ///////// DELETE ///////// *//
-    @Operation(summary = "Eliminar la Imagen por Id")
+    @Operation(summary = "Eliminar una Imagen por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         imageServices.delete(id);

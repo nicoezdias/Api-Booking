@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.Post.BookingDto;
+
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
@@ -22,7 +22,7 @@ public class ProductController {
     IProductService productServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar o actualizar Producto")
+    @Operation(summary = "Guardar o actualizar un Producto")
     @PostMapping
     public ResponseEntity<ProductDto> save(@RequestBody ProductDto productDto) {
         if(productDto.getId() == null)
@@ -38,7 +38,7 @@ public class ProductController {
         return ResponseEntity.ok(productServices.findAll());
     }
 
-    @Operation(summary = "Traer el Productos por Id")
+    @Operation(summary = "Traer un Productos por Id")
     @GetMapping("/{id}")
     public ResponseEntity<Product_CompleteDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productServices.findById(id));
@@ -57,7 +57,6 @@ public class ProductController {
         Set<Product_CardDto> product = productServices.findByCityId(cityId);
         return ResponseEntity.ok(product);
     }
-
 
     @Operation(summary = "Traer todos Productos por Fecha e Id de Ciudad")
     @GetMapping("date")

@@ -19,7 +19,7 @@ public class PolicyController {
     IPolicyService policyService;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar o actualizar Política")
+    @Operation(summary = "Guardar o actualizar una Política")
     @PostMapping
     public ResponseEntity<PolicyDto> save(@RequestBody PolicyDto policyDto) {
         if(policyDto.getId() == null)
@@ -36,14 +36,14 @@ public class PolicyController {
         return ResponseEntity.ok(policyService.findAll());
     }
 
-    @Operation(summary = "Traer la Política por Id")
+    @Operation(summary = "Traer una Política por Id")
     @GetMapping("/{id}")
     public ResponseEntity<PolicyDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(policyService.findById(id));
     }
 
     //* ///////// DELETE ///////// *//
-    @Operation(summary = "Eliminar la Política por Id")
+    @Operation(summary = "Eliminar una Política por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         policyService.delete(id);

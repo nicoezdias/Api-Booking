@@ -1,6 +1,7 @@
 package com.PI.apiBooking.Model.User;
 
 import com.PI.apiBooking.Model.Booking;
+import com.PI.apiBooking.Model.City;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,11 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private City city;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_rol" , referencedColumnName= "id")

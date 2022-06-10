@@ -19,7 +19,7 @@ public class FeatureController {
     IFeatureService featureServices;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Guardar o actualizar Caracteristica")
+    @Operation(summary = "Guardar o actualizar una Característica")
     @PostMapping
     public ResponseEntity<FeatureDto> save(@RequestBody FeatureDto featureDto) {
         if(featureDto.getId() == null)
@@ -28,20 +28,20 @@ public class FeatureController {
             return ResponseEntity.ok(featureServices.save(featureDto));
     }
     //* ///////// GET ///////// *//
-    @Operation(summary = "Traer todas las Caracteristica")
+    @Operation(summary = "Traer todas las Característica")
     @GetMapping
     public ResponseEntity<Set<FeatureDto>> findAll() {
         return ResponseEntity.ok(featureServices.findAll());
     }
 
-    @Operation(summary = "Traer la Caracteristica por Id")
+    @Operation(summary = "Traer una Característica por Id")
     @GetMapping("/{id}")
     public ResponseEntity<FeatureDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(featureServices.findById(id));
     }
 
     //* ///////// DELETE ///////// *//
-    @Operation(summary = "Eliminar la Caracteristica por Id")
+    @Operation(summary = "Eliminar una Característica por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
         featureServices.delete(id);
