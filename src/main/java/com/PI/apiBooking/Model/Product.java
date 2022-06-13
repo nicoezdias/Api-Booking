@@ -60,13 +60,6 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private City city;
 
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private Set<Rating> ratings;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private Set<Image> images;
-=======
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Rating> ratings;
 
@@ -75,7 +68,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Booking> bookings;
->>>>>>> back-dami
+
 
     //Default
     public Product() {

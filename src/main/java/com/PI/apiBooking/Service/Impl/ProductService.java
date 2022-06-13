@@ -1,11 +1,6 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-<<<<<<< HEAD
-=======
-import com.PI.apiBooking.Model.Booking;
-import com.PI.apiBooking.Model.DTO.Post.BookingDto;
->>>>>>> back-dami
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
@@ -36,10 +31,7 @@ public class ProductService implements IProductService {
     @Autowired
     ObjectMapper mapper;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> back-dami
     @Override
     public Set<Product_CardDto> findAll() {
         List<Product> products = productRepository.findAll();
@@ -55,11 +47,8 @@ public class ProductService implements IProductService {
         product_completeDto.setCategoryName(product.getCategory().getTitle());
         product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()).get());
         product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
-<<<<<<< HEAD
-=======
         product_completeDto.setCityName(product.getCity().getName() + ", " + product.getCity().getName_province() + ", " + product.getCity().getName_country());
         product_completeDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
->>>>>>> back-dami
         return product_completeDto;
     }
 
@@ -77,8 +66,6 @@ public class ProductService implements IProductService {
         Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
         logger.info("La busqueda fue exitosa: "+ products_cardDto);
         return products_cardDto;
-<<<<<<< HEAD
-=======
     }
 
     @Override
@@ -89,7 +76,6 @@ public class ProductService implements IProductService {
             Products_CardDto.add(mapper.convertValue(product, Product_CardDto.class));
         }
         return Products_CardDto;
->>>>>>> back-dami
     }
 
     @Override
@@ -127,9 +113,7 @@ public class ProductService implements IProductService {
         for (Product product : products) {
             Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
             product_cardDto.setCategoryName(product.getCategory().getTitle());
-<<<<<<< HEAD
             product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()).get());
-=======
             product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
             product_cardDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
             Set<String> featuresIcons = new HashSet<>();
@@ -137,14 +121,11 @@ public class ProductService implements IProductService {
                 featuresIcons.add(feature.getIcon());
             }
             product_cardDto.setFeaturesIcons(featuresIcons);
->>>>>>> back-dami
             product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
             products_cardDto.add(product_cardDto);
         }
         return products_cardDto;
     }
-<<<<<<< HEAD
-=======
 
     public double distance(double lat1, double lng1, double lat2, double lng2) {
         double radioEarth = 6371;
@@ -158,5 +139,4 @@ public class ProductService implements IProductService {
         double distance = radioEarth * va2;
         return distance;
     }
->>>>>>> back-dami
 }

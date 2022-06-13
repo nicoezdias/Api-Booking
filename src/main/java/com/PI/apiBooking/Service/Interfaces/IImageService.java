@@ -1,11 +1,6 @@
 package com.PI.apiBooking.Service.Interfaces;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-<<<<<<< HEAD
-import com.PI.apiBooking.Model.DTO.Post.FeatureDto;
-import com.PI.apiBooking.Model.DTO.Post.ImageDto;
-=======
->>>>>>> back-dami
 import com.PI.apiBooking.Model.DTO.ImageProductDto;
 import com.PI.apiBooking.Model.DTO.Post.ImageDto;
 import com.PI.apiBooking.Model.Image;

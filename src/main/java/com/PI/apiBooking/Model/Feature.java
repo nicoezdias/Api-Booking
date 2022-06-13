@@ -1,9 +1,5 @@
 package com.PI.apiBooking.Model;
 
-<<<<<<< HEAD
-import com.PI.apiBooking.Model.Product;
-=======
->>>>>>> back-dami
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
