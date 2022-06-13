@@ -21,6 +21,7 @@ public class ProductController {
     IProductService productServices;
 
     //* ///////// POST ///////// *//
+//    @Secured({"ADMIN"})
     @Operation(summary = "Guardar o actualizar un Producto")
     @PostMapping
     public ResponseEntity<ProductDto> save(@RequestBody ProductDto productDto) {
@@ -65,6 +66,7 @@ public class ProductController {
     }
 
     //* ///////// DELETE ///////// *//
+//    @Secured({"ADMIN"})
     @Operation(summary = "Eliminar el Producto por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

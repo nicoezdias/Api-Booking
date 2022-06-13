@@ -19,6 +19,7 @@ public class PolicyController {
     IPolicyService policyService;
 
     //* ///////// POST ///////// *//
+//
     @Operation(summary = "Guardar o actualizar una Política")
     @PostMapping
     public ResponseEntity<PolicyDto> save(@RequestBody PolicyDto policyDto) {
@@ -43,6 +44,7 @@ public class PolicyController {
     }
 
     //* ///////// DELETE ///////// *//
+//    @Secured({"ADMIN"})
     @Operation(summary = "Eliminar una Política por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

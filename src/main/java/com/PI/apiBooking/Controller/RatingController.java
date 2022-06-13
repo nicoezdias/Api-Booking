@@ -42,6 +42,7 @@ public class RatingController {
     }
 
     //* ///////// DELETE ///////// *//
+//    @Secured({"ADMIN"})
     @Operation(summary = "Eliminar una Puntuación por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
