@@ -1,8 +1,6 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
-import com.PI.apiBooking.Model.Category;
-import com.PI.apiBooking.Model.City;
-import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Model.*;
 import com.PI.apiBooking.Model.Policy;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +22,6 @@ public class ProductDto {
     private Set<Feature> features;
     private City city;
     private Set<Policy> policies;
-
     private Double latitude;
     private Double longitude;
 

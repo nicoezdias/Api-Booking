@@ -1,8 +1,6 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.Booking;
-import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
@@ -33,6 +31,7 @@ public class ProductService implements IProductService {
     @Autowired
     ObjectMapper mapper;
 
+
     @Override
     public Set<Product_CardDto> findAll() {
         List<Product> products = productRepository.findAll();
@@ -46,7 +45,7 @@ public class ProductService implements IProductService {
         Product product = checkId(id);
         Product_CompleteDto product_completeDto = mapper.convertValue(product, Product_CompleteDto.class);
         product_completeDto.setCategoryName(product.getCategory().getTitle());
-        product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()));
+        product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()).get());
         product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
         product_completeDto.setCityName(product.getCity().getName() + ", " + product.getCity().getName_province() + ", " + product.getCity().getName_country());
         product_completeDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
@@ -114,6 +113,7 @@ public class ProductService implements IProductService {
         for (Product product : products) {
             Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
             product_cardDto.setCategoryName(product.getCategory().getTitle());
+            product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()).get());
             product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
             product_cardDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
             Set<String> featuresIcons = new HashSet<>();

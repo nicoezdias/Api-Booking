@@ -69,6 +69,7 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Booking> bookings;
 
+
     //Default
     public Product() {
     }

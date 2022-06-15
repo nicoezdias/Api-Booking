@@ -20,13 +20,12 @@ public class Product_CompleteDto {
     private String description;
     private Integer stars;
     private String categoryName;
-    private String cityName;
-    private Double distance;
-    private Optional<Integer> avgRanting;
     private Set<ImageProductDto> imagesProduct;
     private Set<Feature> features;
     private Set<Policy> policies;
-
+    private String cityName;
+    private Double distance;
+    private Optional<Integer> avgRanting;
 
     //Default
     public Product_CompleteDto() {
