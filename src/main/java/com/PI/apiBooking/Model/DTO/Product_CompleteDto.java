@@ -20,7 +20,7 @@ public class Product_CompleteDto {
     private String description;
     private Integer stars;
     private String categoryName;
-    private Set<ImageProductDto> imagesProduct;
+    private Set<Image_ProductDto> imagesProduct;
     private Set<Feature> features;
     private Set<Policy> policies;
     private String cityName;

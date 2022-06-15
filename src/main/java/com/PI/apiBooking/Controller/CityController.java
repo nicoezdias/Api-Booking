@@ -1,6 +1,7 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.City_ListDto;
 import com.PI.apiBooking.Model.DTO.Post.CityDto;
 import com.PI.apiBooking.Service.Interfaces.ICityService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +32,7 @@ public class CityController {
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Ciudades")
     @GetMapping
-    public ResponseEntity<Set<CityDto>> findAll() {
+    public ResponseEntity<Set<City_ListDto>> findAll() {
         return ResponseEntity.ok(cityServices.findAll());
     }
 

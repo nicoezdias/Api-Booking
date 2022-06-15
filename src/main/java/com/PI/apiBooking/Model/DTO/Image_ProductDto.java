@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class ImageProductDto {
+public class Image_ProductDto {
 
     private Long id;
     private String title;
@@ -15,6 +15,6 @@ public class ImageProductDto {
     private String text_alt;
 
     //Default
-    public ImageProductDto() {
+    public Image_ProductDto() {
     }
 }

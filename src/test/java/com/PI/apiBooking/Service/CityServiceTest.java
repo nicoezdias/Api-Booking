@@ -39,6 +39,7 @@ class CityServiceTest {
         assertNotNull(cityService.findById(c3.getId()));
     }
 
+    /*
     @Test
     public void findAllCities() {
         logInfo();
@@ -46,7 +47,7 @@ class CityServiceTest {
         assertFalse(citiesDtos.isEmpty());
         System.out.println(citiesDtos);
     }
-
+*/
     @Test
     public void deleteCity() throws ResourceNotFoundException {
         boolean ex = false;

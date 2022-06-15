@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.ImageDto;
-import com.PI.apiBooking.Model.DTO.ImageProductDto;
+import com.PI.apiBooking.Model.DTO.Image_ProductDto;
 import com.PI.apiBooking.Service.Interfaces.IImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,19 +32,19 @@ public class ImageController {
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Imágenes")
     @GetMapping
-    public ResponseEntity<Set<ImageProductDto>> findAll(){
+    public ResponseEntity<Set<Image_ProductDto>> findAll(){
         return ResponseEntity.ok(imageServices.findAll());
     }
 
     @Operation(summary = "Traer una Imagen por Id")
     @GetMapping("/{id}")
-    public ResponseEntity<ImageProductDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Image_ProductDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(imageServices.findById(id));
     }
 
     @Operation(summary = "Traer las Imágenes por Id de Producto")
     @GetMapping("/product/{productId}")
-    public ResponseEntity<Set<ImageProductDto>> findImagesByProductId(@PathVariable Long productId){
+    public ResponseEntity<Set<Image_ProductDto>> findImagesByProductId(@PathVariable Long productId){
         return ResponseEntity.ok(imageServices.findImagesByProductId(productId));
     }
 

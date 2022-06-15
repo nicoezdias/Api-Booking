@@ -19,10 +19,12 @@ public class City {
     private Long id;
     @Column(length = 50)
     private String name;
-    @Column(length = 50)
-    private String name_province;
-    @Column(length = 50)
-    private String name_country;
+
+    @ManyToOne
+    @JoinColumn(name = "province_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Province province;
+
     private Double latitude;
     private Double longitude;
 

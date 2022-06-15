@@ -1,8 +1,6 @@
 package com.PI.apiBooking.Repository;
 
-import com.PI.apiBooking.Model.Booking;
 import com.PI.apiBooking.Model.Product;
-import org.hibernate.type.BigIntegerType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

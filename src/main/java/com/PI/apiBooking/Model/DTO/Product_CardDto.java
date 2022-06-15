@@ -1,6 +1,5 @@
 package com.PI.apiBooking.Model.DTO;
 
-import com.PI.apiBooking.Model.Feature;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,11 +15,11 @@ public class Product_CardDto {
     private String name;
     private String description;
     private Integer stars;
-    private Set<Feature> features;
+    private Set<String> setFeaturesIcons;
     private String categoryName;
     private Optional<Integer> avgRanting;
     private Double distance;
-    private ImageProductDto imageProfile;
+    private Image_ProductDto imageProfile;
 
     //Default
     public Product_CardDto() {}
