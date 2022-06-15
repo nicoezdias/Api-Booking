@@ -1,10 +1,17 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+<<<<<<< HEAD
+import com.PI.apiBooking.Model.Booking;
+import com.PI.apiBooking.Model.DTO.Booking_ProductDto;
+import com.PI.apiBooking.Model.DTO.Post.BookingDto;
+=======
+>>>>>>> f065a6309e9b0a9fba717def17c1c8bbdb5b7a95
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
 import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Model.Policy;
 import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
@@ -76,6 +83,27 @@ public class ProductService implements IProductService {
             Products_CardDto.add(mapper.convertValue(product, Product_CardDto.class));
         }
         return Products_CardDto;
+    }
+
+    @Override
+    public Booking_ProductDto findForBooking(Long id)throws ResourceNotFoundException{
+        Product product = checkId(id);
+        Booking_ProductDto booking_productDto = mapper.convertValue(product, Booking_ProductDto.class);
+        booking_productDto.setCategoryName(product.getCategory().getTitle());
+        booking_productDto.setProductName(product.getName());
+        booking_productDto.setProductStars(product.getStars());
+        booking_productDto.setProductCityName(product.getCity().getName() + ", " + product.getCity().getName_province() + ", " + product.getCity().getName_country());
+        booking_productDto.setProductPolicies(product.getPolicies());
+        booking_productDto.setProductCheckInMin(product.getCheckInMin());
+        booking_productDto.setProductCheckInMax(product.getCheckInMax());
+
+        //UserDto userDto = user.Service.findById(userId);
+        //booking_productDto.setUserName(userDto.getName());
+        //booking_productDto.setUserSurname(userDto.getSurname());
+        //booking_productDto.setUserEmail(userDto.getEmail());
+        //booking_productDto.setUserCityName(userDto.getName());
+        return booking_productDto;
+
     }
 
     @Override

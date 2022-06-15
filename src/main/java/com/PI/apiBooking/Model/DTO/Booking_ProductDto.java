@@ -15,7 +15,7 @@ public class Booking_ProductDto {
 
     private String categoryName;
     private String productName;
-    private String productStars;
+    private Integer productStars;
     private String productCityName;
     private Set<Policy> productPolicies;
     private String productCheckInMin;

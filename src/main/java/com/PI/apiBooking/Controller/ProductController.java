@@ -1,6 +1,11 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+<<<<<<< HEAD
+
+import com.PI.apiBooking.Model.DTO.Booking_ProductDto;
+=======
+>>>>>>> f065a6309e9b0a9fba717def17c1c8bbdb5b7a95
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
@@ -64,6 +69,12 @@ public class ProductController {
         return ResponseEntity.ok(products_cardDto);
     }
 
+    @Operation(summary = "Traer un Producto por Id para una Reserva")
+    @GetMapping("booking/{id}")
+    public ResponseEntity<Booking_ProductDto> findForBooking(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(productServices.findForBooking(id));
+    }
+
     //* ///////// DELETE ///////// *//
     @Operation(summary = "Eliminar el Producto por Id")
     @DeleteMapping("/{id}")
@@ -71,5 +82,7 @@ public class ProductController {
         productServices.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+
 }
 
