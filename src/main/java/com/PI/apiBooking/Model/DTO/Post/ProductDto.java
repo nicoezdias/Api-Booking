@@ -15,21 +15,23 @@ public class ProductDto {
 
     private Long id;
     private String name;
+    private String titleDescription;
     private String description;
-    private Boolean availability;
     private Integer stars;
+    private String direction;
+    private Double latitude;
+    private Double longitude;
+    private String checkInMin;
+    private String checkInMax;
     private Category category;
     private Set<Feature> features;
     private City city;
     private Set<Policy> policies;
-    private Double latitude;
-    private Double longitude;
 
     //Constructor for test
     public ProductDto(String name, String description, Boolean availability, Integer stars, Category category, City city, Set<Policy> policies) {
         this.name = name;
         this.description = description;
-        this.availability = availability;
         this.stars = stars;
         this.category = category;
         this.city = city;

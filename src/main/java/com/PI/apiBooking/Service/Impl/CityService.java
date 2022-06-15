@@ -2,6 +2,7 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.City;
+import com.PI.apiBooking.Model.DTO.City_ListDto;
 import com.PI.apiBooking.Model.DTO.Post.CityDto;
 import com.PI.apiBooking.Repository.ICityRepository;
 import com.PI.apiBooking.Service.Interfaces.ICityService;
@@ -25,14 +26,17 @@ public class CityService implements ICityService {
     ObjectMapper mapper;
 
     @Override
-    public Set<CityDto> findAll() {
-        Set<CityDto> citiesDtos = new HashSet<>();
+    public Set<City_ListDto> findAll() {
+        Set<City_ListDto> cities_listDto = new HashSet<>();
         List<City> cities = cityRepository.findAll();
         for (City city:cities) {
-            citiesDtos.add(mapper.convertValue(city, CityDto.class));
+            City_ListDto city_listDto = mapper.convertValue(city, City_ListDto.class);
+            city_listDto.setName(city.getName() + ", " + city.getProvince().getName());
+            city_listDto.setNameCountry(city.getProvince().getCountry().getName());
+            cities_listDto.add(city_listDto);
         }
-        logger.info("La busqueda fue exitosa: "+ citiesDtos);
-        return citiesDtos;
+        logger.info("La busqueda fue exitosa: "+ cities_listDto);
+        return cities_listDto;
     }
 
     @Override

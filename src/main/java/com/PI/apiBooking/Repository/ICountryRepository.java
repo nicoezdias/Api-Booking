@@ -1,11 +1,9 @@
 package com.PI.apiBooking.Repository;
 
-import com.PI.apiBooking.Model.Policy;
+import com.PI.apiBooking.Model.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
-
 @Repository
-public interface IPolicyRepository extends JpaRepository<Policy, Long> {
+public interface ICountryRepository extends JpaRepository<Country, Long> {
 }

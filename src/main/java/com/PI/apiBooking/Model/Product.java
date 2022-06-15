@@ -24,6 +24,8 @@ public class Product {
     private String description;
     private Integer stars;
     @Column(nullable = false)
+    private String direction;
+    @Column(nullable = false)
     private Double latitude;
     @Column(nullable = false)
     private Double longitude;
@@ -68,7 +70,6 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Booking> bookings;
-
 
     //Default
     public Product() {

@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
 import java.util.Set;
 
 @ToString
 @Getter
 @Setter
-public class Booking_ProductDto {
+public class Product_BookingDto {
 
     private String categoryName;
     private String productName;
@@ -20,13 +19,5 @@ public class Booking_ProductDto {
     private Set<Policy> productPolicies;
     private String productCheckInMin;
     private String productCheckInMax;
-
-    private String userName;
-    private String userSurname;
-    private String userEmail;
-    private String userCityName;
-
-
-
 
 }
