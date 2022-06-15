@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Service.Security.jwt;
+package com.PI.apiBooking.Security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

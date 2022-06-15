@@ -23,13 +23,13 @@ public class Product {
     @Lob
     private String description;
     private Integer stars;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Double latitude;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Double longitude;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String checkInMin;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String checkInMax;
 
     @ManyToOne

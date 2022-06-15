@@ -8,9 +8,11 @@ import com.PI.apiBooking.Service.Interfaces.IRolService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class RolService implements IRolService {
     protected final static Logger logger = Logger.getLogger(RolService.class);
 

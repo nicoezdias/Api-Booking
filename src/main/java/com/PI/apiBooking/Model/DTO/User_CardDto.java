@@ -13,6 +13,7 @@ public class User_CardDto {
     private String name;
     private String surname;
     private City city;
+    private String rol_Name;
     private String jwt;
 
     //Default

@@ -9,6 +9,6 @@ import com.PI.apiBooking.Service.ICheckId;
 import com.PI.apiBooking.Service.IService;
 
 public interface IUserService extends IService<UserDto>, ICheckId<User> {
-    User_CardDto findByEmail(String email);
+    User findByEmail(String email);
     User_CardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException;
 }

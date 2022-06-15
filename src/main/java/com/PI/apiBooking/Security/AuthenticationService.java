@@ -1,5 +1,6 @@
-package com.PI.apiBooking.Service.Security;
+package com.PI.apiBooking.Security;
 
+import com.PI.apiBooking.Repository.IRolRepository;
 import com.PI.apiBooking.Repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,17 +17,14 @@ public class AuthenticationService implements UserDetailsService {
 
     @Autowired
     IUserRepository userRepository;
+    @Autowired
+    IRolRepository rolRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         com.PI.apiBooking.Model.User.User user = userRepository.findByEmail(email).get();
-
         SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRol().getName());
-
-        Collections.singletonList(grantedAuthority);
-        User userDetail = new User(user.getName(),user.getPassword(),true, true, true,true, Collections.singletonList(grantedAuthority));
-        return userDetail;
+        return new User(user.getEmail(), user.getPassword(), Collections.singletonList(grantedAuthority));
     }
-
 
 }

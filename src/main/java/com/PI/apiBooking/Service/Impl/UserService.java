@@ -5,28 +5,31 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.User_CardDto;
+import com.PI.apiBooking.Model.User.Rol;
 import com.PI.apiBooking.Model.User.User;
+import com.PI.apiBooking.Repository.ICityRepository;
 import com.PI.apiBooking.Repository.IUserRepository;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
-import com.PI.apiBooking.Service.Security.MyPasswordEncoder;
-import com.PI.apiBooking.Service.Security.jwt.JwtUtil;
+import com.PI.apiBooking.Security.AuthenticationService;
+import com.PI.apiBooking.Security.MyPasswordEncoder;
+import com.PI.apiBooking.Security.jwt.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserService implements IUserService {
 
     protected final static Logger logger = Logger.getLogger(UserService.class);
 
     @Autowired
     IUserRepository userRepository;
+    @Autowired
+    ICityRepository cityRepository;
 
     @Autowired
     ObjectMapper mapper;
@@ -38,32 +41,33 @@ public class UserService implements IUserService {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private AuthenticationService authenticationService;
 
     @Override
-    public User_CardDto findByEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
-        User_CardDto user_cardDto = mapper.convertValue(user, User_CardDto.class);
-        logger.info("La busqueda fue exitosa: "+ user_cardDto);
-        return user_cardDto;
+    public User findByEmail(String email) {
+        User user = userRepository.findByEmail(email).get();
+        logger.info("La busqueda fue exitosa: "+ user);
+        return user;
     }
 
     @Override
     public UserDto save(UserDto userDto) {
-        String hashedPassword = passwordEncoder.encode(userDto.getPassword());
+        String hashedPassword = passwordEncoder.encodePassword(userDto.getPassword());
+        Rol rol = new Rol();
         userDto.setPassword(hashedPassword);
         User user = mapper.convertValue(userDto, User.class);
-        userRepository.save(user);
         if (userDto.getId() == null){
-            userDto.setId(user.getId());
+            rol.setId(2L);
+            rol.setName("USER");
+            user.setRol(rol);
+            user.setCity(cityRepository.findById(userDto.getCity().getId()).get());
+            userRepository.save(user);
             logger.info("User registrado correctamente: "+ userDto);
         }else{
+            userRepository.save(user);
             logger.info("User actualizado correctamente: "+ userDto);
         }
-        return userDto;
+        return mapper.convertValue(user, UserDto.class);
     }
 
     @Override
@@ -84,12 +88,12 @@ public class UserService implements IUserService {
 
     @Override
     public User_CardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException {
-        User user = userRepository.findByEmail(authenticationRequest.getEmail()).get();
-
-        if (user != null && passwordEncoder.matches(authenticationRequest.getPassword(), user.getPassword())) {
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
+        Optional<User> user = userRepository.findByEmail(authenticationRequest.getEmail());
+        if (!user.isEmpty() && passwordEncoder.matchesPassword(authenticationRequest.getPassword(), user.get().getPassword())) {
+            final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
             final String jwt = jwtUtil.generateToken(userDetails);
             User_CardDto user_cardDto = mapper.convertValue(user, User_CardDto.class);
+            user_cardDto.setRol_Name(user.get().getRol().getName());
             user_cardDto.setJwt(jwt);
             return user_cardDto;
         } else {

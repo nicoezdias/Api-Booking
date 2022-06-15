@@ -7,10 +7,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+//@Secured({"USER","ADMIN"})
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
@@ -19,7 +22,6 @@ public class BookingController {
     IBookingService bookingService;
 
     //* ///////// POST ///////// *//
-
     @Operation(summary = "Guardar o actualizar una Reserva")
     @PostMapping
     public ResponseEntity<BookingDto> save(@RequestBody BookingDto bookingDto) {
@@ -30,7 +32,6 @@ public class BookingController {
     }
 
     //* ///////// GET ///////// *//
-
     @Operation(summary = "Traer todas las reservas por Id de Producto")
     @GetMapping("products/{productId}")
     public ResponseEntity<Set<BookingDto>> findBookingByProductId(@PathVariable Long productId){
