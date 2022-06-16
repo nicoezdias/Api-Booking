@@ -23,7 +23,7 @@ public class CategoryController {
     ICategoryService categoryServices;
 
     //* ///////// POST ///////// *//
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Categoría")
     @PostMapping
     public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto categoryDto) {
@@ -47,7 +47,7 @@ public class CategoryController {
     }
 
     //* ///////// DELETE ///////// *//
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar una Categoría por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

@@ -21,7 +21,7 @@ public class ProductController {
     IProductService productServices;
 
     //* ///////// POST ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar un Producto")
     @PostMapping
     public ResponseEntity<ProductDto> save(@RequestBody ProductDto productDto) {

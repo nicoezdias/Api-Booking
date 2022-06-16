@@ -21,7 +21,6 @@ public class UserController {
     IUserService userService;
 
     //* ///////// POST ///////// *//
-//    @Secured({"ADMIN"})
     @Operation(summary = "Guardar o actualizar un Usuario")
     @PostMapping
     public ResponseEntity<User_CardDto> save(@RequestBody UserDto userDto) throws BadRequestException {
@@ -50,7 +49,7 @@ public class UserController {
     }
 
     //* ///////// DELETE ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar un Usuario por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

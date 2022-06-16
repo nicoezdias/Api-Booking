@@ -20,7 +20,7 @@ public class RatingController {
     IRatingService ratingServices;
 
     //* ///////// POST ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Puntuación")
     @PostMapping
     public ResponseEntity<RatingDto> save(@RequestBody RatingDto ratingDto) {
@@ -44,7 +44,7 @@ public class RatingController {
     }
 
     //* ///////// DELETE ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar una Puntuación por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

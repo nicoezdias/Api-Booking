@@ -19,7 +19,7 @@ public class CityController {
     ICityService cityServices;
 
     //* ///////// POST ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Ciudad")
     @PostMapping
     public ResponseEntity<CityDto> save(@RequestBody CityDto cityDto) {
@@ -43,7 +43,7 @@ public class CityController {
     }
 
     //* ///////// DELETE ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar una Ciudad por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

@@ -19,7 +19,7 @@ public class FeatureController {
     IFeatureService featureServices;
 
     //* ///////// POST ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Característica")
     @PostMapping
     public ResponseEntity<FeatureDto> save(@RequestBody FeatureDto featureDto) {
@@ -42,7 +42,7 @@ public class FeatureController {
     }
 
     //* ///////// DELETE ///////// *//
-//    @Secured({"ADMIN"})
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar una Característica por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
