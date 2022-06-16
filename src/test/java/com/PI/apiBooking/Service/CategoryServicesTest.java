@@ -68,6 +68,6 @@ class CategoryServicesTest {
         c6.setId(c5.getId());
 
         categoryServices.save(c6);
-        assertEquals(c6.toString(), categoryServices.findById(c6.getId()).toString());
+        assertEquals("Category_CompleteDto(id="+c6.getId() +", title=Residencia, description=DescripcionCambiada, urlImage=UrlCambiada, text_alt=txt5, productQuantity=0)", categoryServices.findById(c6.getId()).toString());
     }
 }

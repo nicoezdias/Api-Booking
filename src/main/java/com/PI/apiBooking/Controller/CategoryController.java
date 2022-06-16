@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -21,6 +23,7 @@ public class CategoryController {
     ICategoryService categoryServices;
 
     //* ///////// POST ///////// *//
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Categoría")
     @PostMapping
     public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto categoryDto) {
@@ -44,6 +47,7 @@ public class CategoryController {
     }
 
     //* ///////// DELETE ///////// *//
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar una Categoría por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

@@ -20,6 +20,7 @@ public class ImageController {
     IImageService imageServices;
 
     //* ///////// POST ///////// *//
+//    @@PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Imagen")
     @PostMapping
     public ResponseEntity<ImageDto> save(@RequestBody ImageDto imageDto) {
@@ -49,6 +50,7 @@ public class ImageController {
     }
 
     //* ///////// DELETE ///////// *//
+//    @@PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar una Imagen por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

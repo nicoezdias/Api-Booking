@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table
 @JsonIgnoreProperties({"bookings"})
-public class User {
+public class User{
 
     @Id
     @SequenceGenerator(name = "userSequence",sequenceName = "userSequence", allocationSize = 1)
@@ -31,11 +31,11 @@ public class User {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private City city;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_rol" , referencedColumnName= "id")
+    @ManyToOne
+    @JoinColumn(name = "id_rol")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Rol rol;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Set<Booking> bookings;
-
 }

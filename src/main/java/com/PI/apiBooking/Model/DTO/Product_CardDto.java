@@ -20,6 +20,8 @@ public class Product_CardDto {
     private Optional<Integer> avgRanting;
     private Double distance;
     private Image_ProductDto imageProfile;
+    private Set<String> FeaturesIcons;
+
 
     //Default
     public Product_CardDto() {}

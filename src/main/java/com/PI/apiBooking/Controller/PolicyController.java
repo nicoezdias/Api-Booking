@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -19,6 +20,7 @@ public class PolicyController {
     IPolicyService policyService;
 
     //* ///////// POST ///////// *//
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Política")
     @PostMapping
     public ResponseEntity<PolicyDto> save(@RequestBody PolicyDto policyDto) {
@@ -43,6 +45,7 @@ public class PolicyController {
     }
 
     //* ///////// DELETE ///////// *//
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Eliminar una Política por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

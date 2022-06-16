@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Model.DTO.Authentication;
+package com.PI.apiBooking.Model.DTO.Post;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +15,8 @@ public class AuthenticationRequest {
     public AuthenticationRequest() {
     }
 
-    public AuthenticationRequest(String username, String password) {
-        this.email = username;
+    public AuthenticationRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 }
