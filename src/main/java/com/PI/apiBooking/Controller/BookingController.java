@@ -33,7 +33,7 @@ public class BookingController {
 
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las reservas por Id de Producto")
-    @GetMapping("products/{productId}")
+    @GetMapping("product/{productId}")
     public ResponseEntity<Set<BookingDto>> findBookingByProductId(@PathVariable Long productId){
         return ResponseEntity.ok(bookingService.findBookingByProductId(productId));
     }
