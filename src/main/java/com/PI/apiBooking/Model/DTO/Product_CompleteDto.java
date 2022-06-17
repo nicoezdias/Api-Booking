@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ public class Product_CompleteDto {
     private String cityName;
     private Double distance;
     private Optional<Integer> avgRanting;
+    private Set<Date_DisabledDto> disabled;
 
     //Default
     public Product_CompleteDto() {

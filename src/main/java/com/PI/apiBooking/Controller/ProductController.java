@@ -63,16 +63,18 @@ public class ProductController {
     }
 
     @Operation(summary = "Traer todos Productos por Fecha e Id de Ciudad")
-    @GetMapping("date")
-    public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@RequestParam(required = false) String arrival, @RequestParam(required = false) String departure, @RequestParam int id){
-        Set<Product_CardDto> products_cardDto = productServices.findByDateAndCityId(arrival, departure, id);
+    //@GetMapping("date")
+    //public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@RequestParam(required = false) String arrival, @RequestParam(required = false) String departure, @RequestParam int id){
+    @GetMapping(value = {"date/{id}", "date/{id}/{arrival}/{departure}"})
+    public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@PathVariable(required = false) String arrival, @PathVariable(required = false) String departure, @PathVariable int id){
+    Set<Product_CardDto> products_cardDto = productServices.findByDateAndCityId(arrival, departure, id);
         return ResponseEntity.ok(products_cardDto);
     }
 
     @Operation(summary = "Traer un Producto por Id para una Reserva")
-    @GetMapping("{id}/booking")
-    public ResponseEntity<Product_BookingDto> findForBooking(@PathVariable Long id) throws ResourceNotFoundException {
-        return ResponseEntity.ok(productServices.findForBooking(id));
+    @GetMapping("/booking/{productId}/{userId}")
+    public ResponseEntity<Product_BookingDto> findForBooking(@PathVariable Long productId, @PathVariable Long userId) throws ResourceNotFoundException {
+        return ResponseEntity.ok(productServices.findForBooking(productId, userId));
     }
 
     //* ///////// DELETE ///////// *//

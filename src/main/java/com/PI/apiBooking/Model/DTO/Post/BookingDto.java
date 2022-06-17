@@ -1,6 +1,7 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
 import com.PI.apiBooking.Model.Product;
+import com.PI.apiBooking.Model.User.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,5 +17,5 @@ public class BookingDto {
     private LocalDate arrival;
     private LocalDate departure;
     private Product product;
-    //private User usuario;
+    private User user;
 }

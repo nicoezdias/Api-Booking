@@ -4,9 +4,13 @@ import com.PI.apiBooking.Exceptions.BadRequestException;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
+import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
+import com.PI.apiBooking.Model.DTO.User_BookingDto;
 import com.PI.apiBooking.Model.DTO.User_CardDto;
+import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Model.User.Rol;
 import com.PI.apiBooking.Model.User.User;
+import com.PI.apiBooking.Model.User.UserRoles;
 import com.PI.apiBooking.Repository.ICityRepository;
 import com.PI.apiBooking.Repository.IUserRepository;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
@@ -51,6 +55,18 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User_BookingDto findById(Long id) throws ResourceNotFoundException {
+        User user = checkId(id);
+        User_BookingDto user_bookingDto = mapper.convertValue(user, User_BookingDto.class);
+        user_bookingDto.setName(user.getName());
+        user_bookingDto.setSurname(user.getSurname());
+        user_bookingDto.setCityName(user.getCity().getName() + ", " + user.getCity().getProvince().getName());
+        user_bookingDto.setEmail(user.getEmail());
+
+        return user_bookingDto;
+    }
+
+    @Override
     public UserDto save(UserDto userDto) {
         String hashedPassword = passwordEncoder.encodePassword(userDto.getPassword());
         Rol rol = new Rol();
@@ -58,7 +74,7 @@ public class UserService implements IUserService {
         User user = mapper.convertValue(userDto, User.class);
         if (userDto.getId() == null){
             rol.setId(2L);
-            rol.setName("USER");
+            rol.setName(UserRoles.USER);
             user.setRol(rol);
             user.setCity(cityRepository.findById(userDto.getCity().getId()).get());
             userRepository.save(user);
@@ -93,7 +109,7 @@ public class UserService implements IUserService {
             final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
             final String jwt = jwtUtil.generateToken(userDetails);
             User_CardDto user_cardDto = mapper.convertValue(user, User_CardDto.class);
-            user_cardDto.setRol_Name(user.get().getRol().getName());
+            user_cardDto.setRol_Name(user.get().getRol().getName().toString());
             user_cardDto.setJwt(jwt);
             return user_cardDto;
         } else {

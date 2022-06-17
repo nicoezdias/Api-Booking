@@ -1,10 +1,10 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.Product_BookingDto;
+import com.PI.apiBooking.Model.Booking;
+import com.PI.apiBooking.Model.DTO.*;
+import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
-import com.PI.apiBooking.Model.DTO.Product_CardDto;
-import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
 import com.PI.apiBooking.Model.Feature;
 import com.PI.apiBooking.Model.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
@@ -30,6 +30,12 @@ public class ProductService implements IProductService {
     ImageService imageService;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
+    BookingService bookingService;
+
+    @Autowired
     ObjectMapper mapper;
 
 
@@ -50,6 +56,7 @@ public class ProductService implements IProductService {
         product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
         product_completeDto.setCityName(product.getCity().getName() + ", " + product.getCity().getProvince().getName() + ", " + product.getCity().getProvince().getCountry().getName());
         product_completeDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
+        product_completeDto.setDisabled(findBookings(id));
         return product_completeDto;
     }
 
@@ -78,8 +85,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product_BookingDto findForBooking(Long id)throws ResourceNotFoundException{
-        Product product = checkId(id);
+    public Product_BookingDto findForBooking(Long productId, Long userId)throws ResourceNotFoundException{
+        Product product = checkId(productId);
         Product_BookingDto booking_productDto = mapper.convertValue(product, Product_BookingDto.class);
         booking_productDto.setCategoryName(product.getCategory().getTitle());
         booking_productDto.setProductName(product.getName());
@@ -88,7 +95,26 @@ public class ProductService implements IProductService {
         booking_productDto.setProductPolicies(product.getPolicies());
         booking_productDto.setProductCheckInMin(product.getCheckInMin());
         booking_productDto.setProductCheckInMax(product.getCheckInMax());
+
+        User_BookingDto user_bookingDto = userService.findById(userId);
+        booking_productDto.setUserName(user_bookingDto.getName());
+        booking_productDto.setUserSurname(user_bookingDto.getSurname());
+        booking_productDto.setUserCity(user_bookingDto.getCityName());
+        booking_productDto.setUserEmail(user_bookingDto.getEmail());
+
+        booking_productDto.setDisabled(findBookings(productId));
         return booking_productDto;
+    }
+
+    @Override
+    public Set<Date_DisabledDto> findBookings(Long id) throws ResourceNotFoundException {
+        Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
+        Set<Date_DisabledDto> dates_disabledDto = new HashSet<>();
+        for(BookingDto bookingDto : bookingsDto){
+            Date_DisabledDto date_disabledDto = mapper.convertValue(bookingDto, Date_DisabledDto.class);
+            dates_disabledDto.add(date_disabledDto);
+        }
+        return dates_disabledDto;
     }
 
     @Override
