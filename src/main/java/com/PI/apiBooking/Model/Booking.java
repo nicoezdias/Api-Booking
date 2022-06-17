@@ -34,4 +34,8 @@ public class Booking {
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
+
+    //Default
+    public Booking() {
+    }
 }

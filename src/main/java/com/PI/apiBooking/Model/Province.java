@@ -22,4 +22,8 @@ public class Province {
     @JoinColumn(name = "country_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Country country;
+
+    //Default
+    public Province() {
+    }
 }
