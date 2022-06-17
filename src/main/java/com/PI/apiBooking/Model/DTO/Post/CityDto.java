@@ -17,8 +17,11 @@ public class CityDto {
     private Double longitude;
 
     //Constructor for test
-    public CityDto(String name, String name_country) {
+    public CityDto(String name, Province province, Double latitude, Double longitude) {
         this.name = name;
+        this.province = province;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     //Default

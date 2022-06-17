@@ -109,7 +109,7 @@ public class UserService implements IUserService {
             final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
             final String jwt = jwtUtil.generateToken(userDetails);
             User_CardDto user_cardDto = mapper.convertValue(user, User_CardDto.class);
-            user_cardDto.setRol_Name(user.get().getRol().getName().toString());
+            user_cardDto.setRol_Name(user.get().getRol().getName().name());
             user_cardDto.setJwt(jwt);
             return user_cardDto;
         } else {
