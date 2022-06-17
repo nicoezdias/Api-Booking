@@ -7,6 +7,7 @@ import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.User_CardDto;
 import com.PI.apiBooking.Model.User.Rol;
 import com.PI.apiBooking.Model.User.User;
+import com.PI.apiBooking.Model.User.UserRoles;
 import com.PI.apiBooking.Repository.ICityRepository;
 import com.PI.apiBooking.Repository.IUserRepository;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
@@ -58,7 +59,7 @@ public class UserService implements IUserService {
         User user = mapper.convertValue(userDto, User.class);
         if (userDto.getId() == null){
             rol.setId(2L);
-            rol.setName("USER");
+            rol.setName(UserRoles.USER);
             user.setRol(rol);
             user.setCity(cityRepository.findById(userDto.getCity().getId()).get());
             userRepository.save(user);
@@ -93,7 +94,7 @@ public class UserService implements IUserService {
             final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
             final String jwt = jwtUtil.generateToken(userDetails);
             User_CardDto user_cardDto = mapper.convertValue(user, User_CardDto.class);
-            user_cardDto.setRol_Name(user.get().getRol().getName());
+            user_cardDto.setRol_Name(user.get().getRol().getName().name());
             user_cardDto.setJwt(jwt);
             return user_cardDto;
         } else {

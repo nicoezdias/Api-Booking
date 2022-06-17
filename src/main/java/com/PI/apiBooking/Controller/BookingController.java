@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-//@Secured({"USER","ADMIN"})
+@Secured({"USER","ADMIN"})
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {

@@ -23,7 +23,7 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         com.PI.apiBooking.Model.User.User user = userRepository.findByEmail(email).get();
-        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRol().getName());
+        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRol().getName().name());
         return new User(user.getEmail(), user.getPassword(), Collections.singletonList(grantedAuthority));
     }
 
