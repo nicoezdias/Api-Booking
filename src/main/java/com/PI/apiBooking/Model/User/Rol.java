@@ -19,7 +19,8 @@ public class Rol {
     @SequenceGenerator(name = "rolSequence",sequenceName = "rolSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rolSequence")
     private Long id;
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private UserRoles name;
     @OneToMany(mappedBy = "city")
     private Set<User> users;
 }
