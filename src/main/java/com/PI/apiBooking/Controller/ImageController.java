@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/images")
+@CrossOrigin
 public class ImageController {
 
     @Autowired

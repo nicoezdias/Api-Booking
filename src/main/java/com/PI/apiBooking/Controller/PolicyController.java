@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/policies")
+@CrossOrigin
 public class PolicyController {
 
     @Autowired

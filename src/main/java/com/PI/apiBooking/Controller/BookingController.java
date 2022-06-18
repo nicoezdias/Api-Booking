@@ -16,6 +16,7 @@ import java.util.Set;
 @Secured({"USER","ADMIN"})
 @RestController
 @RequestMapping("/bookings")
+@CrossOrigin
 public class BookingController {
 
     @Autowired
@@ -36,6 +37,12 @@ public class BookingController {
     @GetMapping("product/{productId}")
     public ResponseEntity<Set<BookingDto>> findBookingByProductId(@PathVariable Long productId){
         return ResponseEntity.ok(bookingService.findBookingByProductId(productId));
+    }
+
+    @Operation(summary = "Traer todas las reservas por Id de Usuario")
+    @GetMapping("user/{userId}")
+    public ResponseEntity<Set<BookingDto>> findBookingByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(bookingService.findBookingByUserId(userId));
     }
 
     //* ///////// DELETE ///////// *//
