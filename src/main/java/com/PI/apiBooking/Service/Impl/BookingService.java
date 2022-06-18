@@ -55,6 +55,16 @@ public class BookingService implements IBookingService {
     }
 
     @Override
+    public Set<BookingDto> findBookingByUserId(Long userId) {
+        List<Booking> bookings = bookingRepository.findBookingByUserId(userId);
+        Set<BookingDto> bookingsDto = new HashSet<>();
+        for(Booking booking : bookings){
+            bookingsDto.add(mapper.convertValue(booking, BookingDto.class));
+        }
+        return bookingsDto;
+    }
+
+    @Override
     public Booking checkId(Long id) throws ResourceNotFoundException{
         Optional<Booking> booking = bookingRepository.findById(id);
         if (booking.isEmpty()) {

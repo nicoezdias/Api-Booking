@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/ratings")
+@CrossOrigin
 public class RatingController {
 
     @Autowired
