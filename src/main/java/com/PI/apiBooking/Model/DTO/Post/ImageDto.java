@@ -18,11 +18,12 @@ public class ImageDto {
     private Product product;
 
     //Constructor for test
-    public ImageDto(String title, String url, String text_alt, Boolean profile) {
+    public ImageDto(String title, String url, String text_alt, Boolean profile, Product product) {
         this.title = title;
         this.url = url;
         this.text_alt = text_alt;
         this.profile = profile;
+        this.product = product;
     }
 
     //Default

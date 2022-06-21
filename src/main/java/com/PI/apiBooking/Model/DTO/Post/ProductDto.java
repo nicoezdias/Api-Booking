@@ -29,11 +29,18 @@ public class ProductDto {
     private Set<Policy> policies;
 
     //Constructor for test
-    public ProductDto(String name, String description, Boolean availability, Integer stars, Category category, City city, Set<Policy> policies) {
+    public ProductDto(String name, String titleDescription, String description, Integer stars, String direction, Double latitude, Double longitude, String checkInMin, String checkInMax, Category category, Set<Feature> features, City city, Set<Policy> policies) {
         this.name = name;
+        this.titleDescription = titleDescription;
         this.description = description;
         this.stars = stars;
+        this.direction = direction;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.checkInMin = checkInMin;
+        this.checkInMax = checkInMax;
         this.category = category;
+        this.features = features;
         this.city = city;
         this.policies = policies;
     }

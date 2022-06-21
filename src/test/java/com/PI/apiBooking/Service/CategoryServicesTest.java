@@ -4,37 +4,34 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Category_CardDto;
 import com.PI.apiBooking.Model.DTO.Post.CategoryDto;
 import com.PI.apiBooking.Service.Impl.CategoryService;
-import org.junit.FixMethodOrder;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import com.PI.apiBooking.Service.Interfaces.ICategoryService;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 class CategoryServicesTest {
 
     @Autowired
     private CategoryService categoryServices;
 
-    public void logInfo(){
-        categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1"));
-        categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2", "txt2"));
-        categoryServices.save(new CategoryDto("Dpto","Descripcion3", "url3","txt3"));
+    CategoryDto c1, c2, c3, c4, c5;
+
+    @BeforeEach
+    void doBefore(){
+        c1 = categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1"));
+        c2 = categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2", "txt2"));
+        c3 = categoryServices.save(new CategoryDto("Dpto","Descripcion3","Url3", "txt3"));
+        c4 = categoryServices.save(new CategoryDto("Hostel","Descripcion4","Url4", "txt4"));
+        c5 = categoryServices.save(new CategoryDto("Residencia","Descripcion5","Url5", "txt5"));
     }
 
     @Test
     public void saveAndFindCategories() throws ResourceNotFoundException {
-        CategoryDto c1 = categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1"));
-        CategoryDto c2 = categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2", "txt2"));
-        CategoryDto c3 = categoryServices.save(new CategoryDto("Dpto","Descripcion3","Url3", "txt3"));
         assertNotNull(categoryServices.findById(c1.getId()));
         assertNotNull(categoryServices.findById(c2.getId()));
         assertNotNull(categoryServices.findById(c3.getId()));
@@ -42,7 +39,6 @@ class CategoryServicesTest {
 
     @Test
     public void findAllCategories() {
-        logInfo();
         Set<Category_CardDto> categories = categoryServices.findAll();
         assertFalse(categories.isEmpty());
         System.out.println(categories);
@@ -51,7 +47,6 @@ class CategoryServicesTest {
     @Test
     public void deleteCategory() throws ResourceNotFoundException {
         boolean ex = false;
-        CategoryDto c4 = categoryServices.save(new CategoryDto("Hostel","Descripcion4","Url4", "txt4"));
         categoryServices.delete(c4.getId());
         try{
             categoryServices.findById(c4.getId());
@@ -63,7 +58,6 @@ class CategoryServicesTest {
 
     @Test
     public void updateCategory() throws ResourceNotFoundException {
-        CategoryDto c5 = categoryServices.save(new CategoryDto("Residencia","Descripcion5","Url5", "txt5"));
         CategoryDto c6 = new CategoryDto("Residencia","DescripcionCambiada","UrlCambiada", "txt5");
         c6.setId(c5.getId());
 
