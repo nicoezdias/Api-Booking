@@ -19,13 +19,13 @@ public class UserDto {
     private Rol rol;
 
     //Constructor for test
-    public UserDto(String name, String surname, String email, String password, City city, Rol rol) {
+
+
+    public UserDto(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.city = city;
-        this.rol = rol;
     }
 
     //Default

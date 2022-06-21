@@ -15,6 +15,7 @@ public class RolDto {
     public RolDto(String name) {
         this.name = name;
     }
+
     //Default
     public RolDto() {}
 }

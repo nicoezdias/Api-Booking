@@ -5,10 +5,12 @@ import com.PI.apiBooking.Model.City;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -27,11 +29,11 @@ public class User{
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
+    @JoinColumn(name = "city_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private City city;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_rol" )
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Rol rol;

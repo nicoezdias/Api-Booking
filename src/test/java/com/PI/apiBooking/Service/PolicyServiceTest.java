@@ -3,6 +3,7 @@ package com.PI.apiBooking.Service;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.PolicyDto;
 import com.PI.apiBooking.Service.Impl.PolicyService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,50 +17,55 @@ class PolicyServiceTest {
     @Autowired
     private PolicyService policyService;
 
-    PolicyDto p1, p2, p3, p4, p5;
+    PolicyDto p1, p2, p3, p4;
 
     @BeforeEach
     public void doBefore(){
         p1 = policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00"));
         p2 = policyService.save(new PolicyDto("Normas de la casa","No se permiten fiestas"));
         p3 = policyService.save(new PolicyDto("Normas de la casa","No fumar"));
-        p4 = policyService.save(new PolicyDto("Salud y seguridad","Detector de humo"));
-        p5 = policyService.save(new PolicyDto("Salud y seguridad","Deposito de seguridad"));
+        p4 = policyService.save(new PolicyDto("Salud y seguridad","Deposito de seguridad"));
+    }
+    @AfterEach
+    public void doAfter() throws ResourceNotFoundException {
+        policyService.delete(p1.getId());
+        policyService.delete(p2.getId());
+        policyService.delete(p3.getId());
+        policyService.delete(p4.getId());
     }
 
     @Test
-    public void saveAndFindFeatures() throws ResourceNotFoundException {
+    public void saveAndFindPolicy() throws ResourceNotFoundException {
         assertNotNull(policyService.findById(p1.getId()));
         assertNotNull(policyService.findById(p2.getId()));
         assertNotNull(policyService.findById(p3.getId()));
     }
 
     @Test
-    public void findAllFeatures() {
+    public void findAllPolicies() {
         Set<PolicyDto> politicas = policyService.findAll();
         assertFalse(politicas.isEmpty());
         System.out.println(politicas);
     }
 
     @Test
-    public void deleteFeature() throws ResourceNotFoundException {
-        boolean ex = false;
-        policyService.delete(p4.getId());
-        try{
-            policyService.findById(p4.getId());
-        }catch (ResourceNotFoundException e){
-            ex = true;
-        }
-        assertTrue(ex);
-    }
-
-    @Test
-    public void updateFeature() throws ResourceNotFoundException {
-        PolicyDto p6 = policyService.findById(p5.getId());
+    public void updatePolicy() throws ResourceNotFoundException {
+        PolicyDto p6 = policyService.findById(p4.getId());
         p6.setDescription("Botiquin completo");
         policyService.save(p6);
         assertEquals(p6.toString(), policyService.findById(p6.getId()).toString());
     }
 
-
+    @Test
+    public void deletePolicy() throws ResourceNotFoundException {
+        boolean ex = false;
+        PolicyDto p6 = policyService.save(new PolicyDto("Salud y seguridad","Detector de humo"));
+        try{
+            policyService.delete(p6.getId());
+            policyService.findById(p6.getId());
+        }catch (ResourceNotFoundException e){
+            ex = true;
+        }
+        assertTrue(ex);
+    }
 }

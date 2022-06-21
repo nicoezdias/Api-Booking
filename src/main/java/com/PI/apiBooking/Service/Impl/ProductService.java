@@ -159,7 +159,7 @@ public class ProductService implements IProductService {
             for(Feature feature : product.getFeatures()){
                 featuresIcons.add(feature.getIcon());
             }
-            product_cardDto.setSetFeaturesIcons(featuresIcons);
+            product_cardDto.setFeaturesIcons(featuresIcons);
             product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
             products_cardDto.add(product_cardDto);
         }

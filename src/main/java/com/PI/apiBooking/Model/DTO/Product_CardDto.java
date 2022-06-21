@@ -15,7 +15,6 @@ public class Product_CardDto {
     private String name;
     private String description;
     private Integer stars;
-    private Set<String> setFeaturesIcons;
     private String categoryName;
     private Optional<Integer> avgRanting;
     private Double distance;

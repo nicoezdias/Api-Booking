@@ -32,8 +32,6 @@ public class UserService implements IUserService {
 
     @Autowired
     IUserRepository userRepository;
-    @Autowired
-    ICityRepository cityRepository;
 
     @Autowired
     ObjectMapper mapper;
@@ -76,14 +74,14 @@ public class UserService implements IUserService {
             rol.setId(2L);
             rol.setName(UserRoles.USER);
             user.setRol(rol);
-            user.setCity(cityRepository.findById(userDto.getCity().getId()).get());
             userRepository.save(user);
+            userDto.setId(user.getId());
             logger.info("User registrado correctamente: "+ userDto);
         }else{
             userRepository.save(user);
             logger.info("User actualizado correctamente: "+ userDto);
         }
-        return mapper.convertValue(user, UserDto.class);
+        return userDto;
     }
 
     @Override

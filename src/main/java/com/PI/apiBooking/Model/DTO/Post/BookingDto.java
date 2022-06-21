@@ -19,4 +19,17 @@ public class BookingDto {
     private LocalDate departure;
     private Product product;
     private User user;
+
+    //Constructor for test
+    public BookingDto(String reservationTime, LocalDate arrival, LocalDate departure, Product product, User user) {
+        this.reservationTime = reservationTime;
+        this.arrival = arrival;
+        this.departure = departure;
+        this.product = product;
+        this.user = user;
+    }
+
+    //Default
+    public BookingDto() {
+    }
 }

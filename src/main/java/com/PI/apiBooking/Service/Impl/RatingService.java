@@ -72,6 +72,4 @@ public class RatingService implements IRatingService {
         }
         return rating.get();
     }
-
-
 }

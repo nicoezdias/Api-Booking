@@ -17,9 +17,10 @@ public class RatingDto {
     private User user;
 
     //Constructor for test
-    public RatingDto(Integer score, Product product) {
+    public RatingDto(Integer score, Product product, User user) {
         this.score = score;
         this.product = product;
+        this.user = user;
     }
 
     //Default

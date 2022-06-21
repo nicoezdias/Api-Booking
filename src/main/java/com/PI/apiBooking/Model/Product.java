@@ -3,10 +3,12 @@ package com.PI.apiBooking.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -39,7 +41,7 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_features",
             joinColumns = @JoinColumn(name = "product_id", nullable = false),
@@ -48,7 +50,7 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Set<Feature> features;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_policies",
             joinColumns = @JoinColumn(name = "product_id", nullable = false),
