@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/provinces")
+@CrossOrigin
 public class ProvinceController {
 
     @Autowired

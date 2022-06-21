@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/countries")
+@CrossOrigin
 public class CountryController {
 
     @Autowired

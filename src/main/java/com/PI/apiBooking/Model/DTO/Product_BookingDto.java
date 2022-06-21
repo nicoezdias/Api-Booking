@@ -20,4 +20,11 @@ public class Product_BookingDto {
     private String productCheckInMin;
     private String productCheckInMax;
 
+    private String userName;
+    private String userSurname;
+    private String userEmail;
+    private String userCity;
+
+    private Set<Date_DisabledDto> disabled;
+
 }

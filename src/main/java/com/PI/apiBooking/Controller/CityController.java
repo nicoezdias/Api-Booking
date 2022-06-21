@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/cities")
+@CrossOrigin
 public class CityController {
 
     @Autowired

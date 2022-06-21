@@ -11,4 +11,5 @@ import java.util.Set;
 public interface IBookingService extends IService<BookingDto>, ICheckId<Booking> {
 
     Set<BookingDto> findBookingByProductId(Long productId);
+    Set<BookingDto> findBookingByUserId(Long userId);
 }

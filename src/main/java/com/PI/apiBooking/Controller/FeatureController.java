@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/features")
+@CrossOrigin
 public class FeatureController {
 
     @Autowired
