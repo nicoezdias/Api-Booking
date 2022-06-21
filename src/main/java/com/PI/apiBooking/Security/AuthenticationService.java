@@ -1,6 +1,5 @@
 package com.PI.apiBooking.Security;
 
-import com.PI.apiBooking.Repository.IRolRepository;
 import com.PI.apiBooking.Repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,8 +16,6 @@ public class AuthenticationService implements UserDetailsService {
 
     @Autowired
     IUserRepository userRepository;
-    @Autowired
-    IRolRepository rolRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
