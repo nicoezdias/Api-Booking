@@ -1,6 +1,5 @@
 package com.PI.apiBooking.Model.DTO;
 
-import com.PI.apiBooking.Model.City;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +11,6 @@ public class User_CardDto {
     private Long id;
     private String name;
     private String surname;
-    private City city;
     private String rol_Name;
     private String jwt;
 

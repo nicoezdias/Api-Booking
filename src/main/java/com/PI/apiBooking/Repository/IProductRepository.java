@@ -4,9 +4,6 @@ import com.PI.apiBooking.Model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.math.BigInteger;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +19,11 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT AVG(r.score) FROM Rating r WHERE product.id = ?1")
     Optional<Integer> averageScoreByProduct(Long productId);
 
-    @Query(value = "SELECT * FROM PRODUCT AS P  WHERE P.CITY_ID = ?3 AND P.ID NOT IN(" +
-            "SELECT BOOKING.PRODUCT_ID FROM BOOKING WHERE " +
-            "?1 BETWEEN BOOKING.ARRIVAL AND BOOKING.DEPARTURE OR" +
-            "?2 BETWEEN BOOKING.ARRIVAL AND BOOKING.DEPARTURE OR" +
-            "(?1 < BOOKING.ARRIVAL AND ?2 > BOOKING.DEPARTURE)" +
+    @Query(value = "SELECT * FROM product AS p WHERE p.city_id = ?3 AND p.id NOT IN(" +
+            "SELECT booking.product_id FROM booking WHERE " +
+            "?1 BETWEEN booking.arrival AND booking.departure OR" +
+            "?2 BETWEEN booking.arrival AND booking.departure OR" +
+            "(?1 < booking.arrival AND ?2 > booking.departure)" +
             ")", nativeQuery = true)
     List<Product> findByDateAndCityId(String arrival, String departure, int id);
 

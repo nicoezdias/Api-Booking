@@ -64,7 +64,7 @@ class RatingServiceTest {
         Set<Policy> policies = new HashSet<>();
         policies.add(policy);
         product.setId(productService.save(new ProductDto("Fonte Arcada","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies)).getId());
-        user.setId(userService.save(new UserDto("Juan","Perez","juanperez@mail.com","juancapo")).getId());
+        user.setId(1l);
 
         r1 = ratingService.save(new RatingDto(8, product, user));
         r2 = ratingService.save(new RatingDto(9, product, user));
@@ -74,7 +74,6 @@ class RatingServiceTest {
     @AfterEach
     public void doAfter() throws ResourceNotFoundException {
         productService.delete(product.getId());
-        userService.delete(user.getId());
         featureService.delete(feature.getId());
         policyService.delete(policy.getId());
         categoryService.delete(category.getId());
