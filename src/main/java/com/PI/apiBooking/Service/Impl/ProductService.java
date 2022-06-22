@@ -1,7 +1,6 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.Booking;
 import com.PI.apiBooking.Model.DTO.*;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
@@ -99,10 +98,13 @@ public class ProductService implements IProductService {
         User_BookingDto user_bookingDto = userService.findById(userId);
         booking_productDto.setUserName(user_bookingDto.getName());
         booking_productDto.setUserSurname(user_bookingDto.getSurname());
-        booking_productDto.setUserCity(user_bookingDto.getCityName());
+        if(user_bookingDto.getCityName() != null){
+            booking_productDto.setUserCity(user_bookingDto.getCityName());
+        }
         booking_productDto.setUserEmail(user_bookingDto.getEmail());
-
         booking_productDto.setDisabled(findBookings(productId));
+        booking_productDto.setProductImage(imageService.findProfileImageByProductId(product.getId()));
+
         return booking_productDto;
     }
 

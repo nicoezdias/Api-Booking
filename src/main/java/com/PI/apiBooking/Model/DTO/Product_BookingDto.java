@@ -25,6 +25,8 @@ public class Product_BookingDto {
     private String userEmail;
     private String userCity;
 
+    private Image_ProductDto productImage;
+
     private Set<Date_DisabledDto> disabled;
 
 }
