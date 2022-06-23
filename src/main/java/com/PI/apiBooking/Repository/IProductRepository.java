@@ -1,6 +1,6 @@
 package com.PI.apiBooking.Repository;
 
-import com.PI.apiBooking.Model.Product;
+import com.PI.apiBooking.Model.Entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

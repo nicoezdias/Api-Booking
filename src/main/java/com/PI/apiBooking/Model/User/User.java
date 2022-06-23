@@ -1,7 +1,9 @@
 package com.PI.apiBooking.Model.User;
 
-import com.PI.apiBooking.Model.Booking;
-import com.PI.apiBooking.Model.City;
+import com.PI.apiBooking.Model.Entity.Booking;
+import com.PI.apiBooking.Model.Entity.City;
+import com.PI.apiBooking.Model.Entity.Like;
+import com.PI.apiBooking.Model.Entity.Rating;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +17,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
-@JsonIgnoreProperties({"bookings"})
+@JsonIgnoreProperties({"ratings","likes","bookings"})
 public class User{
 
     @Id
@@ -37,6 +39,12 @@ public class User{
     @JoinColumn(name = "id_rol" )
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Rol rol;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Set<Rating> ratings;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Set<Like> likes;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Set<Booking> bookings;

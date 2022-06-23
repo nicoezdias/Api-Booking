@@ -8,7 +8,7 @@ import com.PI.apiBooking.Model.DTO.Product_BookingDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
-import com.PI.apiBooking.Model.Product;
+import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Service.ICheckId;
 import com.PI.apiBooking.Service.IService;
 

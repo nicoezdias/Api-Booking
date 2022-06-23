@@ -1,6 +1,6 @@
 package com.PI.apiBooking.Model.DTO;
 
-import com.PI.apiBooking.Model.Policy;
+import com.PI.apiBooking.Model.Entity.Policy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

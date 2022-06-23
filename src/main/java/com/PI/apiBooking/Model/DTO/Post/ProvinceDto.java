@@ -1,6 +1,6 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
-import com.PI.apiBooking.Model.Country;
+import com.PI.apiBooking.Model.Entity.Country;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

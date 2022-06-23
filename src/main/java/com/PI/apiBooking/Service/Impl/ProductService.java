@@ -4,8 +4,8 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.*;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
-import com.PI.apiBooking.Model.Feature;
-import com.PI.apiBooking.Model.Product;
+import com.PI.apiBooking.Model.Entity.Feature;
+import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Repository.IProductRepository;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -154,7 +154,6 @@ public class ProductService implements IProductService {
         for (Product product : products) {
             Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
             product_cardDto.setCategoryName(product.getCategory().getTitle());
-            product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
             product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
             product_cardDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
             Set<String> featuresIcons = new HashSet<>();

@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Model.DTO;
 
-import com.PI.apiBooking.Model.Feature;
-import com.PI.apiBooking.Model.Policy;
+import com.PI.apiBooking.Model.Entity.Feature;
+import com.PI.apiBooking.Model.Entity.Policy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +26,7 @@ public class Product_CompleteDto {
     private Double distance;
     private Optional<Integer> avgRanting;
     private Set<Date_DisabledDto> disabled;
+
 
     //Default
     public Product_CompleteDto() {

@@ -2,7 +2,7 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.RatingDto;
-import com.PI.apiBooking.Model.Rating;
+import com.PI.apiBooking.Model.Entity.Rating;
 import com.PI.apiBooking.Repository.IRatingRepository;
 import com.PI.apiBooking.Service.Interfaces.IRatingService;
 import com.fasterxml.jackson.databind.ObjectMapper;

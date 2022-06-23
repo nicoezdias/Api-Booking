@@ -1,12 +1,12 @@
 package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.Country;
+import com.PI.apiBooking.Model.Entity.Country;
 import com.PI.apiBooking.Model.DTO.City_ListDto;
 import com.PI.apiBooking.Model.DTO.Post.CityDto;
 import com.PI.apiBooking.Model.DTO.Post.CountryDto;
 import com.PI.apiBooking.Model.DTO.Post.ProvinceDto;
-import com.PI.apiBooking.Model.Province;
+import com.PI.apiBooking.Model.Entity.Province;
 import com.PI.apiBooking.Service.Impl.CityService;
 import com.PI.apiBooking.Service.Impl.CountryService;
 import com.PI.apiBooking.Service.Impl.ProvinceService;

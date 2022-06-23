@@ -1,6 +1,6 @@
 package com.PI.apiBooking.Service.Interfaces;
 
-import com.PI.apiBooking.Model.Feature;
+import com.PI.apiBooking.Model.Entity.Feature;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.FeatureDto;
 import com.PI.apiBooking.Service.ICheckId;

@@ -2,7 +2,7 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.ProvinceDto;
-import com.PI.apiBooking.Model.Province;
+import com.PI.apiBooking.Model.Entity.Province;
 import com.PI.apiBooking.Repository.IProvinceRepository;
 import com.PI.apiBooking.Service.Interfaces.IProvinceService;
 import com.fasterxml.jackson.databind.ObjectMapper;

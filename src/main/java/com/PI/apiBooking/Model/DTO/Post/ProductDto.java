@@ -1,7 +1,9 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
-import com.PI.apiBooking.Model.*;
-import com.PI.apiBooking.Model.Policy;
+import com.PI.apiBooking.Model.Entity.Category;
+import com.PI.apiBooking.Model.Entity.City;
+import com.PI.apiBooking.Model.Entity.Feature;
+import com.PI.apiBooking.Model.Entity.Policy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

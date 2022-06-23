@@ -1,8 +1,8 @@
 package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.*;
 import com.PI.apiBooking.Model.DTO.Post.*;
+import com.PI.apiBooking.Model.Entity.*;
 import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Service.Impl.*;
 import org.junit.jupiter.api.AfterEach;

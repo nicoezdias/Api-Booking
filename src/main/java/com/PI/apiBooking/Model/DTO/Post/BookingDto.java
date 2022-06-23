@@ -1,6 +1,6 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
-import com.PI.apiBooking.Model.Product;
+import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Model.User.User;
 import lombok.Getter;
 import lombok.Setter;

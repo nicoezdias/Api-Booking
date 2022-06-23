@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Model;
+package com.PI.apiBooking.Model.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
-@JsonIgnoreProperties({"images", "products_features", "ratings", "bookings"})
+@JsonIgnoreProperties({"images", "products_features", "ratings","likes", "bookings"})
 public class Product {
     @Id
     @SequenceGenerator(name = "productSequence",sequenceName = "productSequence", allocationSize = 1)
@@ -66,6 +66,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Rating> ratings;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private Set<Like> likes;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Image> images;

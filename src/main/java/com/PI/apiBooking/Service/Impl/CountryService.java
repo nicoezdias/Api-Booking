@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.Country;
+import com.PI.apiBooking.Model.Entity.Country;
 import com.PI.apiBooking.Model.DTO.Post.CountryDto;
 import com.PI.apiBooking.Repository.ICountryRepository;
 import com.PI.apiBooking.Service.Interfaces.ICountryService;

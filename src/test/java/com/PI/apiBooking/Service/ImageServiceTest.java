@@ -1,9 +1,9 @@
 package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.*;
 import com.PI.apiBooking.Model.DTO.Image_ProductDto;
 import com.PI.apiBooking.Model.DTO.Post.*;
+import com.PI.apiBooking.Model.Entity.*;
 import com.PI.apiBooking.Service.Impl.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;

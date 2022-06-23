@@ -3,7 +3,7 @@ package com.PI.apiBooking.Service.Impl;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.ImageDto;
 import com.PI.apiBooking.Model.DTO.Image_ProductDto;
-import com.PI.apiBooking.Model.Image;
+import com.PI.apiBooking.Model.Entity.Image;
 import com.PI.apiBooking.Repository.IImageRepository;
 import com.PI.apiBooking.Service.Interfaces.IImageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
