@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface ILikeRepository extends JpaRepository<Like,Long> {
 
-    @Query("SELECT l.product FROM Likes l WHERE l.user.id = ?1")
+    @Query("SELECT l.product FROM Like l WHERE l.user.id = ?1")
     List<Product> findProductsByUserId(Long userId);
 
-    @Query(value = "SELECT l FROM Likes l WHERE l.user.id = ?1 AND l.product.id = ?1")
+    @Query(value = "SELECT l FROM Like l WHERE l.user.id = ?1 AND l.product.id = ?1")
     Optional<Like> findByUserIdAndProductId(Long userId, Long productId);
 }

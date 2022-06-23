@@ -20,7 +20,7 @@ public class Product_CardDto {
     private Double distance;
     private Image_ProductDto imageProfile;
     private Set<String> FeaturesIcons;
-
+    private boolean like = false;
 
     //Default
     public Product_CardDto() {}

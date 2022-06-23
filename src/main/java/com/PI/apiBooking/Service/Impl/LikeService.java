@@ -10,12 +10,13 @@ import com.PI.apiBooking.Service.Interfaces.ILikeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Service
 public class LikeService implements ILikeService {
 
     protected final static Logger logger = Logger.getLogger(LikeService.class);
