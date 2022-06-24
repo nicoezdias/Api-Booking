@@ -10,7 +10,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table
-public class Like {
+public class Favourite {
+
     @Id
     @SequenceGenerator(name = "likeSequence",sequenceName = "likeSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "likeSequence")
@@ -22,7 +23,11 @@ public class Like {
     private Product product;
 
     @ManyToOne()
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
+
+    //Default
+    public Favourite() {
+    }
 }

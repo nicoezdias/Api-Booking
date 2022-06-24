@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
-@JsonIgnoreProperties({"images", "products_features", "ratings","likes", "bookings"})
+@JsonIgnoreProperties({"images", "ratings", "likes", "bookings"})
 public class Product {
     @Id
     @SequenceGenerator(name = "productSequence",sequenceName = "productSequence", allocationSize = 1)
@@ -68,7 +68,7 @@ public class Product {
     private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
-    private Set<Like> likes;
+    private Set<Favourite> likes;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<Image> images;

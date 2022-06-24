@@ -1,10 +1,10 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.Post.LikeDto;
+import com.PI.apiBooking.Model.DTO.Post.FavouriteDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
-import com.PI.apiBooking.Model.Entity.Like;
-import com.PI.apiBooking.Service.Interfaces.ILikeService;
+import com.PI.apiBooking.Model.Entity.Favourite;
+import com.PI.apiBooking.Service.Interfaces.IFavouriteService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,27 +18,27 @@ import java.util.Set;
 @RestController
 @RequestMapping("/likes")
 @CrossOrigin
-public class LikeController {
+public class FavouriteController {
 
     @Autowired
-    ILikeService likeService;
+    IFavouriteService likeService;
 
     //* ///////// POST ///////// *//
-    @Operation(summary = "Poner o quitar un like")
+    @Operation(summary = "Poner o quitar de Favourite")
     @PostMapping
-    public ResponseEntity<LikeDto> ponerQuitarLike(@RequestBody LikeDto likeDto) throws ResourceNotFoundException {
-        Optional<Like> like = likeService.findByUserIdAndProductId(likeDto.getUser().getId(), likeDto.getProduct().getId());
-        if(like.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(likeService.save(likeDto));
+    public ResponseEntity<FavouriteDto> ponerQuitarFavourite(@RequestBody FavouriteDto favouriteDto) throws ResourceNotFoundException {
+        Optional<Favourite> favourite = likeService.findByUserIdAndProductId(favouriteDto.getUser().getId(), favouriteDto.getProduct().getId());
+        if(favourite.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(likeService.save(favouriteDto));
         }
         else {
-            likeService.delete(like.get().getId());
+            likeService.delete(favourite.get().getId());
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
 
     //* ///////// GET ///////// *//
-    @Operation(summary = "Traer todos los productos likeados")
+    @Operation(summary = "Traer todos los productos en Favourite")
     @GetMapping("/{id}")
     public ResponseEntity<Set<Product_CardDto>> findProductsByUserId(@PathVariable Long id){
         return ResponseEntity.ok(likeService.findProductsByUserId(id));

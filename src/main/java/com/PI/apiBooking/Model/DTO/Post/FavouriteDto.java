@@ -9,19 +9,19 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class LikeDto {
+public class FavouriteDto {
 
     private Long id;
     private Product product;
     private User user;
 
     //Constructor for test
-    public LikeDto(Product product, User user) {
+    public FavouriteDto(Product product, User user) {
         this.product = product;
         this.user = user;
     }
 
     //Default
-    public LikeDto() {
+    public FavouriteDto() {
     }
 }

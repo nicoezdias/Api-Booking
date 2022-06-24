@@ -2,7 +2,7 @@ package com.PI.apiBooking.Model.User;
 
 import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Model.Entity.City;
-import com.PI.apiBooking.Model.Entity.Like;
+import com.PI.apiBooking.Model.Entity.Favourite;
 import com.PI.apiBooking.Model.Entity.Rating;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -44,7 +44,7 @@ public class User{
     private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Set<Like> likes;
+    private Set<Favourite> likes;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Set<Booking> bookings;
