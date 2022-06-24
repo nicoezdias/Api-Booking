@@ -6,13 +6,17 @@ import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.User_CardDto;
 import com.PI.apiBooking.Model.User.User;
+import com.PI.apiBooking.Model.User.UserRoles;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
+import com.PI.apiBooking.Service.Mail.EmailSenderService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping("/users")
@@ -21,33 +25,40 @@ public class UserController {
 
     @Autowired
     IUserService userService;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar un Usuario")
     @PostMapping
-    public ResponseEntity<User_CardDto> save(@RequestBody UserDto userDto) throws BadRequestException {
+    public ResponseEntity<User_CardDto> save(@RequestBody UserDto userDto) throws BadRequestException, MessagingException {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         authenticationRequest.setEmail(userDto.getEmail());
         authenticationRequest.setPassword(userDto.getPassword());
 
         if(userDto.getId() == null){
             userService.save(userDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(userService.authenticate(authenticationRequest));
+            User_CardDto user_cardDto =userService.authenticate(authenticationRequest);
+            emailSenderService.sendMailLog(userDto.getEmail());
+            return ResponseEntity.status(HttpStatus.CREATED).body(user_cardDto);
         } else{
             userService.save(userDto);
             return ResponseEntity.ok(userService.authenticate(authenticationRequest));
         }
     }
+
     @PostMapping("/authenticate")
     public ResponseEntity<User_CardDto> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
         return ResponseEntity.ok(userService.authenticate(authenticationRequest));
     }
 
-    //* ///////// GET ///////// *//
-    @Operation(summary = "Traer un Usuario por email")
-    @GetMapping("/{email}")
-    public ResponseEntity<User> findByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(userService.findByEmail(email));
+    @PostMapping("/validate")
+    public ResponseEntity<User_CardDto> validateUser(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
+        UserDto userDto = userService.findByEmail(authenticationRequest.getEmail());
+        userDto.getRol().setId(2L);
+        userDto.getRol().setName(UserRoles.USER);
+        userService.save(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.authenticate(authenticationRequest));
     }
 
     //* ///////// DELETE ///////// *//

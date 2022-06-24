@@ -11,7 +11,7 @@ import com.PI.apiBooking.Service.ICheckId;
 import com.PI.apiBooking.Service.IService;
 
 public interface IUserService extends IService<UserDto>, ICheckId<User> {
-    User findByEmail(String email);
+    UserDto findByEmail(String email);
     User_BookingDto findById(Long id) throws ResourceNotFoundException;
     User_CardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException;
 }

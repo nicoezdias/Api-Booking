@@ -43,10 +43,11 @@ public class UserService implements IUserService {
     private AuthenticationService authenticationService;
 
     @Override
-    public User findByEmail(String email) {
+    public UserDto findByEmail(String email) {
         User user = userRepository.findByEmail(email).get();
-        logger.info("La busqueda fue exitosa: "+ user);
-        return user;
+        UserDto userDto = mapper.convertValue(user, UserDto.class);
+        logger.info("La busqueda fue exitosa: "+ userDto);
+        return userDto;
     }
 
     @Override
@@ -70,8 +71,8 @@ public class UserService implements IUserService {
         userDto.setPassword(hashedPassword);
         User user = mapper.convertValue(userDto, User.class);
         if (userDto.getId() == null){
-            rol.setId(2L);
-            rol.setName(UserRoles.USER);
+            rol.setId(3L);
+            rol.setName(UserRoles.PENDING);
             user.setRol(rol);
             userRepository.save(user);
             userDto.setId(user.getId());
