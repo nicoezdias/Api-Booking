@@ -22,11 +22,11 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT AVG(r.score) FROM Rating r WHERE product.id = ?1")
     Optional<Integer> averageScoreByProduct(Long productId);
 
-    @Query(value = "SELECT * FROM PRODUCT AS P  WHERE P.CITY_ID = ?3 AND P.ID NOT IN(" +
-            "SELECT BOOKING.PRODUCT_ID FROM BOOKING WHERE " +
-            "?1 BETWEEN BOOKING.ARRIVAL AND BOOKING.DEPARTURE OR" +
-            "?2 BETWEEN BOOKING.ARRIVAL AND BOOKING.DEPARTURE OR" +
-            "(?1 < BOOKING.ARRIVAL AND ?2 > BOOKING.DEPARTURE)" +
+    @Query(value = "SELECT * FROM product AS p WHERE p.city_id = ?3 AND p.id NOT IN(" +
+            "SELECT booking.product_id FROM booking WHERE " +
+            "?1 BETWEEN booking.arrival AND booking.departure OR" +
+            "?2 BETWEEN booking.arrival AND booking.departure OR" +
+            "((?1 BETWEEN \"1-1-1\" AND BookingDB.booking.arrival) AND (?2 BETWEEN booking.departure AND \"4000-12-30\"))" +
             ")", nativeQuery = true)
     List<Product> findByDateAndCityId(String arrival, String departure, int id);
 

@@ -95,6 +95,7 @@ public class ProductService implements IProductService {
         booking_productDto.setProductPolicies(product.getPolicies());
         booking_productDto.setProductCheckInMin(product.getCheckInMin());
         booking_productDto.setProductCheckInMax(product.getCheckInMax());
+        booking_productDto.setProductImage(imageService.findProfileImageByProductId(product.getId()));
 
         User_BookingDto user_bookingDto = userService.findById(userId);
         booking_productDto.setUserName(user_bookingDto.getName());

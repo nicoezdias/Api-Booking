@@ -2,6 +2,7 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.BadRequestException;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.City;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
@@ -60,7 +61,11 @@ public class UserService implements IUserService {
         User_BookingDto user_bookingDto = mapper.convertValue(user, User_BookingDto.class);
         user_bookingDto.setName(user.getName());
         user_bookingDto.setSurname(user.getSurname());
-        user_bookingDto.setCityName(user.getCity().getName() + ", " + user.getCity().getProvince().getName());
+        City city = user.getCity();
+        if(city == null){
+
+        }
+        user_bookingDto.setCityName(user.getCity().getId() + ", " + user.getCity().getProvince().getName());
         user_bookingDto.setEmail(user.getEmail());
 
         return user_bookingDto;
