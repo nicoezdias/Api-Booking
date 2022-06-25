@@ -5,10 +5,9 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.User_CardDto;
-import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Model.User.UserRoles;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
-import com.PI.apiBooking.Service.Mail.EmailSenderService;
+import com.PI.apiBooking.Util.Mail.EmailSenderService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +38,7 @@ public class UserController {
         if(userDto.getId() == null){
             userService.save(userDto);
             User_CardDto user_cardDto =userService.authenticate(authenticationRequest);
-            emailSenderService.sendMailLog(userDto.getEmail());
+//            emailSenderService.sendMailLog(userDto.getEmail(),userDto.getName()+" "+userDto.getSurname());
             return ResponseEntity.status(HttpStatus.CREATED).body(user_cardDto);
         } else{
             userService.save(userDto);

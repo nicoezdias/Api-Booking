@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Security;
+package com.PI.apiBooking.Util.Security;
 
 import com.PI.apiBooking.Repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

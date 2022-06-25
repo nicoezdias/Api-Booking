@@ -1,15 +1,23 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.Image_ProductDto;
 import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
+import com.PI.apiBooking.Model.Entity.Product;
+import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Repository.IBookingRepository;
+import com.PI.apiBooking.Repository.IProductRepository;
+import com.PI.apiBooking.Repository.IUserRepository;
 import com.PI.apiBooking.Service.Interfaces.IBookingService;
+import com.PI.apiBooking.Util.Mail.EmailSenderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +30,17 @@ public class BookingService implements IBookingService {
     @Autowired
     IBookingRepository bookingRepository;
     @Autowired
+    ImageService imageService;
+    @Autowired
+    IUserRepository userRepository;
+    @Autowired
+    IProductRepository productRepository;
+    @Autowired
     ObjectMapper mapper;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
+    @SneakyThrows
     @Override
     public BookingDto save(BookingDto bookingDto) {
         Booking booking = mapper.convertValue(bookingDto, Booking.class);
@@ -34,6 +51,17 @@ public class BookingService implements IBookingService {
         }else{
             logger.info("Reserva actualizada correctamente: "+ bookingDto);
         }
+        User user = userRepository.findById(bookingDto.getUser().getId()).get();
+        Product product = productRepository.findById(bookingDto.getProduct().getId()).get();
+        Image_ProductDto imagen = imageService.findProfileImageByProductId(product.getId());
+        emailSenderService.sendMailBooking(user.getEmail(),
+                user.getName()+" "+user.getSurname(),
+                bookingDto.getArrival(),
+                bookingDto.getDeparture(),
+                product.getCategory().getTitle(),
+                product.getName(),
+                product.getDirection()+", "+product.getCity().getName()+", "+product.getCity().getProvince().getName()+", "+ product.getCity().getProvince().getCountry().getName(),
+                imagen.getUrl());
         return bookingDto;
     }
 

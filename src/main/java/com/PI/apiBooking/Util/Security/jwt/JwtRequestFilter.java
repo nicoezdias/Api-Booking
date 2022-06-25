@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Security.jwt;
+package com.PI.apiBooking.Util.Security.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

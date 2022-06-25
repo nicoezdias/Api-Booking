@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.Set;
 
 @Secured({"USER","ADMIN"})
@@ -25,7 +25,7 @@ public class BookingController {
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar una Reserva")
     @PostMapping
-    public ResponseEntity<BookingDto> save(@RequestBody BookingDto bookingDto) {
+    public ResponseEntity<BookingDto> save(@RequestBody BookingDto bookingDto) throws MessagingException {
         if(bookingDto.getId() == null)
             return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingDto));
         else

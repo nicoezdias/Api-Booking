@@ -1,6 +1,8 @@
-package com.PI.apiBooking.Security;
+package com.PI.apiBooking.Config;
 
-import com.PI.apiBooking.Security.jwt.JwtRequestFilter;
+import com.PI.apiBooking.Util.Security.AuthenticationService;
+import com.PI.apiBooking.Util.Security.MyPasswordEncoder;
+import com.PI.apiBooking.Util.Security.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
+                .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/categories/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/cities/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/products/**").permitAll()
