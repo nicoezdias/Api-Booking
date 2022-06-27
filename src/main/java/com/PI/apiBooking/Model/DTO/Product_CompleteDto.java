@@ -5,6 +5,7 @@ import com.PI.apiBooking.Model.Entity.Policy;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,8 +26,10 @@ public class Product_CompleteDto {
     private String cityName;
     private Double distance;
     private Optional<Integer> avgRanting;
+    private Double longitude;
+    private Double latitude;
     private Set<Date_DisabledDto> disabled;
-
+    private Boolean like = false;
 
     //Default
     public Product_CompleteDto() {

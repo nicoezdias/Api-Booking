@@ -1,11 +1,8 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-
-
-import com.PI.apiBooking.Model.DTO.Product_BookingDto;
-
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
+import com.PI.apiBooking.Model.DTO.Product_BookingDto;
 import com.PI.apiBooking.Model.DTO.Product_CardDto;
 import com.PI.apiBooking.Model.DTO.Product_CompleteDto;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
@@ -39,37 +36,37 @@ public class ProductController {
 
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todos los Productos")
-    @GetMapping
-    public ResponseEntity<Set<Product_CardDto>> findAll(){
-        return ResponseEntity.ok(productServices.findAll());
+    @GetMapping(value = {"all", "all/{userId}"})
+    public ResponseEntity<Set<Product_CardDto>> findAll(@PathVariable(required = false) Long userId){
+        return ResponseEntity.ok(productServices.findAll(userId));
     }
 
     @Operation(summary = "Traer un Productos por Id")
-    @GetMapping("/{id}")
-    public ResponseEntity<Product_CompleteDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
-        return ResponseEntity.ok(productServices.findById(id));
+    @GetMapping(value = {"/{id}", "/{id}/{userId}"})
+    public ResponseEntity<Product_CompleteDto> findById(@PathVariable Long id,  @PathVariable(required = false) Long userId) throws ResourceNotFoundException {
+        return ResponseEntity.ok(productServices.findById(id, userId));
     }
 
     @Operation(summary = "Traer todos Productos por Id de Categoria")
-    @GetMapping("categories/{categoryId}")
-    public ResponseEntity<Set<Product_CardDto>> findByCategoryId(@PathVariable Long categoryId){
-        Set<Product_CardDto> product = productServices.findByCategoryId(categoryId);
+    @GetMapping(value = {"categories/{categoryId}", "categories/{categoryId}/{userId}"})
+    public ResponseEntity<Set<Product_CardDto>> findByCategoryId(@PathVariable Long categoryId, @PathVariable(required = false) Long userId){
+        Set<Product_CardDto> product = productServices.findByCategoryId(categoryId, userId);
         return ResponseEntity.ok(product);
     }
 
-    @Operation(summary = "Traer todos Productos por Id de Ciudad")
-    @GetMapping("city/{cityId}")
-    public ResponseEntity<Set<Product_CardDto>> findByCityId(@PathVariable Long cityId){
-        Set<Product_CardDto> product = productServices.findByCityId(cityId);
-        return ResponseEntity.ok(product);
-    }
+//    @Operation(summary = "Traer todos Productos por Id de Ciudad")
+//    @GetMapping(value = {"city/{cityId}", "city/{cityId}/{userId}"})
+//    public ResponseEntity<Set<Product_CardDto>> findByCityId(@PathVariable Long cityId, @PathVariable(required = false) Long userId){
+//        Set<Product_CardDto> product = productServices.findByCityId(cityId, userId);
+//        return ResponseEntity.ok(product);
+//    }
 
     @Operation(summary = "Traer todos Productos por Fecha e Id de Ciudad")
     //@GetMapping("date")
     //public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@RequestParam(required = false) String arrival, @RequestParam(required = false) String departure, @RequestParam int id){
-    @GetMapping(value = {"date/{id}", "date/{id}/{arrival}/{departure}"})
-    public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@PathVariable(required = false) String arrival, @PathVariable(required = false) String departure, @PathVariable int id){
-    Set<Product_CardDto> products_cardDto = productServices.findByDateAndCityId(arrival, departure, id);
+    @GetMapping(value = {"date/{cityId}", "date/{cityId}/{userId}", "date/{cityId}/{arrival}/{departure}", "date/{cityId}/{userId}/{arrival}/{departure}"})
+    public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@PathVariable Long cityId, @PathVariable(required = false) Long userId, @PathVariable(required = false) String arrival, @PathVariable(required = false) String departure){
+    Set<Product_CardDto> products_cardDto = productServices.findByDateAndCityId(cityId, userId, arrival, departure);
         return ResponseEntity.ok(products_cardDto);
     }
 
@@ -77,6 +74,12 @@ public class ProductController {
     @GetMapping("/booking/{productId}/{userId}")
     public ResponseEntity<Product_BookingDto> findForBooking(@PathVariable Long productId, @PathVariable Long userId) throws ResourceNotFoundException {
         return ResponseEntity.ok(productServices.findForBooking(productId, userId));
+    }
+
+    @Operation(summary = "Traer un Producto por Id para Editar")
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<ProductDto> findForEdit(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(productServices.findForEdit(id));
     }
 
     //* ///////// DELETE ///////// *//
