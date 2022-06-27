@@ -6,6 +6,7 @@ import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.Entity.Feature;
 import com.PI.apiBooking.Model.Entity.Product;
+import com.PI.apiBooking.Repository.IFavouriteRepository;
 import com.PI.apiBooking.Repository.IProductRepository;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,19 +36,31 @@ public class ProductService implements IProductService {
     BookingService bookingService;
 
     @Autowired
+    IFavouriteRepository favouriteRepository;
+
+    @Autowired
     ObjectMapper mapper;
 
 
     @Override
-    public Set<Product_CardDto> findAll() {
+    public Set<Product_CardDto> findAll(Long userId) {
         List<Product> products = productRepository.findAll();
         Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
-        logger.info("La busqueda fue exitosa: "+ products_cardDto);
+
+        if(userId != null) {
+            for(Product_CardDto product_cardDto : products_cardDto){
+                if((favouriteRepository.findByUserIdAndProductId(product_cardDto.getId(), userId)).isPresent()){
+                    product_cardDto.setLike(true);
+                }
+            }
+        }
+        logger.info("La busqueda fue exitosa: " + products_cardDto);
+
         return products_cardDto;
     }
 
     @Override
-    public Product_CompleteDto findById(Long id) throws ResourceNotFoundException {
+    public Product_CompleteDto findById(Long id, Long userId) throws ResourceNotFoundException {
         Product product = checkId(id);
         Product_CompleteDto product_completeDto = mapper.convertValue(product, Product_CompleteDto.class);
         product_completeDto.setCategoryName(product.getCategory().getTitle());
@@ -56,31 +69,76 @@ public class ProductService implements IProductService {
         product_completeDto.setCityName(product.getCity().getName() + ", " + product.getCity().getProvince().getName() + ", " + product.getCity().getProvince().getCountry().getName());
         product_completeDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
         product_completeDto.setDisabled(findBookings(id));
+
+        if(userId != null) {
+            if((favouriteRepository.findByUserIdAndProductId(id, userId)).isPresent()){
+                product_completeDto.setLike(true);
+                }
+            }
+
         return product_completeDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByCategoryId(Long categoryId){
+    public Set<Product_CardDto> findByCategoryId(Long categoryId, Long userId){
+
         List<Product> products = productRepository.findByCategoryId(categoryId);
         Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
-        logger.info("La busqueda fue exitosa: "+ products_cardDto);
+
+        if(userId != null) {
+            for(Product_CardDto product_cardDto : products_cardDto){
+                if((favouriteRepository.findByUserIdAndProductId(product_cardDto.getId(), userId)).isPresent()){
+                    product_cardDto.setLike(true);
+                }
+            }
+        }
+        logger.info("La busqueda fue exitosa: " + products_cardDto);
         return products_cardDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByCityId(Long cityId){
+    public Set<Product_CardDto> findByCityId(Long cityId, Long userId){
         List<Product> products = productRepository.findByCityId(cityId);
         Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
 
+        if(userId != null) {
+            for(Product_CardDto product_cardDto : products_cardDto){
+                if((favouriteRepository.findByUserIdAndProductId(product_cardDto.getId(), userId)).isPresent()){
+                    product_cardDto.setLike(true);
+                }
+            }
+        }
+        logger.info("La busqueda fue exitosa: " + products_cardDto);
         return products_cardDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByDateAndCityId(String arrival, String departure, int id) {
-        List<Product> products = productRepository.findByDateAndCityId(arrival, departure, id);
-        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
-        logger.info("La busqueda fue exitosa: "+ products_cardDto);
-        return products_cardDto;
+    public Set<Product_CardDto> findByDateAndCityId(Long cityId, Long userId, String arrival, String departure) {
+        if(arrival != null){
+            List<Product> products = productRepository.findByDateAndCityId(cityId, arrival, departure);
+            Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products);
+
+            if(userId != null) {
+                for(Product_CardDto product_cardDto : products_cardDto){
+                    if((favouriteRepository.findByUserIdAndProductId(product_cardDto.getId(), userId)).isPresent()){
+                        product_cardDto.setLike(true);
+                    }
+                }
+            }
+            logger.info("La busqueda fue exitosa: "+ products_cardDto);
+            return products_cardDto;
+
+        } else {
+            Set<Product_CardDto> products_cardDto = findByCityId(cityId, userId);
+            logger.info("La busqueda fue exitosa: "+ products_cardDto);
+            return products_cardDto;
+        }
+    }
+
+    public ProductDto findForEdit(Long id) throws ResourceNotFoundException{
+        Product product = checkId(id);
+        ProductDto productDto = mapper.convertValue(product, ProductDto.class);
+        return productDto;
     }
 
     @Override

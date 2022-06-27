@@ -3,6 +3,7 @@ package com.PI.apiBooking.Model.DTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class Product_CardDto {
     private Double distance;
     private Image_ProductDto imageProfile;
     private Set<String> FeaturesIcons;
-    private boolean like = false;
+    private Boolean like = false;
 
     //Default
     public Product_CardDto() {}

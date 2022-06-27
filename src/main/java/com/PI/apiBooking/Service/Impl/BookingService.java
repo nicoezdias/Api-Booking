@@ -2,8 +2,8 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Image_ProductDto;
-import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
+import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Repository.IBookingRepository;
@@ -17,7 +17,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;

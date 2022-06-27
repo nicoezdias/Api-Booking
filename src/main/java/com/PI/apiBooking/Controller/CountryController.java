@@ -2,7 +2,6 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.CountryDto;
-import com.PI.apiBooking.Model.DTO.Post.ProvinceDto;
 import com.PI.apiBooking.Service.Interfaces.ICountryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
