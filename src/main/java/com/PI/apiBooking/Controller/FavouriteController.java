@@ -40,8 +40,8 @@ public class FavouriteController {
 
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todos los productos en Favourite")
-    @GetMapping("/{id}")
-    public ResponseEntity<Set<Product_CardDto>> findProductsByUserId(@PathVariable Long id){
-        return ResponseEntity.ok(likeService.findProductsByUserId(id));
+    @GetMapping("/{userId}")
+    public ResponseEntity<Set<Product_CardDto>> findProductsByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(likeService.findProductsByUserId(userId));
     }
 }

@@ -52,7 +52,7 @@ public class FavouriteService implements IFavouriteService {
     @Override
     public Set<Product_CardDto> findProductsByUserId(Long userId) {
         List<Product> products = favouriteRepository.findProductsByUserId(userId);
-        Set<Product_CardDto> products_cardDto = productService.produtcToProduct_CardDto(products);
+        Set<Product_CardDto> products_cardDto = productService.produtcToProduct_CardDto(products,userId);
         logger.info("La busqueda fue exitosa: "+ products_cardDto);
         return products_cardDto;
     }
