@@ -26,6 +26,8 @@ public class Product_CompleteDto {
     private String cityName;
     private Double distance;
     private Optional<Integer> avgRanting;
+    private Double longitude;
+    private Double latitude;
     private Set<Date_DisabledDto> disabled;
     private Boolean like = false;
 

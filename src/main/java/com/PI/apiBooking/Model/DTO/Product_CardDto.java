@@ -21,6 +21,8 @@ public class Product_CardDto {
     private Double distance;
     private Image_ProductDto imageProfile;
     private Set<String> FeaturesIcons;
+    private Double longitude;
+    private Double latitude;
     private Boolean like = false;
 
     //Default
