@@ -39,17 +39,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authenticationService);
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password(myPasswordEncoder().encodePassword("admin"))
+                .authorities("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/swagger-ui/**","/booking-openapi/**" ).permitAll()
                 .antMatchers(HttpMethod.GET,"/categories/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/cities/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/products/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/users/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/roles/**").permitAll()
+//TEST
+//                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
