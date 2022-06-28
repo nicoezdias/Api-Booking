@@ -1,8 +1,8 @@
 package com.PI.apiBooking.Config;
 
-import com.PI.apiBooking.Util.Security.AuthenticationService;
-import com.PI.apiBooking.Util.Security.MyPasswordEncoder;
-import com.PI.apiBooking.Util.Security.jwt.JwtRequestFilter;
+import com.PI.apiBooking.Security.AuthenticationService;
+import com.PI.apiBooking.Security.MyPasswordEncoder;
+import com.PI.apiBooking.Security.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/users/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/roles/**").permitAll()
 //TEST
-//                .antMatchers("/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

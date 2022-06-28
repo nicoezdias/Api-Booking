@@ -10,7 +10,7 @@ import com.PI.apiBooking.Repository.IBookingRepository;
 import com.PI.apiBooking.Repository.IProductRepository;
 import com.PI.apiBooking.Repository.IUserRepository;
 import com.PI.apiBooking.Service.Interfaces.IBookingService;
-import com.PI.apiBooking.Util.Mail.EmailSenderService;
+import com.PI.apiBooking.Mail.EmailSenderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.apache.log4j.Logger;

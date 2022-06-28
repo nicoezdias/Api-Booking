@@ -2,6 +2,7 @@
 <html
 		xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:o="urn:schemas-microsoft-com:office:office"
+		xmlns:th="http://www.thymeleaf.org"
 		style="
 		width: 100%;
 		font-family: lato, 'helvetica neue', helvetica, arial, sans-serif;
@@ -9,6 +10,7 @@
 		-ms-text-size-adjust: 100%;
 		padding: 0;
 		margin: 0;
+		background-color: #f4f4f4;
 	"
 >
 <head>
@@ -17,23 +19,11 @@
 	<meta name="x-apple-disable-message-reformatting" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta content="telephone=no" name="format-detection" />
-	<title>Confirm</title>
-	<style type="text/css">
-				a {
-					text-decoration: none;
-				}
-			</style>
-	<xml>
-		<o:OfficeDocumentSettings>
-			<o:AllowPNG></o:AllowPNG>
-			<o:PixelsPerInch>96</o:PixelsPerInch>
-		</o:OfficeDocumentSettings>
-	</xml>
+	<title>Copia de Nueva plantilla de correo electrC3B3nico 2022-06-23</title>
 	<link
 			href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i"
 			rel="stylesheet"
 	/>
-	<!--<![endif]-->
 	<style type="text/css">
 			#outlook a {
 				padding: 0;
@@ -73,9 +63,6 @@
 			[data-ogsb] .es-button {
 				border-width: 0 !important;
 				padding: 15px 25px 15px 25px !important;
-			}
-			[data-ogsb] .es-button.es-button-1 {
-				padding: 15px 30px !important;
 			}
 			@media only screen and (max-width: 600px) {
 				p,
@@ -268,6 +255,9 @@
 					overflow: visible !important;
 					max-height: inherit !important;
 				}
+				.h-auto {
+					height: auto !important;
+				}
 			}
 		</style>
 </head>
@@ -282,11 +272,6 @@
 		"
 >
 <div class="es-wrapper-color" style="background-color: #f4f4f4">
-	<!--[if gte mso 9]>
-	<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-		<v:fill type="tile" color="#f4f4f4"></v:fill>
-	</v:background>
-	<![endif]-->
 	<table
 			class="es-wrapper"
 			width="100%"
@@ -305,56 +290,6 @@
 					background-position: center top;
 				"
 	>
-		<tr class="gmail-fix" height="0" style="border-collapse: collapse">
-			<td style="padding: 0; margin: 0">
-				<table
-						cellspacing="0"
-						cellpadding="0"
-						border="0"
-						align="center"
-						style="
-								mso-table-lspace: 0pt;
-								mso-table-rspace: 0pt;
-								border-collapse: collapse;
-								border-spacing: 0px;
-								width: 600px;
-							"
-				>
-					<tr style="border-collapse: collapse">
-						<td
-								cellpadding="0"
-								cellspacing="0"
-								border="0"
-								style="
-										padding: 0;
-										margin: 0;
-										line-height: 1px;
-										min-width: 600px;
-									"
-								height="0"
-						>
-							<img
-									src="https://jnsxrl.stripocdn.email/content/guids/CABINET_837dc1d79e3a5eca5eb1609bfe9fd374/images/41521605538834349.png"
-									style="
-											display: block;
-											border: 0;
-											outline: none;
-											text-decoration: none;
-											-ms-interpolation-mode: bicubic;
-											max-height: 0px;
-											min-height: 0px;
-											min-width: 600px;
-											width: 600px;
-										"
-									alt
-									width="600"
-									height="1"
-							/>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
 		<tr style="border-collapse: collapse">
 			<td valign="top" style="padding: 0; margin: 0">
 				<table
@@ -447,7 +382,7 @@
 																		"
 															>
 																<a
-																		href="http://54.176.3.26/"
+																		href="http://comotuhogar.ddns.net/"
 																		target="_blank"
 																		style="
 																				-webkit-text-size-adjust: none;
@@ -496,11 +431,7 @@
 							"
 				>
 					<tr style="border-collapse: collapse">
-						<td
-								style="padding: 0; margin: 0; background-color: #424972"
-								bgcolor="#424972"
-								align="center"
-						>
+						<td align="center" style="padding: 0; margin: 0">
 							<table
 									class="es-content-body"
 									style="
@@ -541,7 +472,6 @@
 																	border-collapse: separate;
 																	border-spacing: 0px;
 																	background-color: #ffffff;
-																	border-radius: 4px;
 																"
 															width="100%"
 															cellspacing="0"
@@ -573,7 +503,12 @@
 																				color: #111111;
 																			"
 																>
-																	Hola, {nombre}!
+																	<strong
+																	>¡Hola,
+																		<span th:text="${user}" th:remove="tag"
+																		>{nombre}</span
+																		>!</strong
+																	>
 																</h1>
 															</td>
 														</tr>
@@ -750,7 +685,7 @@
 																				width: auto;
 																			"
 																		><a
-																				href="https://viewstripo.email/"
+																				href="{confirm}"
 																				class="es-button es-button-1"
 																				target="_blank"
 																				style="
@@ -826,7 +761,7 @@
 															>
 																<a
 																		target="_blank"
-																		href="https://viewstripo.email/"
+																		href="{confirm}"
 																		style="
 																				-webkit-text-size-adjust: none;
 																				-ms-text-size-adjust: none;
@@ -835,7 +770,7 @@
 																				color: #f16f42;
 																				font-size: 18px;
 																			"
-																>XXX.XXXXXXX.XXX / XXXXXXXXXXXXX</a
+																>{confirm}</a
 																>
 															</td>
 														</tr>
@@ -872,137 +807,19 @@
 														</tr>
 														<tr style="border-collapse: collapse">
 															<td
-																	class="es-m-txt-l"
-																	align="left"
-																	style="
-																			margin: 0;
-																			padding-top: 20px;
-																			padding-left: 30px;
-																			padding-right: 30px;
-																			padding-bottom: 40px;
-																		"
-															>
-																<p
-																		style="
-																				margin: 0;
-																				-webkit-text-size-adjust: none;
-																				-ms-text-size-adjust: none;
-																				mso-line-height-rule: exactly;
-																				font-family: lato, 'helvetica neue',
-																					helvetica, arial, sans-serif;
-																				line-height: 27px;
-																				color: #666666;
-																				font-size: 18px;
-																			"
-																>
-																	Saludos,
-																</p>
-																<p
-																		style="
-																				margin: 0;
-																				-webkit-text-size-adjust: none;
-																				-ms-text-size-adjust: none;
-																				mso-line-height-rule: exactly;
-																				font-family: lato, 'helvetica neue',
-																					helvetica, arial, sans-serif;
-																				line-height: 27px;
-																				color: #666666;
-																				font-size: 18px;
-																			"
-																>
-																	El equipo de Digital Booking
-																</p>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-				<table
-						class="es-content"
-						cellspacing="0"
-						cellpadding="0"
-						align="center"
-						style="
-								mso-table-lspace: 0pt;
-								mso-table-rspace: 0pt;
-								border-collapse: collapse;
-								border-spacing: 0px;
-								table-layout: fixed !important;
-								width: 100%;
-							"
-				>
-					<tr style="border-collapse: collapse">
-						<td align="center" style="padding: 0; margin: 0">
-							<table
-									class="es-content-body"
-									style="
-											mso-table-lspace: 0pt;
-											mso-table-rspace: 0pt;
-											border-collapse: collapse;
-											border-spacing: 0px;
-											background-color: transparent;
-											width: 600px;
-										"
-									cellspacing="0"
-									cellpadding="0"
-									align="center"
-							>
-								<tr style="border-collapse: collapse">
-									<td align="left" style="padding: 0; margin: 0">
-										<table
-												width="100%"
-												cellspacing="0"
-												cellpadding="0"
-												style="
-														mso-table-lspace: 0pt;
-														mso-table-rspace: 0pt;
-														border-collapse: collapse;
-														border-spacing: 0px;
-													"
-										>
-											<tr style="border-collapse: collapse">
-												<td
-														valign="top"
-														align="center"
-														style="padding: 0; margin: 0; width: 600px"
-												>
-													<table
-															width="100%"
-															cellspacing="0"
-															cellpadding="0"
-															role="presentation"
-															style="
-																	mso-table-lspace: 0pt;
-																	mso-table-rspace: 0pt;
-																	border-collapse: collapse;
-																	border-spacing: 0px;
-																"
-													>
-														<tr style="border-collapse: collapse">
-															<td
 																	align="center"
 																	style="
+																			padding: 5px;
 																			margin: 0;
-																			padding-top: 10px;
-																			padding-bottom: 20px;
-																			padding-left: 20px;
-																			padding-right: 20px;
 																			font-size: 0;
 																		"
 															>
 																<table
+																		border="0"
 																		width="100%"
 																		height="100%"
-																		cellspacing="0"
 																		cellpadding="0"
-																		border="0"
+																		cellspacing="0"
 																		role="presentation"
 																		style="
 																				mso-table-lspace: 0pt;
@@ -1016,9 +833,94 @@
 																				style="
 																						padding: 0;
 																						margin: 0;
-																						border-bottom: 1px solid #f4f4f4;
-																						background: #ffffff none repeat
-																							scroll 0% 0%;
+																						border-bottom: 1px solid #ffffff;
+																						background: unset;
+																						height: 1px;
+																						width: 100%;
+																						margin: 0px;
+																					"
+																		></td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+														<tr style="border-collapse: collapse">
+															<td
+																	class="es-m-txt-l"
+																	align="left"
+																	bgcolor="#424972"
+																	style="
+																			margin: 0;
+																			padding-top: 5px;
+																			padding-bottom: 5px;
+																			padding-left: 30px;
+																			padding-right: 30px;
+																		"
+															>
+																<p
+																		style="
+																				margin: 0;
+																				-webkit-text-size-adjust: none;
+																				-ms-text-size-adjust: none;
+																				mso-line-height-rule: exactly;
+																				font-family: lato, 'helvetica neue',
+																					helvetica, arial, sans-serif;
+																				line-height: 27px;
+																				color: #ffffff;
+																				font-size: 18px;
+																			"
+																>
+																	<strong>Saludos,</strong>
+																</p>
+																<p
+																		style="
+																				margin: 0;
+																				-webkit-text-size-adjust: none;
+																				-ms-text-size-adjust: none;
+																				mso-line-height-rule: exactly;
+																				font-family: lato, 'helvetica neue',
+																					helvetica, arial, sans-serif;
+																				line-height: 27px;
+																				color: #ffffff;
+																				font-size: 18px;
+																			"
+																>
+																	<strong
+																	>El equipo de Digital Booking</strong
+																	>
+																</p>
+															</td>
+														</tr>
+														<tr style="border-collapse: collapse">
+															<td
+																	align="center"
+																	style="
+																			padding: 5px;
+																			margin: 0;
+																			font-size: 0;
+																		"
+															>
+																<table
+																		border="0"
+																		width="100%"
+																		height="100%"
+																		cellpadding="0"
+																		cellspacing="0"
+																		role="presentation"
+																		style="
+																				mso-table-lspace: 0pt;
+																				mso-table-rspace: 0pt;
+																				border-collapse: collapse;
+																				border-spacing: 0px;
+																			"
+																>
+																	<tr style="border-collapse: collapse">
+																		<td
+																				style="
+																						padding: 0;
+																						margin: 0;
+																						border-bottom: 1px solid #ffffff;
+																						background: unset;
 																						height: 1px;
 																						width: 100%;
 																						margin: 0px;

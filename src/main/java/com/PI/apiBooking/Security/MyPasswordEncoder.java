@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Util.Security;
+package com.PI.apiBooking.Security;
 
 
 import org.springframework.context.annotation.Bean;

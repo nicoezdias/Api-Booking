@@ -2,6 +2,7 @@
 <html
 		xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:o="urn:schemas-microsoft-com:office:office"
+		xmlns:th="http://www.thymeleaf.org"
 		style="
 		width: 100%;
 		font-family: lato, 'helvetica neue', helvetica, arial, sans-serif;
@@ -9,6 +10,7 @@
 		-ms-text-size-adjust: 100%;
 		padding: 0;
 		margin: 0;
+		background-color: #f4f4f4;
 	"
 >
 <head>
@@ -17,7 +19,7 @@
 	<meta name="x-apple-disable-message-reformatting" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta content="telephone=no" name="format-detection" />
-	<title>Copia de Nueva plantilla de correo electrC3B3nico 2022-06-23</title>
+	<title>mailBooking</title>
 	<link
 			href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i"
 			rel="stylesheet"
@@ -270,11 +272,6 @@
 		"
 >
 <div class="es-wrapper-color" style="background-color: #f4f4f4">
-	<!--[if gte mso 9]>
-	<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-		<v:fill type="tile" color="#f4f4f4"></v:fill>
-	</v:background>
-	<![endif]-->
 	<table
 			class="es-wrapper"
 			width="100%"
@@ -293,56 +290,6 @@
 					background-position: center top;
 				"
 	>
-		<tr class="gmail-fix" height="0" style="border-collapse: collapse">
-			<td style="padding: 0; margin: 0">
-				<table
-						cellspacing="0"
-						cellpadding="0"
-						border="0"
-						align="center"
-						style="
-								mso-table-lspace: 0pt;
-								mso-table-rspace: 0pt;
-								border-collapse: collapse;
-								border-spacing: 0px;
-								width: 600px;
-							"
-				>
-					<tr style="border-collapse: collapse">
-						<td
-								cellpadding="0"
-								cellspacing="0"
-								border="0"
-								style="
-										padding: 0;
-										margin: 0;
-										line-height: 1px;
-										min-width: 600px;
-									"
-								height="0"
-						>
-							<img
-									src="https://jnsxrl.stripocdn.email/content/guids/CABINET_837dc1d79e3a5eca5eb1609bfe9fd374/images/41521605538834349.png"
-									style="
-											display: block;
-											border: 0;
-											outline: none;
-											text-decoration: none;
-											-ms-interpolation-mode: bicubic;
-											max-height: 0px;
-											min-height: 0px;
-											min-width: 600px;
-											width: 600px;
-										"
-									alt
-									width="600"
-									height="1"
-							/>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
 		<tr style="border-collapse: collapse">
 			<td valign="top" style="padding: 0; margin: 0">
 				<table
@@ -435,7 +382,7 @@
 																		"
 															>
 																<a
-																		href="http://54.176.3.26/"
+																		href="http://comotuhogar.ddns.net/"
 																		target="_blank"
 																		style="
 																				-webkit-text-size-adjust: none;
@@ -607,11 +554,29 @@
 																					helvetica, arial, sans-serif;
 																				line-height: 30px;
 																				color: #666666;
+																				font-size: 22px;
+																			"
+																>
+																	<strong>
+																		Hola
+																		<span th:text="${user}" th:remove="tag"
+																		>{user}</span
+																		>,</strong>
+																</p>
+																<p
+																		style="
+																				margin: 0;
+																				-webkit-text-size-adjust: none;
+																				-ms-text-size-adjust: none;
+																				mso-line-height-rule: exactly;
+																				font-family: lato, 'helvetica neue',
+																					helvetica, arial, sans-serif;
+																				line-height: 30px;
+																				color: #666666;
 																				font-size: 20px;
 																			"
 																>
-																	<strong>Hola {NombreUsuario}</strong
-																	><br />A continuación&nbsp;te dejamos los
+																	A continuación&nbsp;te dejamos los
 																	detalles de la Reserva:<br /><br />
 																</p>
 															</td>
@@ -648,7 +613,7 @@
 															>
 																<img
 																		class="adapt-img"
-																		src="https://buckets3-grupo08.s3.us-west-1.amazonaws.com/hotel/galeriahotel2.jpg"
+																		th:src="@{${image}}"
 																		alt
 																		style="
 																				display: block;
@@ -684,9 +649,8 @@
 																				color: #666666;
 																				font-size: 15px;
 																			"
-																>
-																	{Categoria}
-																</p>
+																		th:text="${category}"
+																></p>
 																<p
 																		style="
 																				margin: 0;
@@ -700,7 +664,9 @@
 																				font-size: 20px;
 																			"
 																>
-																	<strong>{NOBRE}</strong>
+																	<strong th:text="${productName}"
+																	>{productName}</strong
+																	>
 																</p>
 																<p
 																		style="
@@ -716,8 +682,8 @@
 																			"
 																>
 																	<svg
-																			width="18"
-																			height="26"
+																			width="12"
+																			height="16"
 																			viewBox="0 0 18 26"
 																			fill="none"
 																			xmlns="http://www.w3.org/2000/svg"
@@ -728,7 +694,11 @@
 																				fill="#545776"
 																		></path>
 																	</svg>
-																	{Ubicacion}
+																	<span
+																			th:text="${location}"
+																			th:remove="tag"
+																	>{location}</span
+																	>
 																</p>
 															</td>
 														</tr>
@@ -811,7 +781,9 @@
 																				text-align: right;
 																			"
 																>
-																	<strong>{Check in}</strong>
+																	<strong th:text="${arrival}"
+																	>{arrival}</strong
+																	>
 																</p>
 															</td>
 														</tr>
@@ -894,7 +866,9 @@
 																				text-align: right;
 																			"
 																>
-																	<strong>{Check in}</strong>
+																	<strong th:text="${departure}"
+																	>{departure}</strong
+																	>
 																</p>
 															</td>
 														</tr>
