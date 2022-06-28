@@ -50,17 +50,17 @@ public class BookingService implements IBookingService {
         }else{
             logger.info("Reserva actualizada correctamente: "+ bookingDto);
         }
-        User user = userRepository.findById(bookingDto.getUser().getId()).get();
-        Product product = productRepository.findById(bookingDto.getProduct().getId()).get();
-        Image_ProductDto imagen = imageService.findProfileImageByProductId(product.getId());
-        emailSenderService.sendMailBooking(user.getEmail(),
-                user.getName()+" "+user.getSurname(),
-                bookingDto.getArrival(),
-                bookingDto.getDeparture(),
-                product.getCategory().getTitle(),
-                product.getName(),
-                product.getDirection()+", "+product.getCity().getName()+", "+product.getCity().getProvince().getName()+", "+ product.getCity().getProvince().getCountry().getName(),
-                imagen.getUrl());
+//        User user = userRepository.findById(bookingDto.getUser().getId()).get();
+//        Product product = productRepository.findById(bookingDto.getProduct().getId()).get();
+//        Image_ProductDto imagen = imageService.findProfileImageByProductId(product.getId());
+//        emailSenderService.sendMailBooking(user.getEmail(),
+//                user.getName()+" "+user.getSurname(),
+//                bookingDto.getArrival(),
+//                bookingDto.getDeparture(),
+//                product.getCategory().getTitle(),
+//                product.getName(),
+//                product.getDirection()+", "+product.getCity().getName()+", "+product.getCity().getProvince().getName()+", "+ product.getCity().getProvince().getCountry().getName(),
+//                imagen.getUrl());
         return bookingDto;
     }
 

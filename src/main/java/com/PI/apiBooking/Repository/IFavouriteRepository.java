@@ -15,6 +15,6 @@ public interface IFavouriteRepository extends JpaRepository<Favourite,Long> {
     @Query("SELECT f.product FROM Favourite f WHERE f.user.id = ?1")
     List<Product> findProductsByUserId(Long userId);
 
-    @Query(value = "SELECT f FROM Favourite f WHERE f.user.id = ?1 AND f.product.id = ?1")
+    @Query(value = "SELECT f FROM Favourite f WHERE f.user.id = ?1 AND f.product.id = ?2")
     Optional<Favourite> findByUserIdAndProductId(Long userId, Long productId);
 }
