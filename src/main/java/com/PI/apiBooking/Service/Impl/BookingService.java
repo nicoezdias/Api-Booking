@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.Image_ProductDto;
+import com.PI.apiBooking.Model.DTO.ImageProductDto;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Model.Entity.Product;
@@ -50,9 +50,10 @@ public class BookingService implements IBookingService {
         }else{
             logger.info("Reserva actualizada correctamente: "+ bookingDto);
         }
+
         User user = userRepository.findById(bookingDto.getUser().getId()).get();
         Product product = productRepository.findById(bookingDto.getProduct().getId()).get();
-        Image_ProductDto imagen = imageService.findProfileImageByProductId(product.getId());
+        ImageProductDto imagen = imageService.findProfileImageByProductId(product.getId());
         emailSenderService.sendMailBooking(user.getEmail(),
                 user.getName()+" "+user.getSurname(),
                 bookingDto.getArrival(),

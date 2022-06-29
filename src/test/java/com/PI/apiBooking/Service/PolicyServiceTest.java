@@ -53,7 +53,7 @@ class PolicyServiceTest {
     @Test
     public void updatePolicy() throws ResourceNotFoundException {
         PolicyDto p6 = policyService.findById(p4.getId());
-        p6.setDescription("Botiquin completo");
+        p6.setDescription("Botiquín completo");
         policyService.save(p6);
         assertEquals(p6.toString(), policyService.findById(p6.getId()).toString());
     }

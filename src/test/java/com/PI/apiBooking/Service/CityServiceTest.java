@@ -2,7 +2,7 @@ package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.Entity.Country;
-import com.PI.apiBooking.Model.DTO.City_ListDto;
+import com.PI.apiBooking.Model.DTO.CityListDto;
 import com.PI.apiBooking.Model.DTO.Post.CityDto;
 import com.PI.apiBooking.Model.DTO.Post.CountryDto;
 import com.PI.apiBooking.Model.DTO.Post.ProvinceDto;
@@ -62,7 +62,7 @@ class CityServiceTest {
 
     @Test
     public void findAllCities() {
-        Set<City_ListDto> citiesDtos = cityService.findAll();
+        Set<CityListDto> citiesDtos = cityService.findAll();
         assertFalse(citiesDtos.isEmpty());
         System.out.println(citiesDtos);
     }

@@ -1,8 +1,8 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.Category_CardDto;
-import com.PI.apiBooking.Model.DTO.Category_CompleteDto;
+import com.PI.apiBooking.Model.DTO.CategoryCardDto;
+import com.PI.apiBooking.Model.DTO.CategoryCompleteDto;
 import com.PI.apiBooking.Model.DTO.Post.CategoryDto;
 import com.PI.apiBooking.Service.Interfaces.ICategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,13 +36,13 @@ public class CategoryController {
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Categorías")
     @GetMapping
-    public ResponseEntity<Set<Category_CardDto>> findAll() {
+    public ResponseEntity<Set<CategoryCardDto>> findAll() {
         return ResponseEntity.ok(categoryServices.findAll());
     }
 
     @Operation(summary = "Traer una Categoría por Id")
     @GetMapping("/{id}")
-    public ResponseEntity<Category_CompleteDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<CategoryCompleteDto> findById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoryServices.findById(id));
     }
 

@@ -4,8 +4,8 @@ import com.PI.apiBooking.Exceptions.BadRequestException;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
-import com.PI.apiBooking.Model.DTO.User_BookingDto;
-import com.PI.apiBooking.Model.DTO.User_CardDto;
+import com.PI.apiBooking.Model.DTO.UserBookingDto;
+import com.PI.apiBooking.Model.DTO.UserCardDto;
 import com.PI.apiBooking.Model.User.Rol;
 import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Model.User.UserRoles;
@@ -51,17 +51,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User_BookingDto findById(Long id) throws ResourceNotFoundException {
+    public UserBookingDto findById(Long id) throws ResourceNotFoundException {
         User user = checkId(id);
-        User_BookingDto user_bookingDto = mapper.convertValue(user, User_BookingDto.class);
-        user_bookingDto.setName(user.getName());
-        user_bookingDto.setSurname(user.getSurname());
+        UserBookingDto userBookingDto = mapper.convertValue(user, UserBookingDto.class);
+        userBookingDto.setName(user.getName());
+        userBookingDto.setSurname(user.getSurname());
         if (user.getCity() != null){
-            user_bookingDto.setCityName(user.getCity().getName() + ", " + user.getCity().getProvince().getName());
+            userBookingDto.setCityName(user.getCity().getName() + ", " + user.getCity().getProvince().getName());
         }
-        user_bookingDto.setEmail(user.getEmail());
+        userBookingDto.setEmail(user.getEmail());
 
-        return user_bookingDto;
+        return userBookingDto;
     }
 
     @Override
@@ -101,15 +101,15 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User_CardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException {
+    public UserCardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException {
         Optional<User> user = userRepository.findByEmail(authenticationRequest.getEmail());
         if (!user.isEmpty() && passwordEncoder.matchesPassword(authenticationRequest.getPassword(), user.get().getPassword())) {
             final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
             final String jwt = jwtUtil.generateToken(userDetails);
-            User_CardDto user_cardDto = mapper.convertValue(user, User_CardDto.class);
-            user_cardDto.setRol_Name(user.get().getRol().getName().name());
-            user_cardDto.setJwt(jwt);
-            return user_cardDto;
+            UserCardDto userCardDto = mapper.convertValue(user, UserCardDto.class);
+            userCardDto.setRolName(user.get().getRol().getName().name());
+            userCardDto.setJwt(jwt);
+            return userCardDto;
         } else {
             throw new BadRequestException("Los datos ingresados no son correctos");
         }
