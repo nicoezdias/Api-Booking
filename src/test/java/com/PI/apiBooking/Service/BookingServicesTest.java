@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,7 +73,7 @@ class BookingServicesTest {
         productTwo.setId(productService.save(new ProductDto("Nh Hotel","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies)).getId());
         imageOne.setId(imageService.save(new ImageDto("image", "url", "textAlt", true, productOne)).getId());
         imageTwo.setId(imageService.save(new ImageDto("image", "url", "textAlt", true, productTwo)).getId());
-        user.setId(1l);
+        user.setId(1L);
 
         b1 = bookingService.save(new BookingDto("10:00", LocalDate.of(2022, 6, 12), LocalDate.of(2022, 6, 14), productOne, user));
         b2 = bookingService.save(new BookingDto("11:00", LocalDate.of(2022, 7, 2), LocalDate.of(2022, 7, 9), productOne, user));
@@ -102,14 +103,14 @@ class BookingServicesTest {
     }
 
     @Test
-    public void findBookingByProductId() throws ResourceNotFoundException {
+    public void findBookingByProductId(){
         int count_1 = 0;
         int count_2 = 0;
 
         for(BookingDto bookingDto : bookingDtos){
-            if(bookingDto.getProduct().getId() == productOne.getId())
+            if(bookingDto.getProduct().getId().equals(productOne.getId()))
                 count_1++;
-            if(bookingDto.getProduct().getId() == productTwo.getId())
+            if(bookingDto.getProduct().getId().equals(productTwo.getId()))
                 count_2++;
         }
 
@@ -120,13 +121,13 @@ class BookingServicesTest {
     }
 
     @Test
-    public void findBookingByUserId() throws ResourceNotFoundException {
+    public void findBookingByUserId(){
         assertNotNull(bookingService.findBookingByUserId(user.getId()));
         assertEquals(bookingDtos.size(), (bookingService.findBookingByUserId(user.getId())).size());
     }
 
     @Test
-    public void updateBooking() throws ResourceNotFoundException {
+    public void updateBooking(){
         String newTime = "07:00";
         b4.setReservationTime(newTime);
         bookingService.save(b4);

@@ -98,7 +98,7 @@ class ImageServiceTest {
     }
 
     @Test
-    public void deleteImage() throws ResourceNotFoundException {
+    public void deleteImage(){
         boolean ex = false;
         ImageDto i6 =  imageService.save(new ImageDto("Salón comedor", "url4", "Salón comedor", false, product));
         try{

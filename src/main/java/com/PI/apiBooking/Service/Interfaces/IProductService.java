@@ -21,5 +21,5 @@ public interface IProductService extends IService<ProductDto>, ICheckId<Product>
     Set<ProductCardDto> findByDateAndCityId(Long cityId, Long userId, String arrival, String departure);
     ProductDto findForEdit(Long id) throws ResourceNotFoundException;
     ProductBookingDto findForBooking(Long productId, Long userId) throws ResourceNotFoundException;
-    Set<DateDisabledDto>findBookings(Long id) throws ResourceNotFoundException;;
+    Set<DateDisabledDto>findBookings(Long id) throws ResourceNotFoundException;
 }

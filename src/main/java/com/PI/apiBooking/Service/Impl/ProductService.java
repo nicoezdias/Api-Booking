@@ -162,7 +162,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Set<DateDisabledDto> findBookings(Long id) throws ResourceNotFoundException {
+    public Set<DateDisabledDto> findBookings(Long id){
         Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
         Set<DateDisabledDto> datesDisabledDto = new HashSet<>();
         for(BookingDto bookingDto : bookingsDto){

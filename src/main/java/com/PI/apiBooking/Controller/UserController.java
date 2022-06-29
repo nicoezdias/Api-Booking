@@ -37,7 +37,7 @@ public class UserController {
         if(userDto.getId() == null){
             userService.save(userDto);
             UserCardDto user_cardDto =userService.authenticate(authenticationRequest);
-//            emailSenderService.sendMailLog(userDto.getEmail(),userDto.getName()+" "+userDto.getSurname());
+//            emailSenderService.sendMailUser(userDto.getEmail(),userDto.getName()+" "+userDto.getSurname());
             return ResponseEntity.status(HttpStatus.CREATED).body(user_cardDto);
         } else{
             userService.save(userDto);

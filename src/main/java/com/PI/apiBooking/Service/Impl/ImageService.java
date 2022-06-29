@@ -57,8 +57,7 @@ public class ImageService implements IImageService {
 
     @Override
     public ImageProductDto findProfileImageByProductId(Long productId) {
-        ImageProductDto imageProductDto = mapper.convertValue(imageRepository.findProfileImageByProductId(productId), ImageProductDto.class);
-        return imageProductDto;
+        return mapper.convertValue(imageRepository.findProfileImageByProductId(productId), ImageProductDto.class);
     }
 
     @Override

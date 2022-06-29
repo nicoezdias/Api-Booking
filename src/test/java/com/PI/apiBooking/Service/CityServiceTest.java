@@ -76,7 +76,7 @@ class CityServiceTest {
     }
 
     @Test
-    public void deleteCity() throws ResourceNotFoundException {
+    public void deleteCity(){
         boolean ex = false;
         CityDto c6 = cityService.save(new CityDto("Ramos",province,-34.6061369839531,-34.6061369839531));
         try{

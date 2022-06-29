@@ -59,7 +59,7 @@ class FeatureServiceTest {
     }
 
     @Test
-    public void deleteFeature() throws ResourceNotFoundException {
+    public void deleteFeature(){
         boolean ex = false;
         FeatureDto f6 = featureService.save(new FeatureDto("CoWorking","Url4"));
         try{

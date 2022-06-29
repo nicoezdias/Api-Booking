@@ -10,7 +10,7 @@ public class MyPasswordEncoder{
         return new BCryptPasswordEncoder();
     }
     public String encodePassword (String rawPassword) {
-        return bCryptPasswordEncoder().encode(rawPassword).toString();
+        return bCryptPasswordEncoder().encode(rawPassword);
     }
     public boolean matchesPassword(String rawPassword,String encodePassword){
         return bCryptPasswordEncoder().matches(rawPassword,encodePassword);

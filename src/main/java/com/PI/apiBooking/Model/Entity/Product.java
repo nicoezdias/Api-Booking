@@ -65,15 +65,19 @@ public class Product {
     private City city;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<Favourite> likes;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<Image> images;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<Booking> bookings;
 
     //Default

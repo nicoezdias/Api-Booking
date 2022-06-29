@@ -22,7 +22,7 @@ public class EmailSenderService{
     private final String serviceAddress = "correodeautenticacionctd@gmail.com";
     private final String subject = "Digital Booking";
 
-    public void sendMailLog(String to, String user) throws MessagingException {
+    public void sendMailUser(String to, String user) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject(subject);

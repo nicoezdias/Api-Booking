@@ -39,7 +39,7 @@ class FavouriteServiceTest {
     @Autowired
     private FavouriteService favouriteService;
 
-    FavouriteDto f1, f2, f3, f4;
+    FavouriteDto f1, f2, f3;
     Category category = new Category();
     Feature feature = new Feature();
     Country country = new Country();
@@ -106,8 +106,8 @@ class FavouriteServiceTest {
     @Test
     public void deleteFavoutites() throws ResourceNotFoundException {
         user4.setId(4L);
-        FavouriteDto r6 =  favouriteService.save(new FavouriteDto(product, user4));
-        favouriteService.delete(r6.getId());
+        FavouriteDto f6 =  favouriteService.save(new FavouriteDto(product, user4));
+        favouriteService.delete(f6.getId());
         assertTrue(favouriteService.findByUserIdAndProductId(user4.getId(), product.getId()).isEmpty());
     }
 

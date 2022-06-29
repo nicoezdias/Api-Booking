@@ -59,7 +59,7 @@ class CategoryServicesTest {
     }
 
     @Test
-    public void deleteCategory() throws ResourceNotFoundException {
+    public void deleteCategory(){
         boolean ex = false;
         CategoryDto c6 = categoryServices.save(new CategoryDto("Hostel","Descripcion4","Url4", "txt4"));
         try{

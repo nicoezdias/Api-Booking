@@ -41,11 +41,14 @@ public class User{
     private Rol rol;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<Favourite> likes;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<Booking> bookings;
 }

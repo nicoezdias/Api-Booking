@@ -11,10 +11,6 @@ public class RolDto {
     private Long id;
     private String name;
 
-    //Constructor for test
-    public RolDto(String name) {
-        this.name = name;
-    }
 
     //Default
     public RolDto() {}

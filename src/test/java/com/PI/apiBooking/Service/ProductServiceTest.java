@@ -3,11 +3,9 @@ package com.PI.apiBooking.Service;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.*;
 import com.PI.apiBooking.Model.DTO.ProductCardDto;
-import com.PI.apiBooking.Model.DTO.ProductCompleteDto;
 import com.PI.apiBooking.Model.Entity.*;
 import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Service.Impl.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,8 +37,6 @@ class ProductServiceTest {
     private ProductService productService;
     @Autowired
     private BookingService bookingService;
-    @Autowired
-    private ObjectMapper mapper;
 
     ProductDto p1, p2, p3, p4;
     Category category1 = new Category();
@@ -69,7 +65,7 @@ class ProductServiceTest {
         policy.setId(policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00")).getId());
         Set<Policy> policies = new HashSet<>();
         policies.add(policy);
-        user.setId(1l);
+        user.setId(1L);
 
         p1 = productService.save(new ProductDto("Producto1","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category1,features,city1,policies));
         p2 = productService.save(new ProductDto("Producto2","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city1,policies));
@@ -77,9 +73,9 @@ class ProductServiceTest {
         p4 = productService.save(new ProductDto("Producto4","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city2,policies));
 
         productOne.setId(p1.getId());
-        BookingDto b1 = bookingService.save(new BookingDto("10:00", LocalDate.of(2022, 6, 12), LocalDate.of(2022, 6, 14), productOne, user));
+        bookingService.save(new BookingDto("10:00", LocalDate.of(2022, 6, 12), LocalDate.of(2022, 6, 14), productOne, user));
         productOne.setId(p3.getId());
-        BookingDto b2 = bookingService.save(new BookingDto("10:00", LocalDate.of(2022, 6, 12), LocalDate.of(2022, 6, 14), productOne, user));
+        bookingService.save(new BookingDto("10:00", LocalDate.of(2022, 6, 12), LocalDate.of(2022, 6, 14), productOne, user));
     }
 
     @AfterEach
@@ -176,7 +172,7 @@ class ProductServiceTest {
     }
 
     @Test
-    public void deleteProduct() throws ResourceNotFoundException {
+    public void deleteProduct(){
         boolean ex = false;
         Set<Policy> policies = new HashSet<>();
         policies.add(policy);

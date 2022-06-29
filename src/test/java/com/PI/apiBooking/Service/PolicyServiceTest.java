@@ -59,7 +59,7 @@ class PolicyServiceTest {
     }
 
     @Test
-    public void deletePolicy() throws ResourceNotFoundException {
+    public void deletePolicy(){
         boolean ex = false;
         PolicyDto p6 = policyService.save(new PolicyDto("Salud y seguridad","Detector de humo"));
         try{
