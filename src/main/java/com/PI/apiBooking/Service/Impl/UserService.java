@@ -67,10 +67,10 @@ public class UserService implements IUserService {
     @Override
     public UserDto save(UserDto userDto) {
         String hashedPassword = passwordEncoder.encodePassword(userDto.getPassword());
-        Rol rol = new Rol();
         userDto.setPassword(hashedPassword);
         User user = mapper.convertValue(userDto, User.class);
         if (userDto.getId() == null){
+            Rol rol = new Rol();
             rol.setId(3L);
             rol.setName(UserRoles.PENDING);
             user.setRol(rol);
@@ -82,6 +82,31 @@ public class UserService implements IUserService {
             logger.info("User actualizado correctamente: "+ userDto);
         }
         return userDto;
+    }
+
+    @Override
+    public UserCardDto validate(AuthenticationRequest authenticationRequest, UserDto userDto) throws BadRequestException{
+        userDto.getRol().setId(2L);
+        userDto.getRol().setName(UserRoles.USER);
+        User user = mapper.convertValue(userDto, User.class);
+        userRepository.save(user);
+        logger.info("User actualizado correctamente: "+ userDto);
+        return authenticate(authenticationRequest);
+    }
+
+    @Override
+    public UserCardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException {
+        Optional<User> user = userRepository.findByEmail(authenticationRequest.getEmail());
+        if (user.isPresent() && passwordEncoder.matchesPassword(authenticationRequest.getPassword(), user.get().getPassword())) {
+            final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
+            final String jwt = jwtUtil.generateToken(userDetails);
+            UserCardDto userCardDto = mapper.convertValue(user, UserCardDto.class);
+            userCardDto.setRolName(user.get().getRol().getName().name());
+            userCardDto.setJwt(jwt);
+            return userCardDto;
+        } else {
+            throw new BadRequestException("Los datos ingresados no son correctos");
+        }
     }
 
     @Override
@@ -98,21 +123,6 @@ public class UserService implements IUserService {
             throw new ResourceNotFoundException(msjError + id);
         }
         return user.get();
-    }
-
-    @Override
-    public UserCardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException {
-        Optional<User> user = userRepository.findByEmail(authenticationRequest.getEmail());
-        if (!user.isEmpty() && passwordEncoder.matchesPassword(authenticationRequest.getPassword(), user.get().getPassword())) {
-            final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
-            final String jwt = jwtUtil.generateToken(userDetails);
-            UserCardDto userCardDto = mapper.convertValue(user, UserCardDto.class);
-            userCardDto.setRolName(user.get().getRol().getName().name());
-            userCardDto.setJwt(jwt);
-            return userCardDto;
-        } else {
-            throw new BadRequestException("Los datos ingresados no son correctos");
-        }
     }
 
 }

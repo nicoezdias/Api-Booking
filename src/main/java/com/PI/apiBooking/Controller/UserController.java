@@ -5,7 +5,6 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.UserCardDto;
-import com.PI.apiBooking.Model.User.UserRoles;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
 import com.PI.apiBooking.Mail.EmailSenderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,18 +45,17 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Log in de Usuario")
     @PostMapping("/authenticate")
     public ResponseEntity<UserCardDto> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
         return ResponseEntity.ok(userService.authenticate(authenticationRequest));
     }
 
+    @Operation(summary = "Pasar rol de Pending a USER")
     @PostMapping("/validate")
     public ResponseEntity<UserCardDto> validateUser(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
         UserDto userDto = userService.findByEmail(authenticationRequest.getEmail());
-        userDto.getRol().setId(2L);
-        userDto.getRol().setName(UserRoles.USER);
-        userService.save(userDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.authenticate(authenticationRequest));
+        return ResponseEntity.ok(userService.validate( authenticationRequest, userDto));
     }
 
     //* ///////// DELETE ///////// *//

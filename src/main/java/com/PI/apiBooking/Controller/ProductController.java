@@ -66,8 +66,9 @@ public class ProductController {
     //public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@RequestParam(required = false) String arrival, @RequestParam(required = false) String departure, @RequestParam int id){
     @GetMapping(value = {"date/{cityId}", "date/{cityId}/{userId}", "date/{cityId}/{arrival}/{departure}", "date/{cityId}/{userId}/{arrival}/{departure}"})
     public ResponseEntity<Set<ProductCardDto>> findByDateAndCityId(@PathVariable Long cityId, @PathVariable(required = false) Long userId, @PathVariable(required = false) String arrival, @PathVariable(required = false) String departure){
-    Set<ProductCardDto> products_cardDto = productServices.findByDateAndCityId(cityId, userId, arrival, departure);
-        return ResponseEntity.ok(products_cardDto);
+        Set<ProductCardDto> productsCardDto = productServices.findByDateAndCityId(cityId, userId, arrival, departure);
+
+        return ResponseEntity.ok(productsCardDto);
     }
 
     @Operation(summary = "Traer un Producto por Id para una Reserva")

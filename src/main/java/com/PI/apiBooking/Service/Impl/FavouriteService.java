@@ -29,19 +29,19 @@ public class FavouriteService implements IFavouriteService {
     ObjectMapper mapper;
 
     @Override
-    public FavouriteDto save(FavouriteDto likesDto) {
-        Favourite favourite = mapper.convertValue(likesDto, Favourite.class);
+    public FavouriteDto save(FavouriteDto favouriteDto) {
+        Favourite favourite = mapper.convertValue(favouriteDto, Favourite.class);
         favouriteRepository.save(favourite);
-        likesDto.setId(favourite.getId());
-            logger.info("Like registrado correctamente: "+ likesDto);
-        return likesDto;
+        favouriteDto.setId(favourite.getId());
+            logger.info("Registrado en favourite correctamente: "+ favouriteDto);
+        return favouriteDto;
     }
 
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         checkId(id);
         favouriteRepository.deleteById(id);
-        logger.info("Se elimino el Like correctamente: id("+id+")");
+        logger.info("Se elimino de favourite correctamente: id("+id+")");
     }
 
     @Override

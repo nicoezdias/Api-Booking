@@ -103,8 +103,7 @@ public class ProductService implements IProductService {
     @Override
     public ProductDto findForEdit(Long id) throws ResourceNotFoundException{
         Product product = checkId(id);
-        ProductDto productDto = mapper.convertValue(product, ProductDto.class);
-        return productDto;
+        return mapper.convertValue(product, ProductDto.class);
     }
 
     @Override
@@ -119,28 +118,17 @@ public class ProductService implements IProductService {
         bookingProductDto.setProductCheckInMin(product.getCheckInMin());
         bookingProductDto.setProductCheckInMax(product.getCheckInMax());
 
-        UserBookingDto user_bookingDto = userService.findById(userId);
-        bookingProductDto.setUserName(user_bookingDto.getName());
-        bookingProductDto.setUserSurname(user_bookingDto.getSurname());
-        if(user_bookingDto.getCityName() != null){
-            bookingProductDto.setUserCity(user_bookingDto.getCityName());
+        UserBookingDto userBookingDto = userService.findById(userId);
+        bookingProductDto.setUserName(userBookingDto.getName());
+        bookingProductDto.setUserSurname(userBookingDto.getSurname());
+        if(userBookingDto.getCityName() != null){
+            bookingProductDto.setUserCity(userBookingDto.getCityName());
         }
-        bookingProductDto.setUserEmail(user_bookingDto.getEmail());
+        bookingProductDto.setUserEmail(userBookingDto.getEmail());
         bookingProductDto.setDisabled(findBookings(productId));
         bookingProductDto.setProductImage(imageService.findProfileImageByProductId(product.getId()));
 
         return bookingProductDto;
-    }
-
-    @Override
-    public Set<DateDisabledDto> findBookings(Long id) throws ResourceNotFoundException {
-        Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
-        Set<DateDisabledDto> datesDisabledDto = new HashSet<>();
-        for(BookingDto bookingDto : bookingsDto){
-            DateDisabledDto date_disabledDto = mapper.convertValue(bookingDto, DateDisabledDto.class);
-            datesDisabledDto.add(date_disabledDto);
-        }
-        return datesDisabledDto;
     }
 
     @Override
@@ -173,22 +161,33 @@ public class ProductService implements IProductService {
         return product.get();
     }
 
+    @Override
+    public Set<DateDisabledDto> findBookings(Long id) throws ResourceNotFoundException {
+        Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
+        Set<DateDisabledDto> datesDisabledDto = new HashSet<>();
+        for(BookingDto bookingDto : bookingsDto){
+            DateDisabledDto date_disabledDto = mapper.convertValue(bookingDto, DateDisabledDto.class);
+            datesDisabledDto.add(date_disabledDto);
+        }
+        return datesDisabledDto;
+    }
+
     public Set<ProductCardDto> productToProductCardDto (List<Product> products, Long userId){
         Set<ProductCardDto> productsCardDto = new HashSet<>();
         for (Product product : products) {
-            ProductCardDto product_cardDto = mapper.convertValue(product, ProductCardDto.class);
-            product_cardDto.setCategoryName(product.getCategory().getTitle());
-            product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
-            product_cardDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
+            ProductCardDto productCardDto = mapper.convertValue(product, ProductCardDto.class);
+            productCardDto.setCategoryName(product.getCategory().getTitle());
+            productCardDto.setAvgRanting(productRepository.averageScoreByProduct(productCardDto.getId()));
+            productCardDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
             Set<String> featuresIcons = new HashSet<>();
             for(Feature feature : product.getFeatures()){
                 featuresIcons.add(feature.getIcon());
             }
-            product_cardDto.setFeaturesIcons(featuresIcons);
-            product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
-            if(userId != null && favouriteRepository.findByUserIdAndProductId(product_cardDto.getId(), userId).isPresent())
-                product_cardDto.setLike(true);
-            productsCardDto.add(product_cardDto);
+            productCardDto.setFeaturesIcons(featuresIcons);
+            productCardDto.setImageProfile(imageService.findProfileImageByProductId(productCardDto.getId()));
+            if(userId != null && favouriteRepository.findByUserIdAndProductId(productCardDto.getId(), userId).isPresent())
+                productCardDto.setLike(true);
+            productsCardDto.add(productCardDto);
         }
         return productsCardDto;
     }
@@ -202,7 +201,6 @@ public class ProductService implements IProductService {
         double va1 = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
                 * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
         double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
-        double distance = radioEarth * va2;
-        return distance;
+        return radioEarth * va2;
     }
 }

@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Secured({"PENDING","USER","ADMIN"})
 @RestController
-@RequestMapping("/likes")
+@RequestMapping("/favourites")
 @CrossOrigin
 public class FavouriteController {
 

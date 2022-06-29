@@ -25,11 +25,6 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public MyPasswordEncoder myPasswordEncoder() {
-        return new MyPasswordEncoder();
-    }
-
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -53,8 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/cities/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/products/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/users/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/roles/**").permitAll()
 //TEST
+                .antMatchers(HttpMethod.POST,"/roles/**").permitAll()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -69,6 +64,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public MyPasswordEncoder myPasswordEncoder() {
+        return new MyPasswordEncoder();
     }
 
     @Bean
