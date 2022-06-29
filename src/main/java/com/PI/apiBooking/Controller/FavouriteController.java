@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.FavouriteDto;
-import com.PI.apiBooking.Model.DTO.Product_CardDto;
+import com.PI.apiBooking.Model.DTO.ProductCardDto;
 import com.PI.apiBooking.Model.Entity.Favourite;
 import com.PI.apiBooking.Service.Interfaces.IFavouriteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,18 +22,18 @@ import java.util.Set;
 public class FavouriteController {
 
     @Autowired
-    IFavouriteService likeService;
+    IFavouriteService favouriteService;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Poner o quitar de Favourite")
     @PostMapping
     public ResponseEntity<FavouriteDto> ponerQuitarFavourite(@RequestBody FavouriteDto favouriteDto) throws ResourceNotFoundException {
-        Optional<Favourite> favourite = likeService.findByUserIdAndProductId(favouriteDto.getUser().getId(), favouriteDto.getProduct().getId());
+        Optional<Favourite> favourite = favouriteService.findByUserIdAndProductId(favouriteDto.getUser().getId(), favouriteDto.getProduct().getId());
         if(favourite.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(likeService.save(favouriteDto));
+            return ResponseEntity.status(HttpStatus.CREATED).body(favouriteService.save(favouriteDto));
         }
         else {
-            likeService.delete(favourite.get().getId());
+            favouriteService.delete(favourite.get().getId());
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
@@ -41,7 +41,7 @@ public class FavouriteController {
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todos los productos en Favourite")
     @GetMapping("/{userId}")
-    public ResponseEntity<Set<Product_CardDto>> findProductsByUserId(@PathVariable Long userId){
-        return ResponseEntity.ok(likeService.findProductsByUserId(userId));
+    public ResponseEntity<Set<ProductCardDto>> findProductsByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(favouriteService.findProductsByUserId(userId));
     }
 }

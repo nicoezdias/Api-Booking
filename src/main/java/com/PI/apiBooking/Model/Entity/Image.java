@@ -19,7 +19,7 @@ public class Image {
     private String title;
     @Lob
     private String url;
-    private String text_alt;
+    private String textAlt;
     private Boolean profile;
 
     @ManyToOne

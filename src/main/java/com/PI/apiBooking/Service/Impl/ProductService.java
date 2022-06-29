@@ -43,60 +43,60 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public Set<Product_CardDto> findAll(Long userId) {
+    public Set<ProductCardDto> findAll(Long userId) {
         List<Product> products = productRepository.findAll();
-        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
-        logger.info("La busqueda fue exitosa: " + products_cardDto);
+        Set<ProductCardDto> productsCardDto = productToProductCardDto(products, userId);
+        logger.info("La busqueda fue exitosa: " + productsCardDto);
 
-        return products_cardDto;
+        return productsCardDto;
     }
 
     @Override
-    public Product_CompleteDto findById(Long id, Long userId) throws ResourceNotFoundException {
+    public ProductCompleteDto findById(Long id, Long userId) throws ResourceNotFoundException {
         Product product = checkId(id);
-        Product_CompleteDto product_completeDto = mapper.convertValue(product, Product_CompleteDto.class);
-        product_completeDto.setCategoryName(product.getCategory().getTitle());
-        product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()));
-        product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
-        product_completeDto.setCityName(product.getCity().getName() + ", " + product.getCity().getProvince().getName() + ", " + product.getCity().getProvince().getCountry().getName());
-        product_completeDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
-        product_completeDto.setDisabled(findBookings(id));
+        ProductCompleteDto productCompleteDto = mapper.convertValue(product, ProductCompleteDto.class);
+        productCompleteDto.setCategoryName(product.getCategory().getTitle());
+        productCompleteDto.setAvgRanting(productRepository.averageScoreByProduct(productCompleteDto.getId()));
+        productCompleteDto.setImagesProduct(imageService.findImagesByProductId(productCompleteDto.getId()));
+        productCompleteDto.setCityName(product.getCity().getName() + ", " + product.getCity().getProvince().getName() + ", " + product.getCity().getProvince().getCountry().getName());
+        productCompleteDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
+        productCompleteDto.setDisabled(findBookings(id));
 
         if(userId != null && favouriteRepository.findByUserIdAndProductId(id, userId).isPresent()) {
-                product_completeDto.setLike(true);
+            productCompleteDto.setLike(true);
             }
 
-        return product_completeDto;
+        return productCompleteDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByCategoryId(Long categoryId, Long userId){
+    public Set<ProductCardDto> findByCategoryId(Long categoryId, Long userId){
 
         List<Product> products = productRepository.findByCategoryId(categoryId);
-        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
-        logger.info("La busqueda fue exitosa: " + products_cardDto);
-        return products_cardDto;
+        Set<ProductCardDto> productsCardDto = productToProductCardDto(products, userId);
+        logger.info("La busqueda fue exitosa: " + productsCardDto);
+        return productsCardDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByCityId(Long cityId, Long userId){
+    public Set<ProductCardDto> findByCityId(Long cityId, Long userId){
         List<Product> products = productRepository.findByCityId(cityId);
-        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
-        logger.info("La busqueda fue exitosa: " + products_cardDto);
-        return products_cardDto;
+        Set<ProductCardDto> productsCardDto = productToProductCardDto(products, userId);
+        logger.info("La busqueda fue exitosa: " + productsCardDto);
+        return productsCardDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByDateAndCityId(Long cityId, Long userId, String arrival, String departure) {
+    public Set<ProductCardDto> findByDateAndCityId(Long cityId, Long userId, String arrival, String departure) {
         if(arrival != null){
             List<Product> products = productRepository.findByDateAndCityId(cityId, arrival, departure);
-            Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
-            logger.info("La busqueda fue exitosa: "+ products_cardDto);
-            return products_cardDto;
+            Set<ProductCardDto> productsCardDto = productToProductCardDto(products, userId);
+            logger.info("La busqueda fue exitosa: "+ productsCardDto);
+            return productsCardDto;
         } else {
-            Set<Product_CardDto> products_cardDto = findByCityId(cityId, userId);
-            logger.info("La busqueda fue exitosa: "+ products_cardDto);
-            return products_cardDto;
+            Set<ProductCardDto> productsCardDto = findByCityId(cityId, userId);
+            logger.info("La busqueda fue exitosa: "+ productsCardDto);
+            return productsCardDto;
         }
     }
 
@@ -108,39 +108,39 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product_BookingDto findForBooking(Long productId, Long userId)throws ResourceNotFoundException{
+    public ProductBookingDto findForBooking(Long productId, Long userId)throws ResourceNotFoundException{
         Product product = checkId(productId);
-        Product_BookingDto booking_productDto = mapper.convertValue(product, Product_BookingDto.class);
-        booking_productDto.setCategoryName(product.getCategory().getTitle());
-        booking_productDto.setProductName(product.getName());
-        booking_productDto.setProductStars(product.getStars());
-        booking_productDto.setProductCityName(product.getDirection() + ", " + product.getCity().getName() + ", " + product.getCity().getProvince().getName() + ", " + product.getCity().getProvince().getCountry().getName());
-        booking_productDto.setProductPolicies(product.getPolicies());
-        booking_productDto.setProductCheckInMin(product.getCheckInMin());
-        booking_productDto.setProductCheckInMax(product.getCheckInMax());
+        ProductBookingDto bookingProductDto = mapper.convertValue(product, ProductBookingDto.class);
+        bookingProductDto.setCategoryName(product.getCategory().getTitle());
+        bookingProductDto.setProductName(product.getName());
+        bookingProductDto.setProductStars(product.getStars());
+        bookingProductDto.setProductCityName(product.getDirection() + ", " + product.getCity().getName() + ", " + product.getCity().getProvince().getName() + ", " + product.getCity().getProvince().getCountry().getName());
+        bookingProductDto.setProductPolicies(product.getPolicies());
+        bookingProductDto.setProductCheckInMin(product.getCheckInMin());
+        bookingProductDto.setProductCheckInMax(product.getCheckInMax());
 
-        User_BookingDto user_bookingDto = userService.findById(userId);
-        booking_productDto.setUserName(user_bookingDto.getName());
-        booking_productDto.setUserSurname(user_bookingDto.getSurname());
+        UserBookingDto user_bookingDto = userService.findById(userId);
+        bookingProductDto.setUserName(user_bookingDto.getName());
+        bookingProductDto.setUserSurname(user_bookingDto.getSurname());
         if(user_bookingDto.getCityName() != null){
-            booking_productDto.setUserCity(user_bookingDto.getCityName());
+            bookingProductDto.setUserCity(user_bookingDto.getCityName());
         }
-        booking_productDto.setUserEmail(user_bookingDto.getEmail());
-        booking_productDto.setDisabled(findBookings(productId));
-        booking_productDto.setProductImage(imageService.findProfileImageByProductId(product.getId()));
+        bookingProductDto.setUserEmail(user_bookingDto.getEmail());
+        bookingProductDto.setDisabled(findBookings(productId));
+        bookingProductDto.setProductImage(imageService.findProfileImageByProductId(product.getId()));
 
-        return booking_productDto;
+        return bookingProductDto;
     }
 
     @Override
-    public Set<Date_DisabledDto> findBookings(Long id) throws ResourceNotFoundException {
+    public Set<DateDisabledDto> findBookings(Long id) throws ResourceNotFoundException {
         Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
-        Set<Date_DisabledDto> dates_disabledDto = new HashSet<>();
+        Set<DateDisabledDto> datesDisabledDto = new HashSet<>();
         for(BookingDto bookingDto : bookingsDto){
-            Date_DisabledDto date_disabledDto = mapper.convertValue(bookingDto, Date_DisabledDto.class);
-            dates_disabledDto.add(date_disabledDto);
+            DateDisabledDto date_disabledDto = mapper.convertValue(bookingDto, DateDisabledDto.class);
+            datesDisabledDto.add(date_disabledDto);
         }
-        return dates_disabledDto;
+        return datesDisabledDto;
     }
 
     @Override
@@ -173,10 +173,10 @@ public class ProductService implements IProductService {
         return product.get();
     }
 
-    public Set<Product_CardDto> produtcToProduct_CardDto (List<Product> products, Long userId){
-        Set<Product_CardDto> products_cardDto = new HashSet<>();
+    public Set<ProductCardDto> productToProductCardDto (List<Product> products, Long userId){
+        Set<ProductCardDto> productsCardDto = new HashSet<>();
         for (Product product : products) {
-            Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
+            ProductCardDto product_cardDto = mapper.convertValue(product, ProductCardDto.class);
             product_cardDto.setCategoryName(product.getCategory().getTitle());
             product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
             product_cardDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
@@ -188,9 +188,9 @@ public class ProductService implements IProductService {
             product_cardDto.setImageProfile(imageService.findProfileImageByProductId(product_cardDto.getId()));
             if(userId != null && favouriteRepository.findByUserIdAndProductId(product_cardDto.getId(), userId).isPresent())
                 product_cardDto.setLike(true);
-            products_cardDto.add(product_cardDto);
+            productsCardDto.add(product_cardDto);
         }
-        return products_cardDto;
+        return productsCardDto;
     }
 
     public double distance(double lat1, double lng1, double lat2, double lng2) {

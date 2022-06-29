@@ -14,8 +14,8 @@ import javax.persistence.*;
 public class Favourite {
 
     @Id
-    @SequenceGenerator(name = "likeSequence",sequenceName = "likeSequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "likeSequence")
+    @SequenceGenerator(name = "favouriteSequence",sequenceName = "favouriteSequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "favouriteSequence")
     private Long id;
 
     @ManyToOne

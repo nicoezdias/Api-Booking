@@ -10,7 +10,7 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
-public class Product_BookingDto {
+public class ProductBookingDto {
 
     private String categoryName;
     private String productName;
@@ -25,8 +25,8 @@ public class Product_BookingDto {
     private String userEmail;
     private String userCity;
 
-    private Image_ProductDto productImage;
+    private ImageProductDto productImage;
 
-    private Set<Date_DisabledDto> disabled;
+    private Set<DateDisabledDto> disabled;
 
 }

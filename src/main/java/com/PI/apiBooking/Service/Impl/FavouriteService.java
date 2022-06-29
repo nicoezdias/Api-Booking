@@ -2,7 +2,7 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.FavouriteDto;
-import com.PI.apiBooking.Model.DTO.Product_CardDto;
+import com.PI.apiBooking.Model.DTO.ProductCardDto;
 import com.PI.apiBooking.Model.Entity.Favourite;
 import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Repository.IFavouriteRepository;
@@ -50,9 +50,9 @@ public class FavouriteService implements IFavouriteService {
     }
 
     @Override
-    public Set<Product_CardDto> findProductsByUserId(Long userId) {
+    public Set<ProductCardDto> findProductsByUserId(Long userId) {
         List<Product> products = favouriteRepository.findProductsByUserId(userId);
-        Set<Product_CardDto> products_cardDto = productService.produtcToProduct_CardDto(products,userId);
+        Set<ProductCardDto> products_cardDto = productService.productToProductCardDto(products,userId);
         logger.info("La busqueda fue exitosa: "+ products_cardDto);
         return products_cardDto;
     }

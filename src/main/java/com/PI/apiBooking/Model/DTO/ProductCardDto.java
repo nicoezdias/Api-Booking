@@ -10,7 +10,7 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
-public class Product_CardDto {
+public class ProductCardDto {
 
     private Long id;
     private String name;
@@ -19,12 +19,12 @@ public class Product_CardDto {
     private String categoryName;
     private Optional<Integer> avgRanting;
     private Double distance;
-    private Image_ProductDto imageProfile;
+    private ImageProductDto imageProfile;
     private Set<String> FeaturesIcons;
     private Double longitude;
     private Double latitude;
     private Boolean like = false;
 
     //Default
-    public Product_CardDto() {}
+    public ProductCardDto() {}
 }

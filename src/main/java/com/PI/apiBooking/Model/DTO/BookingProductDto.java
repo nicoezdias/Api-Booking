@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @ToString
 @Getter
 @Setter
-public class Booking_ProductDto {
+public class BookingProductDto {
 
     private Long id;
     private String reservationTime;

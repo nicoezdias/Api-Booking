@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.Image_ProductDto;
+import com.PI.apiBooking.Model.DTO.ImageProductDto;
 import com.PI.apiBooking.Model.DTO.Post.*;
 import com.PI.apiBooking.Model.Entity.*;
 import com.PI.apiBooking.Service.Impl.*;
@@ -84,7 +84,7 @@ class ImageServiceTest {
 
     @Test
     public void findAllImages() {
-        Set<Image_ProductDto> imagesDto = imageService.findAll();
+        Set<ImageProductDto> imagesDto = imageService.findAll();
         assertFalse(imagesDto.isEmpty());
         System.out.println(imagesDto);
     }
@@ -94,7 +94,7 @@ class ImageServiceTest {
         ImageDto i5 = new ImageDto("Hall", "url5", "Hall", false, product);
         i5.setId(i4.getId());
         imageService.save(i5);
-        assertEquals("Image_ProductDto(id="+i5.getId()+", title=Hall, url=url5, text_alt=Hall)", imageService.findById(i5.getId()).toString());
+        assertEquals("ImageProductDto(id="+i5.getId()+", title=Hall, url=url5, textAlt=Hall, profile=false)", imageService.findById(i5.getId()).toString());
     }
 
     @Test
