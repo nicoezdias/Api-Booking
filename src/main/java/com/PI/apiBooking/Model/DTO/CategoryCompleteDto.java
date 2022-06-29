@@ -7,17 +7,17 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Category_CompleteDto {
+public class CategoryCompleteDto {
 
     private Long id;
     private String title;
     private String description;
     private String urlImage;
-    private String text_alt;
+    private String textAlt;
     private Integer productQuantity = 0;
 
     //Default
-    public Category_CompleteDto() {
+    public CategoryCompleteDto() {
     }
 
 }

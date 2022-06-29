@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.City_ListDto;
+import com.PI.apiBooking.Model.DTO.CityListDto;
 import com.PI.apiBooking.Model.DTO.Post.CityDto;
 import com.PI.apiBooking.Model.Entity.City;
 import com.PI.apiBooking.Repository.ICityRepository;
@@ -26,11 +26,11 @@ public class CityService implements ICityService {
     ObjectMapper mapper;
 
     @Override
-    public Set<City_ListDto> findAll() {
-        Set<City_ListDto> cities_listDto = new HashSet<>();
+    public Set<CityListDto> findAll() {
+        Set<CityListDto> cities_listDto = new HashSet<>();
         List<City> cities = cityRepository.findAll();
         for (City city:cities) {
-            City_ListDto city_listDto = mapper.convertValue(city, City_ListDto.class);
+            CityListDto city_listDto = mapper.convertValue(city, CityListDto.class);
             city_listDto.setName(city.getName() + ", " + city.getProvince().getName());
             city_listDto.setNameCountry(city.getProvince().getCountry().getName());
             cities_listDto.add(city_listDto);

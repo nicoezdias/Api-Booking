@@ -2,7 +2,7 @@ package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.*;
-import com.PI.apiBooking.Model.DTO.Product_CardDto;
+import com.PI.apiBooking.Model.DTO.ProductCardDto;
 import com.PI.apiBooking.Model.Entity.*;
 import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Service.Impl.*;
@@ -97,7 +97,7 @@ class FavouriteServiceTest {
 
     @Test
     public void findAllFavoutites() {
-        Set<Product_CardDto> ratingsDto = favouriteService.findProductsByUserId(user2.getId());
+        Set<ProductCardDto> ratingsDto = favouriteService.findProductsByUserId(user2.getId());
         assertFalse(ratingsDto.isEmpty());
         System.out.println(ratingsDto);
     }

@@ -23,7 +23,7 @@ public class Category {
     private String description;
     @Lob
     private String urlImage;
-    private String text_alt;
+    private String textAlt;
 
     @OneToMany(mappedBy = "category")
     private Set<Product> products;

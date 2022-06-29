@@ -7,14 +7,13 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Image_ProductDto {
-
+public class UserCardDto {
     private Long id;
-    private String title;
-    private String url;
-    private String text_alt;
+    private String name;
+    private String surname;
+    private String rolName;
+    private String jwt;
 
     //Default
-    public Image_ProductDto() {
-    }
+    public UserCardDto() {}
 }

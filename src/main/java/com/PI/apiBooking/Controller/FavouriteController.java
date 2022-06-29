@@ -2,7 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.FavouriteDto;
-import com.PI.apiBooking.Model.DTO.Product_CardDto;
+import com.PI.apiBooking.Model.DTO.ProductCardDto;
 import com.PI.apiBooking.Model.Entity.Favourite;
 import com.PI.apiBooking.Service.Interfaces.IFavouriteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +42,7 @@ public class FavouriteController {
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todos los productos en Favourite")
     @GetMapping("/{userId}")
-    public ResponseEntity<Set<Product_CardDto>> findProductsByUserId(@PathVariable Long userId){
+    public ResponseEntity<Set<ProductCardDto>> findProductsByUserId(@PathVariable Long userId){
         return ResponseEntity.ok(favouriteService.findProductsByUserId(userId));
     }
 

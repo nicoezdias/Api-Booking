@@ -13,7 +13,7 @@ public class ImageDto {
     private Long id;
     private String title;
     private String url;
-    private String text_alt;
+    private String textAlt;
     private Boolean profile;
     private Product product;
 
@@ -21,7 +21,7 @@ public class ImageDto {
     public ImageDto(String title, String url, String text_alt, Boolean profile, Product product) {
         this.title = title;
         this.url = url;
-        this.text_alt = text_alt;
+        this.textAlt = text_alt;
         this.profile = profile;
         this.product = product;
     }

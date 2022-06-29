@@ -12,7 +12,7 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
-public class Product_CompleteDto {
+public class ProductCompleteDto {
 
     private Long id;
     private String name;
@@ -20,7 +20,7 @@ public class Product_CompleteDto {
     private String description;
     private Integer stars;
     private String categoryName;
-    private Set<Image_ProductDto> imagesProduct;
+    private Set<ImageProductDto> imagesProduct;
     private Set<Feature> features;
     private Set<Policy> policies;
     private String cityName;
@@ -28,10 +28,10 @@ public class Product_CompleteDto {
     private Optional<Integer> avgRanting;
     private Double longitude;
     private Double latitude;
-    private Set<Date_DisabledDto> disabled;
+    private Set<DateDisabledDto> disabled;
     private Boolean like = false;
 
     //Default
-    public Product_CompleteDto() {
+    public ProductCompleteDto() {
     }
 }

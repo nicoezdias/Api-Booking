@@ -4,8 +4,7 @@ import com.PI.apiBooking.Exceptions.BadRequestException;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
-import com.PI.apiBooking.Model.DTO.User_CardDto;
-import com.PI.apiBooking.Model.User.UserRoles;
+import com.PI.apiBooking.Model.DTO.UserCardDto;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
 import com.PI.apiBooking.Mail.EmailSenderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,14 +29,14 @@ public class UserController {
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar un Usuario")
     @PostMapping
-    public ResponseEntity<User_CardDto> save(@RequestBody UserDto userDto) throws BadRequestException, MessagingException {
+    public ResponseEntity<UserCardDto> save(@RequestBody UserDto userDto) throws BadRequestException, MessagingException {
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         authenticationRequest.setEmail(userDto.getEmail());
         authenticationRequest.setPassword(userDto.getPassword());
 
         if(userDto.getId() == null){
             userService.save(userDto);
-            User_CardDto user_cardDto =userService.authenticate(authenticationRequest);
+            UserCardDto user_cardDto =userService.authenticate(authenticationRequest);
 //            emailSenderService.sendMailLog(userDto.getEmail(),userDto.getName()+" "+userDto.getSurname());
             return ResponseEntity.status(HttpStatus.CREATED).body(user_cardDto);
         } else{
@@ -46,18 +45,17 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Log in de Usuario")
     @PostMapping("/authenticate")
-    public ResponseEntity<User_CardDto> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
+    public ResponseEntity<UserCardDto> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
         return ResponseEntity.ok(userService.authenticate(authenticationRequest));
     }
 
+    @Operation(summary = "Pasar rol de Pending a USER")
     @PostMapping("/validate")
-    public ResponseEntity<User_CardDto> validateUser(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
+    public ResponseEntity<UserCardDto> validateUser(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
         UserDto userDto = userService.findByEmail(authenticationRequest.getEmail());
-        userDto.getRol().setId(2L);
-        userDto.getRol().setName(UserRoles.USER);
-        userService.save(userDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.authenticate(authenticationRequest));
+        return ResponseEntity.ok(userService.validate( authenticationRequest, userDto));
     }
 
     //* ///////// DELETE ///////// *//

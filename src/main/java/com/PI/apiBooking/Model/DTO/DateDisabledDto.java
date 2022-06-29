@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @ToString
 @Getter
 @Setter
-public class City_ListDto {
+public class DateDisabledDto {
 
-    private Long id;
-    private String name;
-    private String nameCountry;
+    private LocalDate arrival;
+    private LocalDate departure;
 }

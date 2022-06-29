@@ -4,8 +4,8 @@ import com.PI.apiBooking.Exceptions.BadRequestException;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
-import com.PI.apiBooking.Model.DTO.User_BookingDto;
-import com.PI.apiBooking.Model.DTO.User_CardDto;
+import com.PI.apiBooking.Model.DTO.UserBookingDto;
+import com.PI.apiBooking.Model.DTO.UserCardDto;
 import com.PI.apiBooking.Model.User.Rol;
 import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Model.User.UserRoles;
@@ -51,9 +51,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User_BookingDto findById(Long id) throws ResourceNotFoundException {
+    public UserBookingDto findById(Long id) throws ResourceNotFoundException {
         User user = checkId(id);
-        User_BookingDto user_bookingDto = mapper.convertValue(user, User_BookingDto.class);
+        UserBookingDto user_bookingDto = mapper.convertValue(user, UserBookingDto.class);
         user_bookingDto.setName(user.getName());
         user_bookingDto.setSurname(user.getSurname());
         if (user.getCity() != null){
@@ -67,10 +67,10 @@ public class UserService implements IUserService {
     @Override
     public UserDto save(UserDto userDto) {
         String hashedPassword = passwordEncoder.encodePassword(userDto.getPassword());
-        Rol rol = new Rol();
         userDto.setPassword(hashedPassword);
         User user = mapper.convertValue(userDto, User.class);
         if (userDto.getId() == null){
+            Rol rol = new Rol();
             rol.setId(3L);
             rol.setName(UserRoles.PENDING);
             user.setRol(rol);
@@ -82,6 +82,31 @@ public class UserService implements IUserService {
             logger.info("User actualizado correctamente: "+ userDto);
         }
         return userDto;
+    }
+
+    @Override
+    public UserCardDto validate(AuthenticationRequest authenticationRequest, UserDto userDto) throws BadRequestException{
+        userDto.getRol().setId(2L);
+        userDto.getRol().setName(UserRoles.USER);
+        User user = mapper.convertValue(userDto, User.class);
+        userRepository.save(user);
+        logger.info("User actualizado correctamente: "+ userDto);
+        return authenticate(authenticationRequest);
+    }
+
+    @Override
+    public UserCardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException {
+        Optional<User> user = userRepository.findByEmail(authenticationRequest.getEmail());
+        if (user.isPresent() && passwordEncoder.matchesPassword(authenticationRequest.getPassword(), user.get().getPassword())) {
+            final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
+            final String jwt = jwtUtil.generateToken(userDetails);
+            UserCardDto userCardDto = mapper.convertValue(user, UserCardDto.class);
+            userCardDto.setRolName(user.get().getRol().getName().name());
+            userCardDto.setJwt(jwt);
+            return userCardDto;
+        } else {
+            throw new BadRequestException("Los datos ingresados no son correctos");
+        }
     }
 
     @Override
@@ -98,21 +123,6 @@ public class UserService implements IUserService {
             throw new ResourceNotFoundException(msjError + id);
         }
         return user.get();
-    }
-
-    @Override
-    public User_CardDto authenticate(AuthenticationRequest authenticationRequest) throws BadRequestException {
-        Optional<User> user = userRepository.findByEmail(authenticationRequest.getEmail());
-        if (!user.isEmpty() && passwordEncoder.matchesPassword(authenticationRequest.getPassword(), user.get().getPassword())) {
-            final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
-            final String jwt = jwtUtil.generateToken(userDetails);
-            User_CardDto user_cardDto = mapper.convertValue(user, User_CardDto.class);
-            user_cardDto.setRol_Name(user.get().getRol().getName().name());
-            user_cardDto.setJwt(jwt);
-            return user_cardDto;
-        } else {
-            throw new BadRequestException("Los datos ingresados no son correctos");
-        }
     }
 
 }

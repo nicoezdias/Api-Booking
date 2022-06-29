@@ -43,18 +43,17 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public Set<Product_CardDto> findAll(Long userId) {
+    public Set<ProductCardDto> findAll(Long userId) {
         List<Product> products = productRepository.findAll();
-        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
+        Set<ProductCardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
         logger.info("La busqueda fue exitosa: " + products_cardDto);
-
         return products_cardDto;
     }
 
     @Override
-    public Product_CompleteDto findById(Long id, Long userId) throws ResourceNotFoundException {
+    public ProductCompleteDto findById(Long id, Long userId) throws ResourceNotFoundException {
         Product product = checkId(id);
-        Product_CompleteDto product_completeDto = mapper.convertValue(product, Product_CompleteDto.class);
+        ProductCompleteDto product_completeDto = mapper.convertValue(product, ProductCompleteDto.class);
         product_completeDto.setCategoryName(product.getCategory().getTitle());
         product_completeDto.setAvgRanting(productRepository.averageScoreByProduct(product_completeDto.getId()));
         product_completeDto.setImagesProduct(imageService.findImagesByProductId(product_completeDto.getId()));
@@ -70,31 +69,31 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Set<Product_CardDto> findByCategoryId(Long categoryId, Long userId){
+    public Set<ProductCardDto> findByCategoryId(Long categoryId, Long userId){
 
         List<Product> products = productRepository.findByCategoryId(categoryId);
-        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
+        Set<ProductCardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
         logger.info("La busqueda fue exitosa: " + products_cardDto);
         return products_cardDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByCityId(Long cityId, Long userId){
+    public Set<ProductCardDto> findByCityId(Long cityId, Long userId){
         List<Product> products = productRepository.findByCityId(cityId);
-        Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
+        Set<ProductCardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
         logger.info("La busqueda fue exitosa: " + products_cardDto);
         return products_cardDto;
     }
 
     @Override
-    public Set<Product_CardDto> findByDateAndCityId(Long cityId, Long userId, String arrival, String departure) {
+    public Set<ProductCardDto> findByDateAndCityId(Long cityId, Long userId, String arrival, String departure) {
         if(arrival != null){
             List<Product> products = productRepository.findByDateAndCityId(cityId, arrival, departure);
-            Set<Product_CardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
+            Set<ProductCardDto> products_cardDto = produtcToProduct_CardDto(products, userId);
             logger.info("La busqueda fue exitosa: "+ products_cardDto);
             return products_cardDto;
         } else {
-            Set<Product_CardDto> products_cardDto = findByCityId(cityId, userId);
+            Set<ProductCardDto> products_cardDto = findByCityId(cityId, userId);
             logger.info("La busqueda fue exitosa: "+ products_cardDto);
             return products_cardDto;
         }
@@ -103,14 +102,13 @@ public class ProductService implements IProductService {
     @Override
     public ProductDto findForEdit(Long id) throws ResourceNotFoundException{
         Product product = checkId(id);
-        ProductDto productDto = mapper.convertValue(product, ProductDto.class);
-        return productDto;
+        return mapper.convertValue(product, ProductDto.class);
     }
 
     @Override
-    public Product_BookingDto findForBooking(Long productId, Long userId)throws ResourceNotFoundException{
+    public ProductBookingDto findForBooking(Long productId, Long userId) throws ResourceNotFoundException{
         Product product = checkId(productId);
-        Product_BookingDto booking_productDto = mapper.convertValue(product, Product_BookingDto.class);
+        ProductBookingDto booking_productDto = mapper.convertValue(product, ProductBookingDto.class);
         booking_productDto.setCategoryName(product.getCategory().getTitle());
         booking_productDto.setProductName(product.getName());
         booking_productDto.setProductStars(product.getStars());
@@ -119,7 +117,7 @@ public class ProductService implements IProductService {
         booking_productDto.setProductCheckInMin(product.getCheckInMin());
         booking_productDto.setProductCheckInMax(product.getCheckInMax());
 
-        User_BookingDto user_bookingDto = userService.findById(userId);
+        UserBookingDto user_bookingDto = userService.findById(userId);
         booking_productDto.setUserName(user_bookingDto.getName());
         booking_productDto.setUserSurname(user_bookingDto.getSurname());
         if(user_bookingDto.getCityName() != null){
@@ -130,17 +128,6 @@ public class ProductService implements IProductService {
         booking_productDto.setProductImage(imageService.findProfileImageByProductId(product.getId()));
 
         return booking_productDto;
-    }
-
-    @Override
-    public Set<Date_DisabledDto> findBookings(Long id) throws ResourceNotFoundException {
-        Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
-        Set<Date_DisabledDto> dates_disabledDto = new HashSet<>();
-        for(BookingDto bookingDto : bookingsDto){
-            Date_DisabledDto date_disabledDto = mapper.convertValue(bookingDto, Date_DisabledDto.class);
-            dates_disabledDto.add(date_disabledDto);
-        }
-        return dates_disabledDto;
     }
 
     @Override
@@ -173,10 +160,21 @@ public class ProductService implements IProductService {
         return product.get();
     }
 
-    public Set<Product_CardDto> produtcToProduct_CardDto (List<Product> products, Long userId){
-        Set<Product_CardDto> products_cardDto = new HashSet<>();
+    @Override
+    public Set<DateDisabledDto> findBookings(Long id) throws ResourceNotFoundException {
+        Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
+        Set<DateDisabledDto> dates_disabledDto = new HashSet<>();
+        for(BookingDto bookingDto : bookingsDto){
+            DateDisabledDto date_disabledDto = mapper.convertValue(bookingDto, DateDisabledDto.class);
+            dates_disabledDto.add(date_disabledDto);
+        }
+        return dates_disabledDto;
+    }
+
+    public Set<ProductCardDto> produtcToProduct_CardDto (List<Product> products, Long userId){
+        Set<ProductCardDto> products_cardDto = new HashSet<>();
         for (Product product : products) {
-            Product_CardDto product_cardDto = mapper.convertValue(product, Product_CardDto.class);
+            ProductCardDto product_cardDto = mapper.convertValue(product, ProductCardDto.class);
             product_cardDto.setCategoryName(product.getCategory().getTitle());
             product_cardDto.setAvgRanting(productRepository.averageScoreByProduct(product_cardDto.getId()));
             product_cardDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
@@ -202,7 +200,6 @@ public class ProductService implements IProductService {
         double va1 = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
                 * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
         double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
-        double distance = radioEarth * va2;
-        return distance;
+        return radioEarth * va2;
     }
 }
