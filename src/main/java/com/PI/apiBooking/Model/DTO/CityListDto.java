@@ -12,4 +12,8 @@ public class CityListDto {
     private Long id;
     private String name;
     private String nameCountry;
+
+    //Default
+    public CityListDto() {
+    }
 }

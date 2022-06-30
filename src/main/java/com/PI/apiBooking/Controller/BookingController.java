@@ -1,6 +1,7 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Mail.EmailSenderService;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Service.Interfaces.IBookingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,15 +22,23 @@ public class BookingController {
 
     @Autowired
     IBookingService bookingService;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Guardar o actualizar una Reserva")
     @PostMapping
     public ResponseEntity<BookingDto> save(@RequestBody BookingDto bookingDto) throws MessagingException {
-        if(bookingDto.getId() == null)
-            return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.save(bookingDto));
-        else
-            return ResponseEntity.ok(bookingService.save(bookingDto));
+        if(bookingDto.getId() == null) {
+            BookingDto booking = bookingService.save(bookingDto);
+//            emailSenderService.sendMailBooking(booking);
+            return ResponseEntity.status(HttpStatus.CREATED).body(booking);
+        }else{
+            BookingDto booking = bookingService.save(bookingDto);
+//            emailSenderService.sendMailBooking(booking);
+            return ResponseEntity.ok(bookingService.save(booking));
+        }
+
     }
 
     //* ///////// GET ///////// *//

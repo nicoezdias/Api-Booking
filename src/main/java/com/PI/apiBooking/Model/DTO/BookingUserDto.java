@@ -22,4 +22,7 @@ public class BookingUserDto {
     private String productCityName;
     private String productDirection;
 
+    //Default
+    public BookingUserDto() {
+    }
 }

@@ -13,4 +13,8 @@ public class DateDisabledDto {
 
     private LocalDate arrival;
     private LocalDate departure;
+
+    //Default
+    public DateDisabledDto() {
+    }
 }

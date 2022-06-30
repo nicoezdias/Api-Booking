@@ -71,6 +71,7 @@ class RatingServiceTest {
         r3 = ratingService.save(new RatingDto(7, product, user));
         r4 = ratingService.save(new RatingDto(6, product, user));
     }
+
     @AfterEach
     public void doAfter() throws ResourceNotFoundException {
         productService.delete(product.getId());

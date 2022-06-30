@@ -15,7 +15,9 @@ public class BookingProductDto {
     private String reservationTime;
     private LocalDate arrival;
     private LocalDate departure;
-
     private String userNameComplete;
 
+    //Default
+    public BookingProductDto() {
+    }
 }

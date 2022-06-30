@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -64,6 +65,7 @@ class ImageServiceTest {
         i3 = imageService.save(new ImageDto("Pileta", "url3", "Pileta", false, product));
         i4 = imageService.save(new ImageDto("Hal", "url5", "Hal", false, product));
     }
+
     @AfterEach
     public void doAfter() throws ResourceNotFoundException {
         productService.delete(product.getId());

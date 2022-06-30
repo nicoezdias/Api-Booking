@@ -29,4 +29,7 @@ public class ProductBookingDto {
 
     private Set<DateDisabledDto> disabled;
 
+    //Default
+    public ProductBookingDto() {
+    }
 }

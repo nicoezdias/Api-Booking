@@ -54,16 +54,7 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-//    @Operation(summary = "Traer todos Productos por Id de Ciudad")
-//    @GetMapping(value = {"city/{cityId}", "city/{cityId}/{userId}"})
-//    public ResponseEntity<Set<Product_CardDto>> findByCityId(@PathVariable Long cityId, @PathVariable(required = false) Long userId){
-//        Set<Product_CardDto> product = productServices.findByCityId(cityId, userId);
-//        return ResponseEntity.ok(product);
-//    }
-
     @Operation(summary = "Traer todos Productos por Fecha e Id de Ciudad")
-    //@GetMapping("date")
-    //public ResponseEntity<Set<Product_CardDto>> findByDateAndCityId(@RequestParam(required = false) String arrival, @RequestParam(required = false) String departure, @RequestParam int id){
     @GetMapping(value = {"date/{cityId}", "date/{cityId}/{userId}", "date/{cityId}/{arrival}/{departure}", "date/{cityId}/{userId}/{arrival}/{departure}"})
     public ResponseEntity<Set<ProductCardDto>> findByDateAndCityId(@PathVariable Long cityId, @PathVariable(required = false) Long userId, @PathVariable(required = false) String arrival, @PathVariable(required = false) String departure){
         Set<ProductCardDto> productsCardDto = productServices.findByDateAndCityId(cityId, userId, arrival, departure);

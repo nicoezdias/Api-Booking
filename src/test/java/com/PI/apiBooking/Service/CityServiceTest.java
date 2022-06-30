@@ -43,6 +43,7 @@ class CityServiceTest {
         c3 = cityService.save(new CityDto("Flores",province,-34.6061369839531,-34.6061369839531));
         c4 = cityService.save(new CityDto("Moreno",province,-34.6061369839531,-34.6061369839531));
     }
+
     @AfterEach
     public void doAfter() throws ResourceNotFoundException {
         cityService.delete(c1.getId());

@@ -27,6 +27,7 @@ class CategoryServicesTest {
         c3 = categoryServices.save(new CategoryDto("Dpto","Descripcion3","Url3", "txt3"));
         c4 = categoryServices.save(new CategoryDto("Residencia","Descripcion5","Url5", "txt5"));
     }
+
     @AfterEach
     void doAfter() throws ResourceNotFoundException {
         categoryServices.delete(c1.getId());

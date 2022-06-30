@@ -1,5 +1,13 @@
 package com.PI.apiBooking.Mail;
 
+import com.PI.apiBooking.Model.DTO.ImageProductDto;
+import com.PI.apiBooking.Model.DTO.Post.BookingDto;
+import com.PI.apiBooking.Model.DTO.Post.UserDto;
+import com.PI.apiBooking.Model.Entity.Product;
+import com.PI.apiBooking.Model.User.User;
+import com.PI.apiBooking.Repository.IProductRepository;
+import com.PI.apiBooking.Repository.IUserRepository;
+import com.PI.apiBooking.Service.Impl.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -9,52 +17,63 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.time.LocalDate;
 
 
 @Service
-public class EmailSenderService{
+public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
     @Autowired
     private SpringTemplateEngine thymeleafTamplateEngine;
+    @Autowired
+    private IUserRepository userRepository;
+    @Autowired
+    private IProductRepository productRepository;
+    @Autowired
+    private ImageService imageService;
+
 
     private final String serviceAddress = "correodeautenticacionctd@gmail.com";
     private final String subject = "Digital Booking";
 
-    public void sendMailUser(String to, String user) throws MessagingException {
+    public void sendMailUser(UserDto user) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject(subject);
         helper.setFrom(serviceAddress);
-        helper.setTo(to);
+        helper.setTo(user.getEmail());
         Context context = new Context();
-        context.setVariable("user",user);
+        context.setVariable("user",user.getName()+" "+user.getSurname());
         helper.setSubject(subject);
         helper.setFrom(serviceAddress);
-        helper.setTo(to);
         String htmlbody = thymeleafTamplateEngine.process("mailUser",context);
         helper.setText(htmlbody, true);
         mailSender.send(message);
+        System.out.println("Mail enviado");
     }
 
-    public void sendMailBooking(String to, String user, LocalDate arrival, LocalDate departure, String category, String productName, String location, String image) throws MessagingException {
+    public void sendMailBooking(BookingDto bookingDto) throws MessagingException {
+        User user = userRepository.findById(bookingDto.getUser().getId()).get();
+        Product product = productRepository.findById(bookingDto.getProduct().getId()).get();
+        ImageProductDto imagen = imageService.findProfileImageByProductId(product.getId());
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject(subject);
         helper.setFrom(serviceAddress);
-        helper.setTo(to);
+        helper.setTo(user.getEmail());
+
         Context context = new Context();
-        context.setVariable("user",user);
-        context.setVariable("arrival",arrival);
-        context.setVariable("departure",departure);
-        context.setVariable("category",category);
-        context.setVariable("productName",productName);
-        context.setVariable("location",location);
-        context.setVariable("image",image);
+        context.setVariable("user",user.getName()+" "+user.getSurname());
+        context.setVariable("arrival",bookingDto.getArrival());
+        context.setVariable("departure",bookingDto.getDeparture());
+        context.setVariable("category",product.getCategory().getTitle());
+        context.setVariable("productName",product.getName());
+        context.setVariable("location",product.getDirection()+", "+product.getCity().getName()+", "+product.getCity().getProvince().getName()+", "+ product.getCity().getProvince().getCountry().getName());
+        context.setVariable("image",imagen.getUrl());
         String htmlbody = thymeleafTamplateEngine.process("mailBooking",context);
         helper.setText(htmlbody, true);
         mailSender.send(message);
+        System.out.println("Mail enviado");
     }
 
 }

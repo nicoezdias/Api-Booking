@@ -28,6 +28,7 @@ class PolicyServiceTest {
         p3 = policyService.save(new PolicyDto("Normas de la casa","No fumar"));
         p4 = policyService.save(new PolicyDto("Salud y seguridad","Deposito de seguridad"));
     }
+
     @AfterEach
     public void doAfter() throws ResourceNotFoundException {
         policyService.delete(p1.getId());
