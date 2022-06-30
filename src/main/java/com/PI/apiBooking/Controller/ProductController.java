@@ -91,7 +91,5 @@ public class ProductController {
         productServices.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
-
 }
 

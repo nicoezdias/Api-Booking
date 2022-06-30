@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Model.DTO.Post;
 
+import com.PI.apiBooking.Model.DTO.UserRatingDto;
 import com.PI.apiBooking.Model.Entity.Product;
-import com.PI.apiBooking.Model.User.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,10 +14,10 @@ public class RatingDto {
     private Long id;
     private Integer score;
     private Product product;
-    private User user;
+    private UserRatingDto user;
 
     //Constructor for test
-    public RatingDto(Integer score, Product product, User user) {
+    public RatingDto(Integer score, Product product, UserRatingDto user) {
         this.score = score;
         this.product = product;
         this.user = user;

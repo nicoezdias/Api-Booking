@@ -2,8 +2,8 @@ package com.PI.apiBooking.Service;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.*;
+import com.PI.apiBooking.Model.DTO.UserRatingDto;
 import com.PI.apiBooking.Model.Entity.*;
-import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Service.Impl.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +48,7 @@ class RatingServiceTest {
     City city = new City();
     Policy policy = new Policy();
     Product  product = new Product();
-    User user = new User();
+    UserRatingDto user = new UserRatingDto();
 
 
     @BeforeEach

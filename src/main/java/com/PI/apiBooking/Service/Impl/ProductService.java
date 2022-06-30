@@ -62,7 +62,7 @@ public class ProductService implements IProductService {
         productCompleteDto.setDistance(distance(product.getLatitude(), product.getLongitude(), product.getCity().getLatitude(), product.getCity().getLongitude()));
         productCompleteDto.setDisabled(findBookings(id));
 
-        if(userId != null && favouriteRepository.findByUserIdAndProductId(id, userId).isPresent()) {
+        if(userId != null && favouriteRepository.findByUserIdAndProductId(userId, id).isPresent()) {
             productCompleteDto.setLike(true);
             }
 
@@ -185,7 +185,7 @@ public class ProductService implements IProductService {
             }
             productCardDto.setFeaturesIcons(featuresIcons);
             productCardDto.setImageProfile(imageService.findProfileImageByProductId(productCardDto.getId()));
-            if(userId != null && favouriteRepository.findByUserIdAndProductId(productCardDto.getId(), userId).isPresent())
+            if(userId != null && favouriteRepository.findByUserIdAndProductId(userId, productCardDto.getId()).isPresent())
                 productCardDto.setLike(true);
             productsCardDto.add(productCardDto);
         }

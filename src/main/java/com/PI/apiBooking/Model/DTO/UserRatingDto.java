@@ -7,15 +7,12 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class UserBookingDto {
-
+public class UserRatingDto {
     private Long id;
     private String name;
     private String surname;
-    private String cityName;
-    private String email;
 
     //Default
-    public UserBookingDto() {
+    public UserRatingDto() {
     }
 }
