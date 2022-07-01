@@ -17,7 +17,7 @@ public class Category {
     @SequenceGenerator(name = "categorySequence",sequenceName = "categorySequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
     private Long id;
-    @Column(length = 20)
+    @Column(nullable = false, length = 20)
     private String title;
     @Lob
     private String description;

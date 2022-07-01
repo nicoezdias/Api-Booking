@@ -17,6 +17,7 @@ public class Country {
     @SequenceGenerator(name = "countrySequence",sequenceName = "countrySequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "countrySequence")
     private Long id;
+    @Column(unique = true)
     private String name;
 
     //Default

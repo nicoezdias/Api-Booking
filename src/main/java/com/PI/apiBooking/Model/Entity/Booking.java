@@ -18,8 +18,11 @@ public class Booking {
     @SequenceGenerator(name = "bookingSequence",sequenceName = "bookingSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookingSequence")
     private Long id;
+    @Column(nullable = false)
     private String reservationTime;
+    @Column(nullable = false)
     private LocalDate arrival;
+    @Column(nullable = false)
     private LocalDate departure;
     private Boolean covidVaccine;
     @Lob

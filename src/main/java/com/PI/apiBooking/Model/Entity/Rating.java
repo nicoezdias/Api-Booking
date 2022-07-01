@@ -17,6 +17,7 @@ public class Rating {
     @SequenceGenerator(name = "ratingSequence",sequenceName = "ratingSequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ratingSequence")
     private Long id;
+    @Column(nullable = false)
     private Integer score;
 
     @ManyToOne
