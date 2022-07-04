@@ -57,7 +57,7 @@ public class UserService implements IUserService {
         userBookingDto.setName(user.getName());
         userBookingDto.setSurname(user.getSurname());
         if (user.getCity() != null){
-            userBookingDto.setCityName(user.getCity().getName() + ", " + user.getCity().getProvince().getName());
+            userBookingDto.setCityId(user.getCity().getId());
         }
         userBookingDto.setEmail(user.getEmail());
 

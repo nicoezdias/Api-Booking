@@ -23,7 +23,7 @@ public class ProductBookingDto {
     private String userName;
     private String userSurname;
     private String userEmail;
-    private String userCity;
+    private Long userCityId;
 
     private ImageProductDto productImage;
 

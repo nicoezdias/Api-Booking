@@ -4,11 +4,15 @@ import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.*;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
+import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.Entity.Feature;
 import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Repository.IFavouriteRepository;
 import com.PI.apiBooking.Repository.IProductRepository;
+import com.PI.apiBooking.Repository.IUserRepository;
+import com.PI.apiBooking.Service.IService;
 import com.PI.apiBooking.Service.Interfaces.IProductService;
+import com.PI.apiBooking.Service.Interfaces.IUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,8 +125,8 @@ public class ProductService implements IProductService {
         UserBookingDto userBookingDto = userService.findById(userId);
         bookingProductDto.setUserName(userBookingDto.getName());
         bookingProductDto.setUserSurname(userBookingDto.getSurname());
-        if(userBookingDto.getCityName() != null){
-            bookingProductDto.setUserCity(userBookingDto.getCityName());
+        if(userBookingDto.getCityId() != null){
+            bookingProductDto.setUserCityId(userBookingDto.getCityId());
         }
         bookingProductDto.setUserEmail(userBookingDto.getEmail());
         bookingProductDto.setDisabled(findBookings(productId));
@@ -163,12 +167,7 @@ public class ProductService implements IProductService {
 
     @Override
     public Set<DateDisabledDto> findBookings(Long id){
-        Set<BookingDto> bookingsDto = bookingService.findBookingByProductId(id);
-        Set<DateDisabledDto> datesDisabledDto = new HashSet<>();
-        for(BookingDto bookingDto : bookingsDto){
-            DateDisabledDto date_disabledDto = mapper.convertValue(bookingDto, DateDisabledDto.class);
-            datesDisabledDto.add(date_disabledDto);
-        }
+        Set<DateDisabledDto> datesDisabledDto = bookingService.findBookingByProductId(id);
         return datesDisabledDto;
     }
 
