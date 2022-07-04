@@ -1,6 +1,8 @@
 package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
+import com.PI.apiBooking.Model.DTO.BookingUserDto;
+import com.PI.apiBooking.Model.DTO.DateDisabledDto;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Repository.IBookingRepository;
@@ -48,23 +50,30 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public Set<BookingDto> findBookingByProductId(Long productId) {
+    public Set<DateDisabledDto> findBookingByProductId(Long productId) {
         List<Booking> bookings = bookingRepository.findBookingByProductId(productId);
-        Set<BookingDto> bookingsDto = new HashSet<>();
+        Set<DateDisabledDto> datesDisabledDto = new HashSet<>();
         for(Booking booking : bookings){
-            bookingsDto.add(mapper.convertValue(booking, BookingDto.class));
+            datesDisabledDto.add(mapper.convertValue(booking, DateDisabledDto.class));
         }
-        return bookingsDto;
+        return datesDisabledDto;
     }
 
     @Override
-    public Set<BookingDto> findBookingByUserId(Long userId) {
+    public Set<BookingUserDto> findBookingByUserId(Long userId) {
         List<Booking> bookings = bookingRepository.findBookingByUserId(userId);
-        Set<BookingDto> bookingsDto = new HashSet<>();
+        Set<BookingUserDto> bookingsUserDto = new HashSet<>();
         for(Booking booking : bookings){
-            bookingsDto.add(mapper.convertValue(booking, BookingDto.class));
+            BookingUserDto bookingUserDto = mapper.convertValue(booking, BookingUserDto.class);
+            bookingUserDto.setCategoryName(booking.getProduct().getCategory().getTitle());
+            bookingUserDto.setProductName(booking.getProduct().getName());
+            bookingUserDto.setProductStars(booking.getProduct().getStars());
+            bookingUserDto.setProductCityName(booking.getProduct().getCity().getName() + ", " + booking.getProduct().getCity().getProvince().getName() + ", " + booking.getProduct().getCity().getProvince().getCountry().getName());
+            bookingUserDto.setProductDirection(booking.getProduct().getDirection());
+
+            bookingsUserDto.add(bookingUserDto);
         }
-        return bookingsDto;
+        return bookingsUserDto;
     }
 
     @Override

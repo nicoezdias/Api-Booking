@@ -12,7 +12,7 @@ public class UserBookingDto {
     private Long id;
     private String name;
     private String surname;
-    private String cityName;
+    private Long cityId;
     private String email;
 
     //Default

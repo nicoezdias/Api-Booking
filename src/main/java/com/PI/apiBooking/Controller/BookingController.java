@@ -2,6 +2,7 @@ package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Mail.EmailSenderService;
+import com.PI.apiBooking.Model.DTO.BookingUserDto;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Service.Interfaces.IBookingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,19 +39,12 @@ public class BookingController {
 //            emailSenderService.sendMailBooking(booking);
             return ResponseEntity.ok(bookingService.save(booking));
         }
-
     }
 
     //* ///////// GET ///////// *//
-    @Operation(summary = "Traer todas las reservas por Id de Producto")
-    @GetMapping("product/{productId}")
-    public ResponseEntity<Set<BookingDto>> findBookingByProductId(@PathVariable Long productId){
-        return ResponseEntity.ok(bookingService.findBookingByProductId(productId));
-    }
-
     @Operation(summary = "Traer todas las reservas por Id de Usuario")
     @GetMapping("user/{userId}")
-    public ResponseEntity<Set<BookingDto>> findBookingByUserId(@PathVariable Long userId){
+    public ResponseEntity<Set<BookingUserDto>> findBookingByUserId(@PathVariable Long userId){
         return ResponseEntity.ok(bookingService.findBookingByUserId(userId));
     }
 

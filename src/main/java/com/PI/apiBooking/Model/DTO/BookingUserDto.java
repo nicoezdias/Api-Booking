@@ -15,6 +15,8 @@ public class BookingUserDto {
     private String reservationTime;
     private LocalDate arrival;
     private LocalDate departure;
+    private Boolean covidVaccine;
+    private String additionalInformation;
 
     private String categoryName;
     private String productName;
