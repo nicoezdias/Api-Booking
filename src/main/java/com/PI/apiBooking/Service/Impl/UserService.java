@@ -85,6 +85,16 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public UserDto updateCity(UserDto userDto) throws ResourceNotFoundException {
+        checkId(userDto.getId());
+        User user = userRepository.findById(userDto.getId()).get();
+        user.setCity(userDto.getCity());
+        userRepository.save(user);
+        logger.info("User actualizado correctamente: "+ userDto);
+        return userDto;
+    }
+
+    @Override
     public UserCardDto validate(AuthenticationRequest authenticationRequest, UserDto userDto) throws BadRequestException{
         userDto.getRol().setId(2L);
         userDto.getRol().setName(UserRoles.USER);

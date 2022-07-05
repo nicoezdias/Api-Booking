@@ -45,6 +45,16 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Actualizar City de un Usuario")
+    @PostMapping
+    public ResponseEntity<UserCardDto> updateCity(@RequestBody UserDto userDto) throws BadRequestException, ResourceNotFoundException {
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
+        authenticationRequest.setEmail(userDto.getEmail());
+        authenticationRequest.setPassword(userDto.getPassword());
+        userService.updateCity(userDto);
+        return ResponseEntity.ok(userService.authenticate(authenticationRequest));
+    }
+
     @Operation(summary = "Log in de Usuario")
     @PostMapping("/authenticate")
     public ResponseEntity<UserCardDto> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws BadRequestException {
