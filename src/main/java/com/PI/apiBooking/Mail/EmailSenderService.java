@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMessage;
 
 
 @Service
-public class EmailSenderService {
+public class EmailSenderService implements IEmailSenderService{
     @Autowired
     private JavaMailSender mailSender;
     @Autowired
@@ -32,10 +32,10 @@ public class EmailSenderService {
     @Autowired
     private ImageService imageService;
 
-
     private final String serviceAddress = "correodeautenticacionctd@gmail.com";
     private final String subject = "Digital Booking";
 
+    @Override
     public void sendMailUser(UserDto user) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -52,6 +52,7 @@ public class EmailSenderService {
         System.out.println("Mail enviado");
     }
 
+    @Override
     public void sendMailBooking(BookingDto bookingDto) throws MessagingException {
         User user = userRepository.findById(bookingDto.getUser().getId()).get();
         Product product = productRepository.findById(bookingDto.getProduct().getId()).get();

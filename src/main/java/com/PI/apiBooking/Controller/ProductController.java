@@ -21,7 +21,7 @@ import java.util.Set;
 public class ProductController {
 
     @Autowired
-    IProductService productServices;
+    private IProductService productServices;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

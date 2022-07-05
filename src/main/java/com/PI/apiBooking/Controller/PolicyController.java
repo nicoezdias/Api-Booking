@@ -18,7 +18,7 @@ import java.util.Set;
 public class PolicyController {
 
     @Autowired
-    IPolicyService policyService;
+    private IPolicyService policyService;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

@@ -1,12 +1,13 @@
 package com.PI.apiBooking.Service;
 
-import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.ImageProductDto;
-import com.PI.apiBooking.Model.DTO.Post.*;
-import com.PI.apiBooking.Model.Entity.*;
-import com.PI.apiBooking.Service.Impl.*;
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import com.dh.backend.Exceptions.ResourceNotFoundException;
+import com.dh.backend.Model.DTO.ImageProductDto;
+import com.dh.backend.Model.DTO.Post.*;
+import com.dh.backend.Model.Entity.*;
+import com.dh.backend.Service.Impl.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -36,24 +37,31 @@ class ImageServiceTest {
     @Autowired
     private ProductService productService;
 
-    ImageDto i1, i2, i3, i4;
-    Category category = new Category();
-    Feature feature = new Feature();
-    Country country = new Country();
-    Province province = new Province();
-    City city = new City();
-    Policy policy = new Policy();
-    Product  product = new Product();
+    static ImageDto i1, i2, i3, i4;
+    static Category category = new Category();
+    static Feature feature = new Feature();
+    static Country country = new Country();
+    static Province province = new Province();
+    static City city = new City();
+    static Policy policy = new Policy();
+    static Product  product = new Product();
 
 
-    @BeforeEach
-    public void doBefore(){
+    @BeforeAll
+    static void doBefore(@Autowired ImageService imageService,
+                         @Autowired CityService cityService,
+                         @Autowired ProvinceService provinceService,
+                         @Autowired CountryService countryService,
+                         @Autowired CategoryService categoryService,
+                         @Autowired FeatureService featureService,
+                         @Autowired PolicyService policyService,
+                         @Autowired ProductService productService){
         category.setId(categoryService.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1")).getId());
         feature.setId(featureService.save(new FeatureDto("Gym","Url1")).getId());
         Set<Feature> features = new HashSet<>();
         features.add(feature);
-        country.setId(countryService.save(new CountryDto("Argentina")).getId());
-        province.setId(provinceService.save(new ProvinceDto("BsAs",country)).getId());
+        country.setId(countryService.save(new CountryDto("Colombia")).getId());
+        province.setId(provinceService.save(new ProvinceDto("Bogotá",country)).getId());
         city.setId(cityService.save(new CityDto("Once",province,-34.6061369839531,-34.6061369839531)).getId());
         policy.setId(policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00")).getId());
         Set<Policy> policies = new HashSet<>();
@@ -66,8 +74,14 @@ class ImageServiceTest {
         i4 = imageService.save(new ImageDto("Hal", "url5", "Hal", false, product));
     }
 
-    @AfterEach
-    public void doAfter() throws ResourceNotFoundException {
+    @AfterAll
+    static void doAfter(@Autowired CityService cityService,
+                        @Autowired ProvinceService provinceService,
+                        @Autowired CountryService countryService,
+                        @Autowired CategoryService categoryService,
+                        @Autowired FeatureService featureService,
+                        @Autowired PolicyService policyService,
+                        @Autowired ProductService productService) throws ResourceNotFoundException {
         productService.delete(product.getId());
         featureService.delete(feature.getId());
         policyService.delete(policy.getId());

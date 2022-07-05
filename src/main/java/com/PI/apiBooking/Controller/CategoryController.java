@@ -20,7 +20,7 @@ import java.util.Set;
 public class CategoryController {
 
     @Autowired
-    ICategoryService categoryServices;
+    private ICategoryService categoryServices;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

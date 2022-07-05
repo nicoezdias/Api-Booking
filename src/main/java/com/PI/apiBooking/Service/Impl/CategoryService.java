@@ -22,9 +22,9 @@ public class CategoryService implements ICategoryService {
     protected final static Logger logger = Logger.getLogger(CategoryService.class);
 
     @Autowired
-    ICategoryRepository categoryRepository;
+    private ICategoryRepository categoryRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public Set<CategoryCardDto> findAll() {

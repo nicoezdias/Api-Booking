@@ -18,7 +18,7 @@ import java.util.Set;
 public class RatingController {
 
     @Autowired
-    IRatingService ratingServices;
+    private IRatingService ratingServices;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

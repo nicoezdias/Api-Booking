@@ -20,9 +20,9 @@ public class FeatureService implements IFeatureService {
     protected final static Logger logger = Logger.getLogger(FeatureService.class);
 
     @Autowired
-    IFeatureRepository featureRepository;
+    private IFeatureRepository featureRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public Set<FeatureDto> findAll() {

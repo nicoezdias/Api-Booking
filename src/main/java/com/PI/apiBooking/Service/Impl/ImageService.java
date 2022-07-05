@@ -21,9 +21,9 @@ public class ImageService implements IImageService {
     protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
-    IImageRepository imageRepository;
+    private IImageRepository imageRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public Set<ImageProductDto> findAll() {

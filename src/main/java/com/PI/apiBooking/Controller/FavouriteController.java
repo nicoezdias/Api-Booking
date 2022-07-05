@@ -22,7 +22,7 @@ import java.util.Set;
 public class FavouriteController {
 
     @Autowired
-    IFavouriteService favouriteService;
+    private IFavouriteService favouriteService;
 
     //* ///////// POST ///////// *//
     @Operation(summary = "Poner o quitar de Favourite")

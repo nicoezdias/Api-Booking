@@ -19,7 +19,7 @@ import java.util.Set;
 public class CityController {
 
     @Autowired
-    ICityService cityServices;
+    private ICityService cityServices;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

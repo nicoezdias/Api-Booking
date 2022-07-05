@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class RolController {
     @Autowired
-    IRolService rolService;
+    private IRolService rolService;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

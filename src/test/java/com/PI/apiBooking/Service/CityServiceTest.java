@@ -1,17 +1,17 @@
 package com.PI.apiBooking.Service;
 
-import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.Entity.Country;
-import com.PI.apiBooking.Model.DTO.CityListDto;
-import com.PI.apiBooking.Model.DTO.Post.CityDto;
-import com.PI.apiBooking.Model.DTO.Post.CountryDto;
-import com.PI.apiBooking.Model.DTO.Post.ProvinceDto;
-import com.PI.apiBooking.Model.Entity.Province;
-import com.PI.apiBooking.Service.Impl.CityService;
-import com.PI.apiBooking.Service.Impl.CountryService;
-import com.PI.apiBooking.Service.Impl.ProvinceService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.dh.backend.Exceptions.ResourceNotFoundException;
+import com.dh.backend.Model.DTO.CityListDto;
+import com.dh.backend.Model.DTO.Post.CityDto;
+import com.dh.backend.Model.DTO.Post.CountryDto;
+import com.dh.backend.Model.DTO.Post.ProvinceDto;
+import com.dh.backend.Model.Entity.Country;
+import com.dh.backend.Model.Entity.Province;
+import com.dh.backend.Service.Impl.CityService;
+import com.dh.backend.Service.Impl.CountryService;
+import com.dh.backend.Service.Impl.ProvinceService;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class CityServiceTest {
 
+
     @Autowired
     private CityService cityService;
     @Autowired
@@ -30,22 +31,26 @@ class CityServiceTest {
     @Autowired
     private CountryService countryService;
 
-    CityDto c1, c2, c3, c4;
-    Country country = new Country();
-    Province province = new Province();
+    static CityDto c1, c2, c3, c4;
+    static Country country = new Country();
+    static Province province = new Province();
 
-    @BeforeEach
-    public void doBefore(){
-        country.setId(countryService.save(new CountryDto("Argentina")).getId());
-        province.setId(provinceService.save(new ProvinceDto("BsAs",country)).getId());
+    @BeforeAll
+    static void doBefore(@Autowired CityService cityService,
+                         @Autowired ProvinceService provinceService,
+                         @Autowired CountryService countryService){
+        country.setId(countryService.save(new CountryDto("Colombia")).getId());
+        province.setId(provinceService.save(new ProvinceDto("Bogotá",country)).getId());
         c1 = cityService.save(new CityDto("Once",province,-34.6061369839531,-34.6061369839531));
         c2 = cityService.save(new CityDto("Caballito",province,-34.6061369839531,-34.6061369839531));
         c3 = cityService.save(new CityDto("Flores",province,-34.6061369839531,-34.6061369839531));
         c4 = cityService.save(new CityDto("Moreno",province,-34.6061369839531,-34.6061369839531));
     }
 
-    @AfterEach
-    public void doAfter() throws ResourceNotFoundException {
+    @AfterAll
+    static void doAfter(@Autowired CityService cityService,
+                        @Autowired ProvinceService provinceService,
+                        @Autowired CountryService countryService) throws ResourceNotFoundException {
         cityService.delete(c1.getId());
         cityService.delete(c2.getId());
         cityService.delete(c3.getId());

@@ -17,9 +17,9 @@ public class RolService implements IRolService {
     protected final static Logger logger = Logger.getLogger(RolService.class);
 
     @Autowired
-    IRolRepository rolRepository;
+    private IRolRepository rolRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public RolDto save(RolDto rolDto) {

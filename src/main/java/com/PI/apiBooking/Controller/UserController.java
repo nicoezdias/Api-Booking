@@ -22,7 +22,7 @@ import javax.mail.MessagingException;
 public class UserController {
 
     @Autowired
-    IUserService userService;
+    private IUserService userService;
     @Autowired
     private EmailSenderService emailSenderService;
 
@@ -37,7 +37,7 @@ public class UserController {
         if(userDto.getId() == null){
             userService.save(userDto);
             UserCardDto user_cardDto =userService.authenticate(authenticationRequest);
-//            emailSenderService.sendMailUser(userDto.getEmail(),userDto.getName()+" "+userDto.getSurname());
+            emailSenderService.sendMailUser(userDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(user_cardDto);
         } else{
             userService.save(userDto);

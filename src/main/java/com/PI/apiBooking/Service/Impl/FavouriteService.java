@@ -22,11 +22,11 @@ public class FavouriteService implements IFavouriteService {
     protected final static Logger logger = Logger.getLogger(FavouriteService.class);
 
     @Autowired
-    IFavouriteRepository favouriteRepository;
+    private IFavouriteRepository favouriteRepository;
     @Autowired
-    ProductService productService;
+    private ProductService productService;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public FavouriteDto save(FavouriteDto favouriteDto) {

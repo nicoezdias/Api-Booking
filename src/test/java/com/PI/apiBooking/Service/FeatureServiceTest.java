@@ -3,8 +3,8 @@ package com.PI.apiBooking.Service;
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.Post.FeatureDto;
 import com.PI.apiBooking.Service.Impl.FeatureService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,18 +19,18 @@ class FeatureServiceTest {
     @Autowired
     private FeatureService featureService;
 
-    FeatureDto f1, f2, f3, f4;
+    static FeatureDto f1, f2, f3, f4;
 
-    @BeforeEach
-    public void doBefore(){
+    @BeforeAll
+    static void doBefore(@Autowired FeatureService featureService){
         f1 = featureService.save(new FeatureDto("Gym","Url1"));
         f2 = featureService.save(new FeatureDto("Wifi","Url2"));
         f3 = featureService.save(new FeatureDto("Mercado","Url3"));
         f4 = featureService.save(new FeatureDto("Servicio de limpieza","Url5"));
     }
 
-    @AfterEach
-    public void doAfter() throws ResourceNotFoundException {
+    @AfterAll
+    static void doAfter(@Autowired FeatureService featureService) throws ResourceNotFoundException {
         featureService.delete(f1.getId());
         featureService.delete(f2.getId());
         featureService.delete(f3.getId());

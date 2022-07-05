@@ -18,18 +18,18 @@ class CategoryServicesTest {
     @Autowired
     private CategoryService categoryServices;
 
-    CategoryDto c1, c2, c3, c4;
+    static CategoryDto c1, c2, c3, c4;
 
-    @BeforeEach
-    void doBefore(){
+    @BeforeAll
+    static void beforeAll(@Autowired CategoryService categoryServices){
         c1 = categoryServices.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1"));
         c2 = categoryServices.save(new CategoryDto("Casa","Descripcion2","Url2", "txt2"));
         c3 = categoryServices.save(new CategoryDto("Dpto","Descripcion3","Url3", "txt3"));
         c4 = categoryServices.save(new CategoryDto("Residencia","Descripcion5","Url5", "txt5"));
     }
 
-    @AfterEach
-    void doAfter() throws ResourceNotFoundException {
+    @AfterAll
+    static void doAfter(@Autowired CategoryService categoryServices) throws ResourceNotFoundException {
         categoryServices.delete(c1.getId());
         categoryServices.delete(c2.getId());
         categoryServices.delete(c3.getId());

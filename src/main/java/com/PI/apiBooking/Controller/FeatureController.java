@@ -18,7 +18,7 @@ import java.util.Set;
 public class FeatureController {
 
     @Autowired
-    IFeatureService featureServices;
+    private IFeatureService featureServices;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

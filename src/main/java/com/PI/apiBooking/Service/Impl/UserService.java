@@ -28,10 +28,10 @@ public class UserService implements IUserService {
     protected final static Logger logger = Logger.getLogger(UserService.class);
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Autowired
     private MyPasswordEncoder passwordEncoder;

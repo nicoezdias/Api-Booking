@@ -17,9 +17,9 @@ public class ProvinceService implements IProvinceService {
     protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
-    IProvinceRepository provinceRepository;
+    private IProvinceRepository provinceRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public ProvinceDto save(ProvinceDto provinceDto) {

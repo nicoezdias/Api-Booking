@@ -5,8 +5,8 @@ import com.PI.apiBooking.Model.DTO.Post.*;
 import com.PI.apiBooking.Model.DTO.UserRatingDto;
 import com.PI.apiBooking.Model.Entity.*;
 import com.PI.apiBooking.Service.Impl.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,31 +34,34 @@ class RatingServiceTest {
     @Autowired
     private ProductService productService;
     @Autowired
-    private UserService userService;
-    @Autowired
-    private RolService rolService;
-    @Autowired
     private RatingService ratingService;
 
-    RatingDto r1, r2, r3, r4;
-    Category category = new Category();
-    Feature feature = new Feature();
-    Country country = new Country();
-    Province province = new Province();
-    City city = new City();
-    Policy policy = new Policy();
-    Product  product = new Product();
-    UserRatingDto user = new UserRatingDto();
+    static RatingDto r1, r2, r3, r4;
+    static Category category = new Category();
+    static Feature feature = new Feature();
+    static Country country = new Country();
+    static Province province = new Province();
+    static City city = new City();
+    static Policy policy = new Policy();
+    static Product  product = new Product();
+    static UserRatingDto user = new UserRatingDto();
 
 
-    @BeforeEach
-    public void doBefore(){
+    @BeforeAll
+    static void doBefore(@Autowired CityService cityService,
+                         @Autowired ProvinceService provinceService,
+                         @Autowired CountryService countryService,
+                         @Autowired CategoryService categoryService,
+                         @Autowired FeatureService featureService,
+                         @Autowired PolicyService policyService,
+                         @Autowired ProductService productService,
+                         @Autowired RatingService ratingService){
         category.setId(categoryService.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1")).getId());
         feature.setId(featureService.save(new FeatureDto("Gym","Url1")).getId());
         Set<Feature> features = new HashSet<>();
         features.add(feature);
-        country.setId(countryService.save(new CountryDto("Argentina")).getId());
-        province.setId(provinceService.save(new ProvinceDto("BsAs",country)).getId());
+        country.setId(countryService.save(new CountryDto("Colombia")).getId());
+        province.setId(provinceService.save(new ProvinceDto("Bogotá",country)).getId());
         city.setId(cityService.save(new CityDto("Once",province,-34.6061369839531,-34.6061369839531)).getId());
         policy.setId(policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00")).getId());
         Set<Policy> policies = new HashSet<>();
@@ -72,8 +75,14 @@ class RatingServiceTest {
         r4 = ratingService.save(new RatingDto(6, product, user));
     }
 
-    @AfterEach
-    public void doAfter() throws ResourceNotFoundException {
+    @AfterAll
+    static void doAfter(@Autowired CityService cityService,
+                        @Autowired ProvinceService provinceService,
+                        @Autowired CountryService countryService,
+                        @Autowired CategoryService categoryService,
+                        @Autowired FeatureService featureService,
+                        @Autowired PolicyService policyService,
+                        @Autowired ProductService productService) throws ResourceNotFoundException {
         productService.delete(product.getId());
         featureService.delete(feature.getId());
         policyService.delete(policy.getId());

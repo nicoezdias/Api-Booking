@@ -20,9 +20,9 @@ public class PolicyService implements IPolicyService {
     protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
-    IPolicyRepository policyRepository;
+    private IPolicyRepository policyRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public Set<PolicyDto> findAll() {

@@ -22,7 +22,7 @@ import java.util.Set;
 public class BookingController {
 
     @Autowired
-    IBookingService bookingService;
+    private IBookingService bookingService;
     @Autowired
     private EmailSenderService emailSenderService;
 

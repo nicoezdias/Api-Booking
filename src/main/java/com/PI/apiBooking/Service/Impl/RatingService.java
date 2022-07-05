@@ -21,9 +21,9 @@ public class RatingService implements IRatingService {
     protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
-    IRatingRepository ratingRepository;
+    private IRatingRepository ratingRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public Set<RatingDto> findAll() {

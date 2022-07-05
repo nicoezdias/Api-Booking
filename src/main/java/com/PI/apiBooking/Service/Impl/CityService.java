@@ -21,9 +21,9 @@ public class CityService implements ICityService {
     protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
-    ICityRepository cityRepository;
+    private ICityRepository cityRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public Set<CityListDto> findAll() {

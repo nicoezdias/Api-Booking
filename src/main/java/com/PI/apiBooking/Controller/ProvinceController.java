@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProvinceController {
 
     @Autowired
-    IProvinceService provinceService;
+    private IProvinceService provinceService;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

@@ -23,9 +23,9 @@ public class BookingService implements IBookingService {
     protected final static Logger logger = Logger.getLogger(BookingService.class);
 
     @Autowired
-    IBookingRepository bookingRepository;
+    private IBookingRepository bookingRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
 
     @SneakyThrows

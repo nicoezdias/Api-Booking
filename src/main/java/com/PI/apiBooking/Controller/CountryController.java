@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class CountryController {
 
     @Autowired
-    ICountryService countryService;
+    private ICountryService countryService;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})

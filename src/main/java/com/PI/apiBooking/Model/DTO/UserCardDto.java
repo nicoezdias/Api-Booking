@@ -11,6 +11,7 @@ public class UserCardDto {
     private Long id;
     private String name;
     private String surname;
+    private String email;
     private String rolName;
     private String jwt;
 

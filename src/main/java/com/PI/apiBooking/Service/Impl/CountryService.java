@@ -18,9 +18,9 @@ public class CountryService implements ICountryService {
     protected final static Logger logger = Logger.getLogger(CityService.class);
 
     @Autowired
-    ICountryRepository countryRepository;
+    private ICountryRepository countryRepository;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public CountryDto save(CountryDto countryDto) {

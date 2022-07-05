@@ -19,7 +19,7 @@ import java.util.Set;
 public class ImageController {
 
     @Autowired
-    IImageService imageServices;
+    private IImageService imageServices;
 
     //* ///////// POST ///////// *//
     @Secured({"ADMIN"})
