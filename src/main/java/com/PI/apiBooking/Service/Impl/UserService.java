@@ -90,6 +90,7 @@ public class UserService implements IUserService {
         User user = userRepository.findById(userDto.getId()).get();
         user.setCity(userDto.getCity());
         userRepository.save(user);
+        userDto = mapper.convertValue(user, UserDto.class);
         logger.info("User actualizado correctamente: "+ userDto);
         return userDto;
     }
