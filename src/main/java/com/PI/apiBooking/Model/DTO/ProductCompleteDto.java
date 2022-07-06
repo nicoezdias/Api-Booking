@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class ProductCompleteDto {
     private Optional<Integer> avgRanting;
     private Double longitude;
     private Double latitude;
-    private Set<DateDisabledDto> disabled;
+    private Set<LocalDate> disabled;
     private Boolean like = false;
 
     //Default

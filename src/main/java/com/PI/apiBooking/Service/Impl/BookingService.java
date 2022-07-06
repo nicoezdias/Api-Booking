@@ -2,7 +2,6 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.BookingUserDto;
-import com.PI.apiBooking.Model.DTO.DateDisabledDto;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Repository.IBookingRepository;
@@ -13,10 +12,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 @Service
 public class BookingService implements IBookingService {
@@ -50,19 +48,23 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public Set<DateDisabledDto> findBookingByProductId(Long productId) {
+    public Set<LocalDate> findBookingByProductId(Long productId) {
         List<Booking> bookings = bookingRepository.findBookingByProductId(productId);
-        Set<DateDisabledDto> datesDisabledDto = new HashSet<>();
+        Set<LocalDate> disables = new HashSet<>();
         for(Booking booking : bookings){
-            datesDisabledDto.add(mapper.convertValue(booking, DateDisabledDto.class));
+            long days = ChronoUnit.DAYS.between(booking.getArrival(), booking.getDeparture());
+            for (int i=0; i < days; i++) {
+                LocalDate date = booking.getArrival().plusDays(i);
+                disables.add(date);
+            }
         }
-        return datesDisabledDto;
+        return disables;
     }
 
     @Override
-    public Set<BookingUserDto> findBookingByUserId(Long userId) {
+    public List<BookingUserDto> findBookingByUserId(Long userId) {
         List<Booking> bookings = bookingRepository.findBookingByUserId(userId);
-        Set<BookingUserDto> bookingsUserDto = new HashSet<>();
+        List<BookingUserDto> bookingsUserDto = new ArrayList<>();
         for(Booking booking : bookings){
             BookingUserDto bookingUserDto = mapper.convertValue(booking, BookingUserDto.class);
             bookingUserDto.setCategoryName(booking.getProduct().getCategory().getTitle());
@@ -85,3 +87,4 @@ public class BookingService implements IBookingService {
         return booking.get();
     }
 }
+

@@ -13,6 +13,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.List;
 import java.util.Set;
 
 @Secured({"USER","ADMIN"})
@@ -32,19 +33,20 @@ public class BookingController {
     public ResponseEntity<BookingDto> save(@RequestBody BookingDto bookingDto) throws MessagingException {
         if(bookingDto.getId() == null) {
             BookingDto booking = bookingService.save(bookingDto);
-//            emailSenderService.sendMailBooking(booking);
+            emailSenderService.sendMailBooking(booking);
             return ResponseEntity.status(HttpStatus.CREATED).body(booking);
         }else{
             BookingDto booking = bookingService.save(bookingDto);
-//            emailSenderService.sendMailBooking(booking);
+            emailSenderService.sendMailBooking(booking);
             return ResponseEntity.ok(bookingService.save(booking));
         }
+
     }
 
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las reservas por Id de Usuario")
     @GetMapping("user/{userId}")
-    public ResponseEntity<Set<BookingUserDto>> findBookingByUserId(@PathVariable Long userId){
+    public ResponseEntity<List<BookingUserDto>> findBookingByUserId(@PathVariable Long userId){
         return ResponseEntity.ok(bookingService.findBookingByUserId(userId));
     }
 

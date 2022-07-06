@@ -13,6 +13,6 @@ public interface IBookingRepository extends JpaRepository<Booking, Long> {
     @Query("SELECT b FROM Booking b WHERE b.product.id = ?1")
     List<Booking> findBookingByProductId(Long productId);
 
-    @Query("SELECT b FROM Booking b WHERE b.user.id = ?1")
+    @Query("SELECT b FROM Booking b WHERE b.user.id = ?1 AND b.arrival > now() ORDER BY b.arrival")
     List<Booking> findBookingByUserId(Long userId);
 }

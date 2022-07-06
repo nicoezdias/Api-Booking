@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @ToString
@@ -27,7 +28,7 @@ public class ProductBookingDto {
 
     private ImageProductDto productImage;
 
-    private Set<DateDisabledDto> disabled;
+    private Set<LocalDate> disabled;
 
     //Default
     public ProductBookingDto() {

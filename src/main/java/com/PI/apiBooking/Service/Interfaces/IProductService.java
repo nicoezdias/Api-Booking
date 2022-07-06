@@ -1,7 +1,6 @@
 package com.PI.apiBooking.Service.Interfaces;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Model.DTO.DateDisabledDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.DTO.ProductBookingDto;
 import com.PI.apiBooking.Model.DTO.ProductCardDto;
@@ -10,6 +9,7 @@ import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Service.ICheckId;
 import com.PI.apiBooking.Service.IService;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public interface IProductService extends IService<ProductDto>, ICheckId<Product> {
@@ -21,5 +21,5 @@ public interface IProductService extends IService<ProductDto>, ICheckId<Product>
     Set<ProductCardDto> findByDateAndCityId(Long cityId, Long userId, String arrival, String departure);
     ProductDto findForEdit(Long id) throws ResourceNotFoundException;
     ProductBookingDto findForBooking(Long productId, Long userId) throws ResourceNotFoundException;
-    Set<DateDisabledDto>findBookings(Long id) throws ResourceNotFoundException;
+    Set<LocalDate> findBookings(Long id) throws ResourceNotFoundException;
 }

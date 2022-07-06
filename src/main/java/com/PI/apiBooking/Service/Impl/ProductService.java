@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -58,7 +59,7 @@ public class ProductService implements IProductService {
 
         if(userId != null && favouriteRepository.findByUserIdAndProductId(userId, id).isPresent()) {
             productCompleteDto.setLike(true);
-            }
+        }
 
         return productCompleteDto;
     }
@@ -98,6 +99,12 @@ public class ProductService implements IProductService {
     public ProductDto findForEdit(Long id) throws ResourceNotFoundException{
         Product product = checkId(id);
         return mapper.convertValue(product, ProductDto.class);
+    }
+
+    @Override
+    public Set<LocalDate> findBookings(Long id){
+
+        return bookingService.findBookingByProductId(id);
     }
 
     @Override
@@ -153,11 +160,6 @@ public class ProductService implements IProductService {
             throw new ResourceNotFoundException(msjError + id);
         }
         return product.get();
-    }
-
-    @Override
-    public Set<DateDisabledDto> findBookings(Long id){
-        return bookingService.findBookingByProductId(id);
     }
 
     public Set<ProductCardDto> productToProductCardDto (List<Product> products, Long userId){
