@@ -6,6 +6,7 @@ import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Repository.IBookingRepository;
 import com.PI.apiBooking.Service.Interfaces.IBookingService;
+import com.PI.apiBooking.Service.Interfaces.IUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.apache.log4j.Logger;
@@ -23,6 +24,8 @@ public class BookingService implements IBookingService {
     @Autowired
     private IBookingRepository bookingRepository;
     @Autowired
+    private IUserService userService;
+    @Autowired
     private ObjectMapper mapper;
 
 
@@ -30,6 +33,7 @@ public class BookingService implements IBookingService {
     @Override
     public BookingDto save(BookingDto bookingDto) {
         Booking booking = mapper.convertValue(bookingDto, Booking.class);
+        userService.updateCity(bookingDto.getUser().getId(),booking.getUser().getCity());
         bookingRepository.save(booking);
         if (bookingDto.getId() == null){
             bookingDto.setId(booking.getId());

@@ -29,6 +29,7 @@ public class ProductDto {
     private Set<Feature> features;
     private City city;
     private Set<Policy> policies;
+    private Set<ImageDto> imagesDto;
 
     //Constructor for test
     public ProductDto(String name, String titleDescription, String description, Integer stars, String direction, Double latitude, Double longitude, String checkInMin, String checkInMax, Category category, Set<Feature> features, City city, Set<Policy> policies) {

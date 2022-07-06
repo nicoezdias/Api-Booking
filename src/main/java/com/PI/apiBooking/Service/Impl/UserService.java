@@ -6,6 +6,7 @@ import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.UserBookingDto;
 import com.PI.apiBooking.Model.DTO.UserCardDto;
+import com.PI.apiBooking.Model.Entity.City;
 import com.PI.apiBooking.Model.User.Rol;
 import com.PI.apiBooking.Model.User.User;
 import com.PI.apiBooking.Model.User.UserRoles;
@@ -85,12 +86,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDto updateCity(UserDto userDto) throws ResourceNotFoundException {
-        checkId(userDto.getId());
-        User user = userRepository.findById(userDto.getId()).get();
-        user.setCity(userDto.getCity());
+    public UserDto updateCity(Long userId, City city) throws ResourceNotFoundException {
+        checkId(userId);
+        User user = userRepository.findById(userId).get();
+        user.setCity(city);
         userRepository.save(user);
-        userDto = mapper.convertValue(user, UserDto.class);
+        UserDto userDto = mapper.convertValue(user, UserDto.class);
         logger.info("User actualizado correctamente: "+ userDto);
         return userDto;
     }

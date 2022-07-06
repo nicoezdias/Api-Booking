@@ -2,6 +2,7 @@ package com.PI.apiBooking.Service.Impl;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
 import com.PI.apiBooking.Model.DTO.*;
+import com.PI.apiBooking.Model.DTO.Post.ImageDto;
 import com.PI.apiBooking.Model.DTO.Post.ProductDto;
 import com.PI.apiBooking.Model.Entity.Feature;
 import com.PI.apiBooking.Model.Entity.Product;
@@ -136,7 +137,11 @@ public class ProductService implements IProductService {
     public ProductDto save(ProductDto productDto) {
         Product product = mapper.convertValue(productDto, Product.class);
         productRepository.save(product);
-
+        Set<ImageDto> imageDtos = productDto.getImagesDto();
+        for (ImageDto imageDto : imageDtos) {
+            imageDto.setProduct(product);
+            imageService.save(imageDto);
+        }
         if (productDto.getId() == null){
             productDto.setId(product.getId());
             logger.info("Producto registrado correctamente: "+ productDto);
