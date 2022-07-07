@@ -26,6 +26,8 @@ public class BookingService implements IBookingService {
     @Autowired
     private IUserService userService;
     @Autowired
+    private ImageService imageService;
+    @Autowired
     private ObjectMapper mapper;
 
 
@@ -76,7 +78,7 @@ public class BookingService implements IBookingService {
             bookingUserDto.setProductStars(booking.getProduct().getStars());
             bookingUserDto.setProductCityName(booking.getProduct().getCity().getName() + ", " + booking.getProduct().getCity().getProvince().getName() + ", " + booking.getProduct().getCity().getProvince().getCountry().getName());
             bookingUserDto.setProductDirection(booking.getProduct().getDirection());
-
+            bookingUserDto.setImageProfile(imageService.findProfileImageByProductId(booking.getProduct().getId()));
             bookingsUserDto.add(bookingUserDto);
         }
         return bookingsUserDto;

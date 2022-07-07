@@ -17,6 +17,7 @@ public class BookingUserDto {
     private LocalDate departure;
     private Boolean covidVaccine;
     private String additionalInformation;
+    private ImageProductDto imageProfile;
 
     private String categoryName;
     private String productName;
