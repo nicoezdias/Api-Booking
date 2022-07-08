@@ -56,7 +56,8 @@ class FavouriteServiceTest {
                          @Autowired FeatureService featureService,
                          @Autowired PolicyService policyService,
                          @Autowired ProductService productService,
-                         @Autowired FavouriteService favouriteService){
+                         @Autowired FavouriteService favouriteService,
+                         @Autowired ImageService imageService){
         category.setId(categoryService.save(new CategoryDto("Hotel","Descripcion1","Url1", "txt1")).getId());
         feature.setId(featureService.save(new FeatureDto("Gym","Url1")).getId());
         Set<Feature> features = new HashSet<>();
@@ -67,7 +68,9 @@ class FavouriteServiceTest {
         policy.setId(policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00")).getId());
         Set<Policy> policies = new HashSet<>();
         policies.add(policy);
-        product.setId(productService.save(new ProductDto("Fonte Arcada","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies)).getId());
+        Set<ImageDto> imageDtos = new HashSet<>();
+        imageDtos.add(new ImageDto("Habitación", "url1", "Habitación", true));
+        product.setId(productService.save(new ProductDto("Fonte Arcada","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies,imageDtos)).getId());
         user1.setId(1L);
         user2.setId(2L);
         user3.setId(3L);

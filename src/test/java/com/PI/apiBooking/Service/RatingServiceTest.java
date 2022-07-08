@@ -66,7 +66,9 @@ class RatingServiceTest {
         policy.setId(policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00")).getId());
         Set<Policy> policies = new HashSet<>();
         policies.add(policy);
-        product.setId(productService.save(new ProductDto("Fonte Arcada","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies)).getId());
+        Set<ImageDto> imageDtos = new HashSet<>();
+        imageDtos.add(new ImageDto("Habitación", "url1", "Habitación", true));
+        product.setId(productService.save(new ProductDto("Fonte Arcada","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies,imageDtos)).getId());
         user.setId(1L);
 
         r1 = ratingService.save(new RatingDto(8, product, user));

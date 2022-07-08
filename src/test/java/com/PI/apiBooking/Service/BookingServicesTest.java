@@ -51,8 +51,7 @@ class BookingServicesTest {
     static Policy policy = new Policy();
     static Product productOne = new Product();
     static Product productTwo = new Product();
-    static Image imageOne = new Image();
-    static Image imageTwo = new Image();
+    static ImageDto imageDto = new ImageDto();
     static User user = new User();
 
     @BeforeAll
@@ -75,10 +74,11 @@ class BookingServicesTest {
         policy.setId(policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00")).getId());
         Set<Policy> policies = new HashSet<>();
         policies.add(policy);
-        productOne.setId(productService.save(new ProductDto("Sh Hotel","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies)).getId());
-        productTwo.setId(productService.save(new ProductDto("Nh Hotel","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies)).getId());
-        imageOne.setId(imageService.save(new ImageDto("image", "url", "textAlt", true, productOne)).getId());
-        imageTwo.setId(imageService.save(new ImageDto("image", "url", "textAlt", true, productTwo)).getId());
+        imageDto = new ImageDto("Habitación", "url1", "Habitación", true);
+        Set<ImageDto> imageDtos = new HashSet<>();
+        imageDtos.add(imageDto);
+        productOne.setId(productService.save(new ProductDto("Sh Hotel","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies,imageDtos)).getId());
+        productTwo.setId(productService.save(new ProductDto("Nh Hotel","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category,features,city,policies,imageDtos)).getId());
         user.setId(1L);
 
         b1 = bookingService.save(new BookingDto("10:00", LocalDate.of(2022, 6, 12), LocalDate.of(2022, 6, 14), productOne, user));
@@ -102,9 +102,6 @@ class BookingServicesTest {
                         @Autowired PolicyService policyService,
                         @Autowired ProductService productService,
                         @Autowired ImageService imageService) throws ResourceNotFoundException {
-
-        imageService.delete(imageOne.getId());
-        imageService.delete(imageTwo.getId());
         productService.delete(productOne.getId());
         productService.delete(productTwo.getId());
         featureService.delete(feature.getId());

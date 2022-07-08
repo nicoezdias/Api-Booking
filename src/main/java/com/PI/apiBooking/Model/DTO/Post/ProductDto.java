@@ -32,7 +32,7 @@ public class ProductDto {
     private Set<ImageDto> imagesDto;
 
     //Constructor for test
-    public ProductDto(String name, String titleDescription, String description, Integer stars, String direction, Double latitude, Double longitude, String checkInMin, String checkInMax, Category category, Set<Feature> features, City city, Set<Policy> policies) {
+    public ProductDto(String name, String titleDescription, String description, Integer stars, String direction, Double latitude, Double longitude, String checkInMin, String checkInMax, Category category, Set<Feature> features, City city, Set<Policy> policies, Set<ImageDto> imagesDto) {
         this.name = name;
         this.titleDescription = titleDescription;
         this.description = description;
@@ -46,6 +46,7 @@ public class ProductDto {
         this.features = features;
         this.city = city;
         this.policies = policies;
+        this.imagesDto = imagesDto;
     }
 
     //Default

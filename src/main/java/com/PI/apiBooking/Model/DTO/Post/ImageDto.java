@@ -17,11 +17,18 @@ public class ImageDto {
     private Boolean profile;
     private Product product;
 
-    //Constructor for test
-    public ImageDto(String title, String url, String text_alt, Boolean profile, Product product) {
+    //Constructor for test1
+    public ImageDto(String title, String url, String text_alt, Boolean profile) {
         this.title = title;
         this.url = url;
         this.textAlt = text_alt;
+        this.profile = profile;
+    }
+    //Constructor for test2
+    public ImageDto(String title, String url, String textAlt, Boolean profile, Product product) {
+        this.title = title;
+        this.url = url;
+        this.textAlt = textAlt;
         this.profile = profile;
         this.product = product;
     }

@@ -72,12 +72,14 @@ class ProductServiceTest {
         policy.setId(policyService.save(new PolicyDto("Normas de la casa","Check-out: 10:00")).getId());
         Set<Policy> policies = new HashSet<>();
         policies.add(policy);
+        Set<ImageDto> imageDtos = new HashSet<>();
+        imageDtos.add(new ImageDto("Habitación", "url1", "Habitación", true));
         user.setId(1L);
 
-        p1 = productService.save(new ProductDto("Producto1","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category1,features,city1,policies));
-        p2 = productService.save(new ProductDto("Producto2","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city1,policies));
-        p3 = productService.save(new ProductDto("Producto3","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category1,features,city2,policies));
-        p4 = productService.save(new ProductDto("Producto4","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city2,policies));
+        p1 = productService.save(new ProductDto("Producto1","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category1,features,city1,policies,imageDtos));
+        p2 = productService.save(new ProductDto("Producto2","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city1,policies,imageDtos));
+        p3 = productService.save(new ProductDto("Producto3","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category1,features,city2,policies,imageDtos));
+        p4 = productService.save(new ProductDto("Producto4","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city2,policies,imageDtos));
 
         productOne.setId(p1.getId());
         bookingService.save(new BookingDto("10:00", LocalDate.of(2022, 6, 12), LocalDate.of(2022, 6, 14), productOne, user));
@@ -177,8 +179,11 @@ class ProductServiceTest {
     @Test
     public void updateProduct() throws ResourceNotFoundException {
         ProductDto p5 = productService.findForEdit(p4.getId());
+        Set<ImageDto> imageDtos = new HashSet<>();
+        imageDtos.add(new ImageDto("Habitación", "url1", "Habitación", false));
         p5.setDescription("Cambiada");
         p5.setTitleDescription("titleCambiado");
+        p5.setImagesDto(imageDtos);
         productService.save(p5);
         assertEquals("Cambiada", productService.findById(p5.getId(),null).getDescription());
         assertEquals("titleCambiado", productService.findById(p5.getId(),null).getTitleDescription());
@@ -191,7 +196,9 @@ class ProductServiceTest {
         policies.add(policy);
         Set<Feature> features = new HashSet<>();
         features.add(feature);
-        ProductDto p6 = productService.save(new ProductDto("Producto4","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city2,policies));
+        Set<ImageDto> imageDtos = new HashSet<>();
+        imageDtos.add(new ImageDto("Habitación", "url1", "Habitación", true));
+        ProductDto p6 = productService.save(new ProductDto("Producto4","title","Description",4,"direccion",-37.261919678039064,-56.96991330339291,"10:00","23:00",category2,features,city2,policies,imageDtos));
         try{
             productService.delete(p6.getId());
             productService.findById(p6.getId(),null);
