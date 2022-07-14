@@ -6,12 +6,11 @@ import com.PI.apiBooking.Model.DTO.Post.CityDto;
 import com.PI.apiBooking.Model.Entity.City;
 import com.PI.apiBooking.Repository.ICityRepository;
 import com.PI.apiBooking.Service.Interfaces.ICityService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.CityMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,18 +22,12 @@ public class CityService implements ICityService {
     @Autowired
     private ICityRepository cityRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private CityMapper cityMapper;
 
     @Override
     public Set<CityListDto> findAll() {
-        Set<CityListDto> citiesListDto = new HashSet<>();
         List<City> cities = cityRepository.findAll();
-        for (City city:cities) {
-            CityListDto cityListDto = mapper.convertValue(city, CityListDto.class);
-            cityListDto.setName(city.getName() + ", " + city.getProvince().getName());
-            cityListDto.setNameCountry(city.getProvince().getCountry().getName());
-            citiesListDto.add(cityListDto);
-        }
+        Set<CityListDto> citiesListDto = cityMapper.toCityListDtoSet(cities);
         logger.info("La busqueda fue exitosa: "+ citiesListDto);
         return citiesListDto;
     }
@@ -42,14 +35,14 @@ public class CityService implements ICityService {
     @Override
     public CityDto findById(Long id) throws ResourceNotFoundException {
         City city = checkId(id);
-        CityDto cityDto = mapper.convertValue(city, CityDto.class);
+        CityDto cityDto = cityMapper.toCityDto(city);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return cityDto;
     }
 
     @Override
     public CityDto save(CityDto cityDto) {
-        City city = mapper.convertValue(cityDto, City.class);
+        City city = cityMapper.toCity(cityDto);
         cityRepository.save(city);
         if (cityDto.getId() == null){
             cityDto.setId(city.getId());

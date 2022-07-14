@@ -7,7 +7,8 @@ import com.PI.apiBooking.Model.Entity.Favourite;
 import com.PI.apiBooking.Model.Entity.Product;
 import com.PI.apiBooking.Repository.IFavouriteRepository;
 import com.PI.apiBooking.Service.Interfaces.IFavouriteService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.FavouriteMapper;
+import com.PI.apiBooking.Util.Mapper.ProductMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,13 @@ public class FavouriteService implements IFavouriteService {
     @Autowired
     private IFavouriteRepository favouriteRepository;
     @Autowired
-    private ProductService productService;
+    private ProductMapper productMapper;
     @Autowired
-    private ObjectMapper mapper;
+    private FavouriteMapper favouriteMapper;
 
     @Override
     public FavouriteDto save(FavouriteDto favouriteDto) {
-        Favourite favourite = mapper.convertValue(favouriteDto, Favourite.class);
+        Favourite favourite = favouriteMapper.toFavourite(favouriteDto);
         favouriteRepository.save(favourite);
         favouriteDto.setId(favourite.getId());
             logger.info("Registrado en favourite correctamente: "+ favouriteDto);
@@ -52,7 +53,7 @@ public class FavouriteService implements IFavouriteService {
     @Override
     public Set<ProductCardDto> findProductsByUserId(Long userId) {
         List<Product> products = favouriteRepository.findProductsByUserId(userId);
-        Set<ProductCardDto> products_cardDto = productService.productToProductCardDto(products,userId);
+        Set<ProductCardDto> products_cardDto = productMapper.toProductCardDtoSet(products, userId);
         logger.info("La busqueda fue exitosa: "+ products_cardDto);
         return products_cardDto;
     }

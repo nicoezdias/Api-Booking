@@ -7,12 +7,10 @@ import com.PI.apiBooking.Model.DTO.Post.CategoryDto;
 import com.PI.apiBooking.Model.Entity.Category;
 import com.PI.apiBooking.Repository.ICategoryRepository;
 import com.PI.apiBooking.Service.Interfaces.ICategoryService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.CategoryMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -24,18 +22,12 @@ public class CategoryService implements ICategoryService {
     @Autowired
     private ICategoryRepository categoryRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private CategoryMapper categoryMapper;
 
     @Override
     public Set<CategoryCardDto> findAll() {
-        Set<CategoryCardDto> categoriesDto = new HashSet<>();
         List<Category> categories = categoryRepository.findAll();
-        for (Category category : categories
-        ) {
-            CategoryCardDto categoryDto = (mapper.convertValue(category, CategoryCardDto.class));
-            categoryDto.setProductQuantity(categoryRepository.countByCategory(category.getId()));
-            categoriesDto.add(categoryDto);
-        }
+        Set<CategoryCardDto> categoriesDto = categoryMapper.toCategoryCardDtoSet(categories);
         logger.info("La busqueda fue exitosa: "+ categoriesDto);
         return categoriesDto;
     }
@@ -43,15 +35,14 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryCompleteDto findById(Long id) throws ResourceNotFoundException {
         Category category = checkId(id);
-        CategoryCompleteDto categoryDto = mapper.convertValue(category, CategoryCompleteDto.class);
-        categoryDto.setProductQuantity(categoryRepository.countByCategory(category.getId()));
+        CategoryCompleteDto categoryDto = categoryMapper.totoCategoryCompleteDto(category);
         logger.info("La busqueda fue exitosa: id("+id+")");
         return categoryDto;
     }
 
     @Override
     public CategoryDto save(CategoryDto categoryDto) {
-        Category category = mapper.convertValue(categoryDto, Category.class);
+        Category category = categoryMapper.toCategory(categoryDto);
         categoryRepository.save(category);
         if (categoryDto.getId() == null){
             categoryDto.setId(category.getId());
@@ -59,7 +50,6 @@ public class CategoryService implements ICategoryService {
         }else{
             logger.info("Categoria actualizada correctamente: "+ categoryDto);
         }
-
         return categoryDto;
     }
 

@@ -6,12 +6,11 @@ import com.PI.apiBooking.Model.DTO.Post.ImageDto;
 import com.PI.apiBooking.Model.Entity.Image;
 import com.PI.apiBooking.Repository.IImageRepository;
 import com.PI.apiBooking.Service.Interfaces.IImageService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.ImageMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,15 +22,12 @@ public class ImageService implements IImageService {
     @Autowired
     private IImageRepository imageRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private ImageMapper imageMapper;
 
     @Override
     public Set<ImageProductDto> findAll() {
-        Set<ImageProductDto> imagesDtos = new HashSet<>();
         List<Image> images = imageRepository.findAll();
-        for (Image image :images) {
-            imagesDtos.add(mapper.convertValue(image, ImageProductDto.class));
-        }
+        Set<ImageProductDto> imagesDtos = imageMapper.toImageProductDtoSet(images);
         logger.info("La búsqueda fue exitosa: "+ imagesDtos);
         return imagesDtos;
     }
@@ -39,30 +35,27 @@ public class ImageService implements IImageService {
     @Override
     public ImageProductDto findById(Long id) throws ResourceNotFoundException {
         Image image = checkId(id);
-        ImageProductDto imageDto = mapper.convertValue(image, ImageProductDto.class);
+        ImageProductDto imageDto = imageMapper.toImageProductDto(image);
         logger.info("La búsqueda fue exitosa: id("+id+")");
         return imageDto;
     }
 
     @Override
     public Set<ImageProductDto> findImagesByProductId(Long productId) {
-        Set<Image> images = imageRepository.findImagesByProductId(productId);
-        Set<ImageProductDto> imageProductsDto = new HashSet<>();
-        for (Image image : images) {
-            imageProductsDto.add(mapper.convertValue(image, ImageProductDto.class));
-        }
+        List<Image> images = imageRepository.findImagesByProductId(productId);
+        Set<ImageProductDto> imageProductsDto = imageMapper.toImageProductDtoSet(images);
         logger.info("Búsqueda exitosa: " + imageProductsDto);
         return imageProductsDto;
     }
 
     @Override
     public ImageProductDto findProfileImageByProductId(Long productId) {
-        return mapper.convertValue(imageRepository.findProfileImageByProductId(productId), ImageProductDto.class);
+        return imageMapper.toImageProductDto(imageRepository.findProfileImageByProductId(productId));
     }
 
     @Override
     public ImageDto save(ImageDto imageDto) {
-        Image image = mapper.convertValue(imageDto, Image.class);
+        Image image = imageMapper.toImage(imageDto);
         imageRepository.save(image);
         if (imageDto.getId() == null){
             imageDto.setId(image.getId());

@@ -18,6 +18,7 @@ public class ProductCardDto {
     private Integer stars;
     private String categoryName;
     private Optional<Integer> avgRanting;
+    private String cityName;
     private Double distance;
     private ImageProductDto imageProfile;
     private Set<String> FeaturesIcons;

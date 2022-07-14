@@ -5,7 +5,7 @@ import com.PI.apiBooking.Model.DTO.Post.ProvinceDto;
 import com.PI.apiBooking.Model.Entity.Province;
 import com.PI.apiBooking.Repository.IProvinceRepository;
 import com.PI.apiBooking.Service.Interfaces.IProvinceService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.ProvinceMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,11 @@ public class ProvinceService implements IProvinceService {
     @Autowired
     private IProvinceRepository provinceRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private ProvinceMapper provinceMapper;
 
     @Override
     public ProvinceDto save(ProvinceDto provinceDto) {
-        Province province = mapper.convertValue(provinceDto, Province.class);
+        Province province = provinceMapper.toProvince(provinceDto);
         provinceRepository.save(province);
         if (provinceDto.getId() == null){
             provinceDto.setId(province.getId());

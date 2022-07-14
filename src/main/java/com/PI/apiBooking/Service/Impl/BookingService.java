@@ -7,7 +7,7 @@ import com.PI.apiBooking.Model.Entity.Booking;
 import com.PI.apiBooking.Repository.IBookingRepository;
 import com.PI.apiBooking.Service.Interfaces.IBookingService;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.BookingMapper;
 import lombok.SneakyThrows;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +28,13 @@ public class BookingService implements IBookingService {
     @Autowired
     private ImageService imageService;
     @Autowired
-    private ObjectMapper mapper;
+    private BookingMapper bookingMapper;
 
 
     @SneakyThrows
     @Override
     public BookingDto save(BookingDto bookingDto) {
-        Booking booking = mapper.convertValue(bookingDto, Booking.class);
+        Booking booking = bookingMapper.toBooking(bookingDto);
         userService.updateCity(bookingDto.getUser().getId(),booking.getUser().getCity());
         bookingRepository.save(booking);
         if (bookingDto.getId() == null){
@@ -70,18 +70,7 @@ public class BookingService implements IBookingService {
     @Override
     public List<BookingUserDto> findBookingByUserId(Long userId) {
         List<Booking> bookings = bookingRepository.findBookingByUserId(userId);
-        List<BookingUserDto> bookingsUserDto = new ArrayList<>();
-        for(Booking booking : bookings){
-            BookingUserDto bookingUserDto = mapper.convertValue(booking, BookingUserDto.class);
-            bookingUserDto.setCategoryName(booking.getProduct().getCategory().getTitle());
-            bookingUserDto.setProductName(booking.getProduct().getName());
-            bookingUserDto.setProductStars(booking.getProduct().getStars());
-            bookingUserDto.setProductCityName(booking.getProduct().getCity().getName() + ", " + booking.getProduct().getCity().getProvince().getName() + ", " + booking.getProduct().getCity().getProvince().getCountry().getName());
-            bookingUserDto.setProductDirection(booking.getProduct().getDirection());
-            bookingUserDto.setImageProfile(imageService.findProfileImageByProductId(booking.getProduct().getId()));
-            bookingsUserDto.add(bookingUserDto);
-        }
-        return bookingsUserDto;
+        return bookingMapper.toBookingUserDtoSet(bookings);
     }
 
     @Override

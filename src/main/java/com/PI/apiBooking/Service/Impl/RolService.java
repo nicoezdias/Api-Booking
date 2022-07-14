@@ -5,7 +5,7 @@ import com.PI.apiBooking.Model.DTO.Post.RolDto;
 import com.PI.apiBooking.Model.User.Rol;
 import com.PI.apiBooking.Repository.IRolRepository;
 import com.PI.apiBooking.Service.Interfaces.IRolService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.RolMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,11 @@ public class RolService implements IRolService {
     @Autowired
     private IRolRepository rolRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private RolMapper rolMapper;
 
     @Override
     public RolDto save(RolDto rolDto) {
-        Rol rol = mapper.convertValue(rolDto, Rol.class);
+        Rol rol = rolMapper.toRol(rolDto);
         rolRepository.save(rol);
         if (rolDto.getId() == null){
             rolDto.setId(rol.getId());

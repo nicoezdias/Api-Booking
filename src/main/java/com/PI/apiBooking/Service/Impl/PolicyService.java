@@ -5,12 +5,11 @@ import com.PI.apiBooking.Model.DTO.Post.PolicyDto;
 import com.PI.apiBooking.Model.Entity.Policy;
 import com.PI.apiBooking.Repository.IPolicyRepository;
 import com.PI.apiBooking.Service.Interfaces.IPolicyService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.PolicyMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -22,15 +21,12 @@ public class PolicyService implements IPolicyService {
     @Autowired
     private IPolicyRepository policyRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private PolicyMapper policyMapper;
 
     @Override
     public Set<PolicyDto> findAll() {
-        Set<PolicyDto> policiesDto = new HashSet<>();
         List<Policy> policies = policyRepository.findAll();
-        for (Policy policy :policies) {
-            policiesDto.add(mapper.convertValue(policy, PolicyDto.class));
-        }
+        Set<PolicyDto> policiesDto = policyMapper.toPolicyDtoSet(policies);
         logger.info("La búsqueda fue exitosa: "+ policiesDto);
         return policiesDto;
     }
@@ -38,14 +34,14 @@ public class PolicyService implements IPolicyService {
     @Override
     public PolicyDto findById(Long id) throws ResourceNotFoundException {
         Policy policy = checkId(id);
-        PolicyDto policyDto = mapper.convertValue(policy, PolicyDto.class);
+        PolicyDto policyDto = policyMapper.toPolicyDto(policy);
         logger.info("La búsqueda fue exitosa: id("+id+")");
         return policyDto;
     }
 
     @Override
     public PolicyDto save(PolicyDto policyDto) {
-        Policy policy = mapper.convertValue(policyDto, Policy.class);
+        Policy policy = policyMapper.toPolicy(policyDto);
         policyRepository.save(policy);
         if (policyDto.getId() == null){
             policyDto.setId(policy.getId());

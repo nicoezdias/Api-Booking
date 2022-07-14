@@ -6,7 +6,7 @@ import com.PI.apiBooking.Model.DTO.Post.AuthenticationRequest;
 import com.PI.apiBooking.Model.DTO.Post.UserDto;
 import com.PI.apiBooking.Model.DTO.UserCardDto;
 import com.PI.apiBooking.Service.Interfaces.IUserService;
-import com.PI.apiBooking.Mail.EmailSenderService;
+import com.PI.apiBooking.Util.Mail.EmailSenderService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,20 +37,13 @@ public class UserController {
         if(userDto.getId() == null){
             userService.save(userDto);
             UserCardDto user_cardDto =userService.authenticate(authenticationRequest);
-            emailSenderService.sendMailUser(userDto);
+//            emailSenderService.sendMailUser(userDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(user_cardDto);
         } else{
             userService.save(userDto);
             return ResponseEntity.ok(userService.authenticate(authenticationRequest));
         }
     }
-
-//    @Operation(summary = "Actualizar City de un Usuario")
-//    @PostMapping("/city")
-//    public ResponseEntity<UserDto> updateCity(@RequestBody UserDto userDto) throws BadRequestException, ResourceNotFoundException {
-//        userService.updateCity(userDto);
-//        return ResponseEntity.ok(userService.updateCity(userDto));
-//    }
 
     @Operation(summary = "Log in de Usuario")
     @PostMapping("/authenticate")

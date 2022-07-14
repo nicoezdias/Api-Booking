@@ -1,4 +1,4 @@
-package com.PI.apiBooking.Mail;
+package com.PI.apiBooking.Util.Mail;
 
 import com.PI.apiBooking.Model.DTO.ImageProductDto;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;

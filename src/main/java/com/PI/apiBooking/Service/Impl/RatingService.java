@@ -5,12 +5,11 @@ import com.PI.apiBooking.Model.DTO.Post.RatingDto;
 import com.PI.apiBooking.Model.Entity.Rating;
 import com.PI.apiBooking.Repository.IRatingRepository;
 import com.PI.apiBooking.Service.Interfaces.IRatingService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.RatingMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,15 +22,12 @@ public class RatingService implements IRatingService {
     @Autowired
     private IRatingRepository ratingRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private RatingMapper ratingMapper;
 
     @Override
     public Set<RatingDto> findAll() {
-        Set<RatingDto> ratingDtos = new HashSet<>();
         List<Rating> ratings = ratingRepository.findAll();
-        for (Rating rating : ratings) {
-            ratingDtos.add(mapper.convertValue(rating, RatingDto.class));
-        }
+        Set<RatingDto> ratingDtos = ratingMapper.toRatingDtoSet(ratings);
         logger.info("La búsqueda fue exitosa: "+ ratingDtos);
         return ratingDtos;
     }
@@ -39,14 +35,14 @@ public class RatingService implements IRatingService {
     @Override
     public RatingDto findById(Long id) throws ResourceNotFoundException {
         Rating rating = checkId(id);
-        RatingDto ratingDto = mapper.convertValue(rating, RatingDto.class);
+        RatingDto ratingDto = ratingMapper.toRatingDto(rating);
         logger.info("La búsqueda fue exitosa: id("+id+")");
         return ratingDto;
     }
 
     @Override
     public RatingDto save(RatingDto ratingDto) {
-        Rating rating = mapper.convertValue(ratingDto, Rating.class);
+        Rating rating = ratingMapper.toRating(ratingDto);
         ratingRepository.save(rating);
         if (ratingDto.getId() == null){
             ratingDto.setId(rating.getId());

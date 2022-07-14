@@ -1,7 +1,7 @@
 package com.PI.apiBooking.Controller;
 
 import com.PI.apiBooking.Exceptions.ResourceNotFoundException;
-import com.PI.apiBooking.Mail.EmailSenderService;
+import com.PI.apiBooking.Util.Mail.EmailSenderService;
 import com.PI.apiBooking.Model.DTO.BookingUserDto;
 import com.PI.apiBooking.Model.DTO.Post.BookingDto;
 import com.PI.apiBooking.Service.Interfaces.IBookingService;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.util.List;
-import java.util.Set;
 
 @Secured({"USER","ADMIN"})
 @RestController
@@ -33,11 +32,11 @@ public class BookingController {
     public ResponseEntity<BookingDto> save(@RequestBody BookingDto bookingDto) throws MessagingException {
         if(bookingDto.getId() == null) {
             BookingDto booking = bookingService.save(bookingDto);
-            emailSenderService.sendMailBooking(booking);
+//            emailSenderService.sendMailBooking(booking);
             return ResponseEntity.status(HttpStatus.CREATED).body(booking);
         }else{
             BookingDto booking = bookingService.save(bookingDto);
-            emailSenderService.sendMailBooking(booking);
+//            emailSenderService.sendMailBooking(booking);
             return ResponseEntity.ok(bookingService.save(booking));
         }
 

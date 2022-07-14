@@ -15,7 +15,7 @@ import com.PI.apiBooking.Service.Interfaces.IUserService;
 import com.PI.apiBooking.Security.AuthenticationService;
 import com.PI.apiBooking.Security.MyPasswordEncoder;
 import com.PI.apiBooking.Security.jwt.JwtUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.UserMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,7 +32,7 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
 
     @Autowired
-    private ObjectMapper mapper;
+    private UserMapper userMapper;
 
     @Autowired
     private MyPasswordEncoder passwordEncoder;
@@ -46,7 +46,7 @@ public class UserService implements IUserService {
     @Override
     public UserDto findByEmail(String email) {
         User user = userRepository.findByEmail(email).get();
-        UserDto userDto = mapper.convertValue(user, UserDto.class);
+        UserDto userDto = userMapper.toUserDto(user);
         logger.info("La busqueda fue exitosa: "+ userDto);
         return userDto;
     }
@@ -54,9 +54,9 @@ public class UserService implements IUserService {
     @Override
     public UserBookingDto findById(Long id) throws ResourceNotFoundException {
         User user = checkId(id);
-        UserBookingDto userBookingDto = mapper.convertValue(user, UserBookingDto.class);
-        userBookingDto.setName(user.getName());
-        userBookingDto.setSurname(user.getSurname());
+        UserBookingDto userBookingDto = userMapper.toUserBookingDto(user);
+//        userBookingDto.setName(user.getName());
+//        userBookingDto.setSurname(user.getSurname());
         if (user.getCity() != null){
             userBookingDto.setCityId(user.getCity().getId());
         }
@@ -69,7 +69,7 @@ public class UserService implements IUserService {
     public UserDto save(UserDto userDto) {
         String hashedPassword = passwordEncoder.encodePassword(userDto.getPassword());
         userDto.setPassword(hashedPassword);
-        User user = mapper.convertValue(userDto, User.class);
+        User user = userMapper.toUser(userDto);
         if (userDto.getId() == null){
             Rol rol = new Rol();
             rol.setId(3L);
@@ -91,16 +91,18 @@ public class UserService implements IUserService {
         User user = userRepository.findById(userId).get();
         user.setCity(city);
         userRepository.save(user);
-        UserDto userDto = mapper.convertValue(user, UserDto.class);
+        UserDto userDto = userMapper.toUserDto(user);
         logger.info("User actualizado correctamente: "+ userDto);
         return userDto;
     }
 
     @Override
     public UserCardDto validate(AuthenticationRequest authenticationRequest, UserDto userDto) throws BadRequestException{
-        userDto.getRol().setId(2L);
-        userDto.getRol().setName(UserRoles.USER);
-        User user = mapper.convertValue(userDto, User.class);
+        Rol rol = new Rol();
+        rol.setId(2L);
+        rol.setName(UserRoles.USER);
+        userDto.setRol(rol);
+        User user = userMapper.toUser(userDto);
         userRepository.save(user);
         logger.info("User actualizado correctamente: "+ userDto);
         return authenticate(authenticationRequest);
@@ -112,8 +114,7 @@ public class UserService implements IUserService {
         if (user.isPresent() && passwordEncoder.matchesPassword(authenticationRequest.getPassword(), user.get().getPassword())) {
             final UserDetails userDetails = authenticationService.loadUserByUsername(authenticationRequest.getEmail());
             final String jwt = jwtUtil.generateToken(userDetails);
-            UserCardDto userCardDto = mapper.convertValue(user, UserCardDto.class);
-            userCardDto.setRolName(user.get().getRol().getName().name());
+            UserCardDto userCardDto = userMapper.toUserCardDto(user.get());
             userCardDto.setJwt(jwt);
             return userCardDto;
         } else {

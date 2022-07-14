@@ -5,7 +5,7 @@ import com.PI.apiBooking.Model.DTO.Post.CountryDto;
 import com.PI.apiBooking.Model.Entity.Country;
 import com.PI.apiBooking.Repository.ICountryRepository;
 import com.PI.apiBooking.Service.Interfaces.ICountryService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.PI.apiBooking.Util.Mapper.CountryMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +20,11 @@ public class CountryService implements ICountryService {
     @Autowired
     private ICountryRepository countryRepository;
     @Autowired
-    private ObjectMapper mapper;
+    private CountryMapper countryMapper;
 
     @Override
     public CountryDto save(CountryDto countryDto) {
-        Country country = mapper.convertValue(countryDto, Country.class);
+        Country country = countryMapper.toCountry(countryDto);
         countryRepository.save(country);
         if (countryDto.getId() == null){
             countryDto.setId(country.getId());
