@@ -34,7 +34,7 @@ public abstract class ProductMapper {
     public abstract Product toProduct(ProductDto productDto);
 
     @Mappings({
-            @Mapping(target = "categoryName", expression="java(product.getCategory().getTitle())"),
+            @Mapping(target = "categoryName", source="product.category.title"),
             @Mapping(target = "avgRanting", expression="java(productRepository.averageScoreByProduct(product.getId()))"),
             @Mapping(target = "imagesProduct", expression="java(imageService.findImagesByProductId(productCompleteDto.getId()))"),
             @Mapping(target = "cityName", expression="java(product.getCity().getName() + \", \" + product.getCity().getProvince().getName() + \", \" + product.getCity().getProvince().getCountry().getName())"),
@@ -46,15 +46,15 @@ public abstract class ProductMapper {
 
     @Mappings({
             @Mapping(target = "categoryName", expression="java(product.getCategory().getTitle())"),
-            @Mapping(source = "product.name", target = "productName"),
-            @Mapping(source = "product.stars", target = "productStars"),
+            @Mapping(target = "productName", source = "product.name"),
+            @Mapping(target = "productStars", source = "product.stars"),
             @Mapping(target = "productCityName", expression="java(product.getDirection() + \", \" + product.getCity().getName() + \", \" + product.getCity().getProvince().getName() + \", \" + product.getCity().getProvince().getCountry().getName())"),
-            @Mapping(source = "product.policies", target = "productPolicies"),
-            @Mapping(source = "product.checkInMin", target = "productCheckInMin"),
-            @Mapping(source = "product.checkInMax", target = "productCheckInMax"),
-            @Mapping(source = "userBookingDto.name", target = "userName"),
-            @Mapping(source = "userBookingDto.surname", target = "userSurname"),
-            @Mapping(source = "userBookingDto.email", target = "userEmail"),
+            @Mapping(target = "productPolicies", source = "product.policies"),
+            @Mapping(target = "productCheckInMin", source = "product.checkInMin"),
+            @Mapping(target = "productCheckInMax", source = "product.checkInMax"),
+            @Mapping(target = "userName", source = "userBookingDto.name"),
+            @Mapping(target = "userSurname", source = "userBookingDto.surname"),
+            @Mapping(target = "userEmail", source = "userBookingDto.email"),
             @Mapping(target = "disabled", expression="java(findBookings(product.getId()))"),
             @Mapping(target = "productImage", expression="java(imageService.findProfileImageByProductId(product.getId()))")
     })

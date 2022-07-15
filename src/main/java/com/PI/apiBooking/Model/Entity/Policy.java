@@ -1,6 +1,7 @@
 package com.PI.apiBooking.Model.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table
+@JsonIgnoreProperties({"products"})
 public class Policy {
 
     @Id
@@ -21,7 +23,6 @@ public class Policy {
     @Lob
     private String description;
     @ManyToMany(mappedBy = "policies")
-    @JsonIgnore
     private Set<Product> products;
 
     //Default

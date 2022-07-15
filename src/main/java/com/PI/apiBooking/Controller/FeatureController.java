@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -21,7 +21,7 @@ public class FeatureController {
     private IFeatureService featureServices;
 
     //* ///////// POST ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Característica")
     @PostMapping
     public ResponseEntity<FeatureDto> save(@RequestBody FeatureDto featureDto) {
@@ -30,6 +30,7 @@ public class FeatureController {
         else
             return ResponseEntity.ok(featureServices.save(featureDto));
     }
+
     //* ///////// GET ///////// *//
     @Operation(summary = "Traer todas las Característica")
     @GetMapping
@@ -44,7 +45,7 @@ public class FeatureController {
     }
 
     //* ///////// DELETE ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Eliminar una Característica por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

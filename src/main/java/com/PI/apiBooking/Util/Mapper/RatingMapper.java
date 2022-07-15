@@ -12,10 +12,10 @@ import java.util.Set;
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public abstract class RatingMapper {
 
-    @Mapping(source = "ratingDto.user", target = "user")
+    @Mapping(target = "user", source = "ratingDto.user")
     public abstract Rating toRating(RatingDto ratingDto);
 
-    @Mapping(source = "rating.user", target = "user")
+    @Mapping(target = "user", source = "rating.user")
     public abstract RatingDto toRatingDto(Rating rating);
 
     public abstract Set<RatingDto> toRatingDtoSet(List<Rating> ratings);

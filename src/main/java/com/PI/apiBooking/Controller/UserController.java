@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     //* ///////// DELETE ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Eliminar un Usuario por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

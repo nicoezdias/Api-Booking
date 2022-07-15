@@ -20,11 +20,11 @@ public abstract class BookingMapper {
     public abstract Booking toBooking(BookingDto bookingDto);
 
     @Mappings({
-            @Mapping(target = "categoryName", expression="java(booking.getProduct().getCategory().getTitle())"),
-            @Mapping(target = "productName", expression="java(booking.getProduct().getName())"),
-            @Mapping(target = "productStars", expression="java(booking.getProduct().getStars())"),
+            @Mapping(target = "categoryName", source="booking.product.category.title"),
+            @Mapping(target = "productName", source="booking.product.name"),
+            @Mapping(target = "productStars", source="booking.product.stars"),
             @Mapping(target = "productCityName", expression="java(booking.getProduct().getCity().getName() + \", \" + booking.getProduct().getCity().getProvince().getName() + \", \" + booking.getProduct().getCity().getProvince().getCountry().getName())"),
-            @Mapping(target = "productDirection", expression="java(booking.getProduct().getDirection())"),
+            @Mapping(target = "productDirection", source="booking.product.direction"),
             @Mapping(target = "imageProfile", expression="java(imageService.findProfileImageByProductId(booking.getProduct().getId()))")
     })
     public abstract BookingUserDto toBookingUserDto(Booking booking);

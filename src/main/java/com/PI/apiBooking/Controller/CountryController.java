@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +19,7 @@ public class CountryController {
     private ICountryService countryService;
 
     //* ///////// POST ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Guardar o actualizar un País")
     @PostMapping
     public ResponseEntity<CountryDto> save(@RequestBody CountryDto countryDto) {
@@ -30,7 +30,7 @@ public class CountryController {
     }
 
     //* ///////// DELETE ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Eliminar un País por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -24,7 +24,7 @@ public class ProductController {
     private IProductService productServices;
 
     //* ///////// POST ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Guardar o actualizar un Producto")
     @PostMapping
     public ResponseEntity<ProductDto> save(@RequestBody ProductDto productDto) {
@@ -75,7 +75,7 @@ public class ProductController {
     }
 
     //* ///////// DELETE ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Eliminar el Producto por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

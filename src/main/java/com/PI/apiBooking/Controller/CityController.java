@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -22,7 +22,7 @@ public class CityController {
     private ICityService cityServices;
 
     //* ///////// POST ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Guardar o actualizar una Ciudad")
     @PostMapping
     public ResponseEntity<CityDto> save(@RequestBody CityDto cityDto) {
@@ -46,7 +46,7 @@ public class CityController {
     }
 
     //* ///////// DELETE ///////// *//
-    @Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Eliminar una Ciudad por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {

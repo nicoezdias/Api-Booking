@@ -17,7 +17,7 @@ public abstract class CityMapper {
     public abstract City toCity(CityDto cityDto);
 
     @Mapping(target = "name", expression="java(city.getName() + \", \" + city.getProvince().getName())")
-    @Mapping(target = "nameCountry", expression="java(city.getProvince().getCountry().getName())")
+    @Mapping(target = "nameCountry", source="city.province.country.name")
     public abstract CityListDto toCityListDto(City city);
 
     public abstract Set<CityListDto> toCityListDtoSet(List<City> cities);
