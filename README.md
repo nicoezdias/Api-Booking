@@ -1,6 +1,6 @@
 # Api-Booking
 
-You can find the Front End of the project in [Digital-Booking](https://github.com/nicoezdias/Digital-Booking)
+You can find the Front End of the project in [Digital-Booking](https://github.com/nicoezdias/Digital-Booking).
 
 ## DB (MySQL):
 
